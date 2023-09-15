@@ -1,6 +1,6 @@
 // const db = require("./db") // Import your database configuration
 import db from "./db.js"
-class User {
+class Customer {
   constructor(id, username, email, hash, type) {
     this.user_id = id
     this.username = username
