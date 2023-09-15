@@ -1,8 +1,10 @@
 import {
   comparePassword,
   generateHash,
+  is_Customer,
 } from "../services/user.service.js"
-import  User  from "../models/user.model.js"
+import User from "../models/user.model.js"
+import Customer from "../models/customer.model.js"
 
 const login = async (req, res) => {
   const username = req.body.username
@@ -32,20 +34,21 @@ const login = async (req, res) => {
 }
 
 const register = async (req, res) => {
+  const NIC = req.body.NIC
   const username = req.body.username
   const password = req.body.password
-  const email = req.body.email
-  const type = req.body.type
 
-  const hash = await generateHash(password)
   try {
-    const user = await User.createUser(username, hash, type, email)
+    const hash = await generateHash(password)
+    const user = await User.createUser(NIC, username, hash)
+    console.log("User created")
+    return res.send({ approved: true })
   } catch (err) {
     console.log(err)
     return res.send({ approved: false })
   }
+  console.log("Register function")
+} 
 
-  console.log("Registration function")
-}
 
 export default { login, register }
