@@ -50,5 +50,23 @@ const register = async (req, res) => {
   console.log("Register function")
 } 
 
+const check_eligibility = async (req, res) => {
+  const NIC = req.body.NIC
+  const name = req.body.name
+
+  try {
+    const is_Customer = await is_Customer(NIC, name)
+    if (is_Customer) {
+      console.log("Customer found")
+      return res.send({ approved: true })
+    } else {
+      console.log("Customer not found")
+      return res.send({ approved: false })
+    }
+  } catch (err) {
+    console.log(err)
+    return res.send({ approved: false })
+  }
+}
 
 export default { login, register }
