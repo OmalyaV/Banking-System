@@ -1,43 +1,37 @@
 // const db = require("./db") // Import your database configuration
 import db from "./db.js"
-class Customer {
-  constructor(id, username, email, hash, type) {
-    this.user_id = id
+class User {
+  constructor(customer_NIC, username, password_hash) {
+    this.customer_NIC = customer_NIC
     this.username = username
-    this.email = email
-    this.hash = hash
-    this.user_type = type
-  }
-
-  static async createUser(username, hash, type, email) {
-    const { rows } = await db.query(
-      "INSERT INTO public.'User' (user_id, hash, user_type, username, email_address) VALUES (DEFAULT, $1, $2, $3, $4);",
-      [hash, type, username, email]
-    )
-
-    const newUser = rows[0]
-    return new User(
-      newUser.user_id,
-      newUser.username,
-      newUser.email_address,
-      newUser.hash,
-      newUser.user_type
-    )
-  }
-
-  static async getUserByUsername(username) {
-    const { rows } = await db.query(
-      'SELECT * FROM public."User" WHERE username = $1',
-      [username]
-    )
-    const user = rows[0]
+    this.password_hash = password_hash
     
+  }
+
+  static async createUser(customer_NIC, username, password_hash) {
+    const { rows } = await db.query(
+      'INSERT INTO public."User" (customer_NIC, username, password_hash) VALUES ($1, $2, $3) RETURNING *',
+      [customer_NIC, username, password_hash]
+  
+    )
+
+    const user = rows[0]
     return new User(
-      user.user_id,
+      user.customer_NIC,
       user.username,
-      user.email_address,
-      user.hash,
-      user.user_type
+      user.password_hash
+    )
+  }
+
+  static async getUserByusername(username) {
+    const {rows} = await db.query(
+      'SELECT password_hash FROM public."User" WHERE username = $1',
+      [username]
+
+    )
+    const password_hash = rows[0]
+    return new password_hash(
+      password_hash.password_hash
     )
   }
 }
