@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/api/index",
-    "devStart": "ts-node --esm script.ts",
+    "devStart": "nodemon src/api/index",
     "dev": "nodemon src/api/index"
   },
   "repository": {

@@ -8,32 +8,37 @@ class User {
     
   }
 
-  static async createUser(customer_NIC, username, password_hash) {
+  static async createUser(username, password_hash,customer_NIC) {
     const { rows } = await db.query(
-      'INSERT INTO public."User" (customer_NIC, username, password_hash) VALUES ($1, $2, $3) RETURNING *',
+      'INSERT INTO defaultdb.User (user_NIC, username, password_hash) VALUES (?, ?, ?)',
       [customer_NIC, username, password_hash]
   
     )
 
-    const user = rows[0]
-    return new User(
-      user.customer_NIC,
-      user.username,
-      user.password_hash
-    )
+    
   }
 
-  static async getUserByusername(username) {
-    const {rows} = await db.query(
-      'SELECT password_hash FROM public."User" WHERE username = $1',
-      [username]
-
-    )
-    const password_hash = rows[0]
-    return new password_hash(
-      password_hash.password_hash
-    )
+  static async getUserByUsername(NIC) {
+    const sqlQuery = 'SELECT password_hash FROM defaultdb.User WHERE user_NIC = ?';
+    
+    try {
+      // Log the final SQL query with the parameter value
+      const finalQuery = db.format(sqlQuery, [NIC]);
+      console.log('Final SQL Query:', finalQuery);
+  
+      const [rows, fields] = await db.execute(sqlQuery, [NIC ]);
+      console.log(rows)
+      console.log(fields)
+      const password_hash = rows ? rows[0] : null;
+      console.log(password_hash)
+      return password_hash.password_hash.toString();
+    } catch (error) {
+      // Handle the database query error here
+      console.error('Error fetching user by NIC:', error);
+      throw error; // You can rethrow the error or handle it as needed
+    }
   }
+  
 }
 
 export default User

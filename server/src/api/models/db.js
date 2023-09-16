@@ -1,4 +1,4 @@
-import mysql from "mysql2";
+import mysql from "mysql2/promise";
 import dotenv from "dotenv"
 
 //const { Pool } = mysql.
@@ -16,32 +16,33 @@ const db = mysql.createPool({
   
 })
 
-async function executeExampleQuery() {
-  let connection;
-  try {
-    // Get a connection from the pool
-    connection = await db.getConnection();
+// async function executeExampleQuery() {
+//   let connection;
+//   try {
+//     // Get a connection from the pool
+//     connection = await db.getConnection();
 
-    // Define your SQL query
-    const sql = "SELECT * FROM Customer";
+//     // Define your SQL query
+//     const sql = "SELECT * FROM Customer";
 
-    // Execute the query
-    const [rows, fields] = await connection.execute(sql);
+//     // Execute the query
+//     const [rows, fields] = await connection.execute(sql);
 
-    // Log the results
-    console.log("Example Query Results:", rows);
-  } catch (error) {
-    console.error("Error executing example query:", error);
-  } finally {
-    // Always release the connection back to the pool
-    if (connection) {
-      connection.release();
-    }
-  }
-}
+//     // Log the results
+//     console.log("Example Query Results:", rows);
+//   } catch (error) {
+//     console.error("Error executing example query:", error);
+//   } finally {
+//     // Always release the connection back to the pool
+//     if (connection) {
+//       connection.release();
+//     }
+//   }
+// }
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
 // Call the example query function
-executeExampleQuery();
+// executeExampleQuery();
 
 
 export default db

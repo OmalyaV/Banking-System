@@ -28,9 +28,9 @@ class Customer {
     )
   }
 
-  static async getCustomerBycustomer_NIC(customer_NIC,name) {
+  static async getCustomerByNIC(customer_NIC,name) {
     const {rows} = await db.query(
-        'SELECT * FROM public."Customer" WHERE customer_NIC = $1 AND name = $2',
+        'SELECT * FROM defaultdb.Customer WHERE customer_NIC = ? AND name = ?',
         [customer_NIC,name]
 
     )
