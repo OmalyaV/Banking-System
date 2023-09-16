@@ -1,10 +1,10 @@
-import pkg from "pg"
+import mysql from "mysql2";
 import dotenv from "dotenv"
 
-const { Pool } = pkg
+//const { Pool } = mysql.
 dotenv.config()
 
-const db = new Pool({
+const db = mysql.createPool({
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
@@ -14,5 +14,8 @@ const db = new Pool({
     rejectUnauthorized: false, // Insecure option, use cautiously
   },
 })
+
+
+
 
 export default db

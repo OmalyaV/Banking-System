@@ -33,22 +33,38 @@ const login = async (req, res) => {
   }
 }
 
+// const register = async (req, res) => {
+//   const NIC = req.body.NIC
+//   const username = req.body.username
+//   const password = req.body.password
+
+//   //try {
+//     const hash = await generateHash(password)
+//     const user = await User.createUser(NIC, username, hash)
+//     console.log("User created")
+//     return res.send({ approved: true })
+//   //} catch (err) {
+//     //console.log(err)
+//     //return res.send({ approved: false })
+//   //}
+//   console.log("Register function")
+// } 
 const register = async (req, res) => {
-  const NIC = req.body.NIC
   const username = req.body.username
   const password = req.body.password
-
-  try {
-    const hash = await generateHash(password)
-    const user = await User.createUser(NIC, username, hash)
+  const NIC = req.body.NIC
+  const hash = await generateHash(password)
+  //try {
+    const user = await User.createUser(username, hash,NIC )
     console.log("User created")
-    return res.send({ approved: true })
-  } catch (err) {
-    console.log(err)
-    return res.send({ approved: false })
-  }
-  console.log("Register function")
-} 
+  //} catch (err) {
+    //console.log(err)
+    //return res.send({ approved: false })
+  //}
+
+  console.log("Registration function")
+}
+
 
 const check_eligibility = async (req, res) => {
   const NIC = req.body.NIC
