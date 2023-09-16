@@ -4,7 +4,7 @@ import {
   is_Customer,
 } from "../services/user.service.js"
 import User from "../models/user.model.js"
-import Customer from "../models/customer.model.js"
+//import Customer from "../models/customer.model.js"
 
 const login = async (req, res) => {
   const username = req.body.username
@@ -69,4 +69,4 @@ const check_eligibility = async (req, res) => {
   }
 }
 
-export default { login, register }
+export default { login, register , check_eligibility}

@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt"
-import { Customer} from "../models/customer.model.js"
+import Customer from "../models/customer.model.js"
 
 export const comparePassword = async (password, hash) => {
   return await bcrypt.compare(password, hash)
