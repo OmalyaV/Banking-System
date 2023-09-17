@@ -16,6 +16,7 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 
 import UserRoute from "./routes/user.routes.js"
+import CustomerRoute from "./routes/customer.routes.js"
 
 const app = express()
 const { urlencoded } = pkg
@@ -34,3 +35,5 @@ app.use(cookieParser())
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
 // Route for index
 app.use("/user", UserRoute)
+app.use("/customer", CustomerRoute)
+
