@@ -1,6 +1,6 @@
 import express from "express"
 
-import customerController from "../controllers/customer.controller"
+import customerController from "../controllers/customer.controller.js"
 
 const { add_customer } = customerController
 const router = express.Router()
