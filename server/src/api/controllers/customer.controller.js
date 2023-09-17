@@ -1,4 +1,4 @@
-import Customer from "../models/customer.model";
+import Customer from "../models/customer.model.js";
 const add_customer = async (req, res) => {
     const NIC = req.body.NIC
     const name = req.body.name
@@ -17,4 +17,4 @@ const add_customer = async (req, res) => {
   
     console.log("Add Customer function")
   }
-  export default { add_customer}
+  export default {add_customer}
