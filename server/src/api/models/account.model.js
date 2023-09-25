@@ -51,6 +51,24 @@ class Account {
         }
     }
     
+    static async updateBalance(account_number, balance) {
+        const sqlQuery = 'UPDATE defaultdb.Account SET balance = ? WHERE account_number = ?';
+        try{
+            const [rows] = await db.execute(sqlQuery, [balance, account_number]);
+
+            const account = rows? rows[0] : null;
+            return account;
+            
+            }
+            
+        
+        catch(error){
+            console.error('Error fetching user by account number:', error);
+            throw error;
+        }
+    }
 }
+
+
 
 export default Account
