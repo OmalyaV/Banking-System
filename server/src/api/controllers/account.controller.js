@@ -24,13 +24,18 @@ const get_account_list = async (req, res) => {
     try{
     const account = await Account.getAccountsByNICAndType(NIC, type)
         console.log("Account list fetched")
+        console.log(account)
         return res.send({ account: account })
+        
     } catch (err) {
         console.log(err)
         return res.send({ approved: false })
     }
+    finally{
+        console.log("Get Account list function")
+    }
 
-    console.log("Get Account list function")
+   // console.log("Get Account list function")
 }
 
 const get_account_details = async (req, res) => {
@@ -43,8 +48,10 @@ const get_account_details = async (req, res) => {
         console.log(err)
         return res.send({ approved: false })
     }
+    finally{
+        console.log("Get Account details function")
+    }
 
-    console.log("Get Account details function")
 }
 
 export default {add_account, get_account_list, get_account_details}

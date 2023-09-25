@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser"
 import UserRoute from "./routes/user.routes.js"
 import CustomerRoute from "./routes/customer.routes.js"
 import AccountRoute from "./routes/account.routes.js"
+import TransactionRoute from "./routes/transaction.routes.js"
 //console.log("hi")
 const app = express()
 const { urlencoded } = pkg
@@ -29,5 +30,6 @@ console.log("hi")
 app.use("/user", UserRoute)
 app.use("/customer", CustomerRoute)
 app.use("/account", AccountRoute)
+app.use("/transaction", TransactionRoute)
 
 
