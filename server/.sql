@@ -100,3 +100,20 @@ CREATE TABLE `User` (
   PRIMARY KEY (`user_NIC`)
 );
 
+alter table Branch
+    add manager_id varchar(36) null;
+
+ALTER TABLE Branch
+ADD CONSTRAINT manager_id
+FOREIGN KEY (manager_id)
+REFERENCES employee(employee_id);
+
+create table `position` (
+    `position_id` INT,
+    `position_name` varchar(50),
+    primary key (`position_id`)
+
+);
+ALTER TABLE Employee
+    ADD CONSTRAINT Employee_position_position_id_fk
+    FOREIGN KEY (position_id) REFERENCES `position` (position_id);
