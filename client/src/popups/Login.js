@@ -13,7 +13,7 @@ const LoginPopup = () => {
     <div className="login-popup">
       {/* <div className="login-popup-child" onClick={onRectangleClick} /> */}
       
-      <div className="login-popup-item" />
+      <input className="login-popup-item" />
       <div className="account-no4">
         <div className="account-no5">Account No:</div>
         <div className="account-no-child1" />
