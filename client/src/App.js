@@ -1,13 +1,14 @@
 import './App.css';
 import LoginPopup from './popups/Login.js';
 import Home from './pages/Home.js';
-import SaveAccount from './pages/SaveAccount';
+import Account from './pages/Account';
+
 
 function App() {
   
   
   return (<div className="App">
-    <SaveAccount/> 
+    <Account/> 
   </div>);
 }
 

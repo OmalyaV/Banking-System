@@ -22,7 +22,7 @@ function NavBar() {
   const customFontStyle = {
     fontFamily: "Inter",
     fontWeight: 500, // You can adjust font weight as needed
-    fontSize: "15px",
+    fontSize: "12px",
   }
 
   const [anchorElNav, setAnchorElNav] = React.useState(null)
@@ -43,12 +43,12 @@ function NavBar() {
         width: "100%",
         margin: 0, // Remove margin
         padding: 0, // Set the background color to black
+        boxShadow: "none", // Remove the shadow
       }}
+      elevation={0}
     >
       <Container maxWidth="xl">
-        <Toolbar
-          disableGutters
-        >
+        <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -116,6 +116,7 @@ function NavBar() {
                   color: "white",
                   display: "block",
                   textTransform: "none",
+                  padding: "10px 20px"
                 }}
                 style={customFontStyle}
               >
