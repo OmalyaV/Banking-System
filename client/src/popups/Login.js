@@ -12,7 +12,7 @@ const LoginPopup = () => {
   return (
     <div className="login-popup">
       {/* <div className="login-popup-child" onClick={onRectangleClick} /> */}
-      <div className="login-popup-child" />
+      
       <div className="login-popup-item" />
       <div className="account-no4">
         <div className="account-no5">Account No:</div>
@@ -20,8 +20,14 @@ const LoginPopup = () => {
       </div>
       <div className="password3">Password:</div>
       <b className="login2">Login</b>
+      <div className="login-popup-child">
       <div className="login3">Login</div>
-      <div className="dont-have-an">Don't have an account? Register</div>
+      </div>
+      
+      
+      <button  className="dont-have-an">Don't have an account? Register
+      
+      </button>
     </div>
   );
 };
