@@ -1,8 +1,11 @@
-import React from 'react'
+import React from "react"
+import NavBar from "../../components/NavBar"
 
 const SaveAccount = () => {
   return (
-    <div>SaveAccount</div>
+    <div>
+      <NavBar />
+    </div>
   )
 }
 
