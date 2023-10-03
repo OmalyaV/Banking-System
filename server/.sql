@@ -117,3 +117,85 @@ create table `position` (
 ALTER TABLE Employee
     ADD CONSTRAINT Employee_position_position_id_fk
     FOREIGN KEY (position_id) REFERENCES `position` (position_id);
+
+
+rename table `Saving account` to saving_account;
+
+alter table Loan ADD column customer_NIC BIGINT;
+alter table Loan
+add CONSTRAINT  fk_customer_NIC
+FOREIGN KEY (customer_NIC)
+REFERENCES Customer(customer_NIC);
+
+DELIMITER //
+create PROCEDURE DeleteFDLoan(IN FD_ID_in varchar(36))
+BEGIN
+    DELETE FROM Loan where request_id in(
+        select request_id from onlineLoanRequest where FD_id = FD_ID_in
+        );
+end //
+DELIMITER ;
+
+DELIMITER //
+
+create PROCEDURE DeleteAccountFD(IN account_number_in BIGINT)
+BEGIN
+    DELETE FROM FixedDeposit where saving_account_number = account_number_in;
+end //
+DELIMITER ;
+
+
+DELIMITER //
+
+create PROCEDURE DeleteCustomerAccount(customer_ID_in BIGINT )
+BEGIN
+    DELETE FROM Account where customer_NIC= customer_ID_in;
+
+
+end //
+DELIMITER ;
+
+DELIMITER //
+create PROCEDURE DeleteAccountSavingAccount(account_number_in BIGINT,type enum('savings', 'current'))
+BEGIN
+    if type = 'savings' then
+        delete from saving_account where account_number = account_number_in;
+    end if ;
+end //
+DELIMITER ;
+
+DELIMITER //
+create TRIGGER customer_delete_trigger
+after delete on Customer
+    for each row
+    BEGIN
+        CALL DeleteCustomerAccount(OLD.customer_NIC);
+    end;
+//
+DELIMITER ;
+DROP TRIGGER IF EXISTS account_delete_trigger;
+
+show triggers ;
+create trigger account_delete_trigger
+    after delete
+    on Account
+    for each row
+begin
+    CALL DeleteAccountSavingAccount(OLD.account_number, OLD.type);
+end;
+
+create trigger FD_delete_trigger
+    after delete
+    on saving_account
+    for each row
+begin
+    call DeleteAccountFD(OLD.account_number);
+end;
+
+create trigger loan_delete_trigger_1
+    after delete
+    on FixedDeposit
+    for each row
+begin
+    call DeleteFDLoan(OLD.FD_id);
+end;
