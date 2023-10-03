@@ -4,6 +4,7 @@ import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
 import SavingAccount from "./SavingAccount"
+import Footer from "../../components/Footer"
 
 function CheckingAccountDetails() {
   return <div>Details related to Checking Account</div>
@@ -50,6 +51,7 @@ const Account = () => {
         {selectedAccount === "CheckingAccount" && <CheckingAccountDetails />}
         {/* Add conditions for other account types' details here */}
       </Box>
+      <Footer/>
     </Box>
   )
 }

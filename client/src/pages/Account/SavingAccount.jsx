@@ -14,12 +14,13 @@ const Item = styled(Paper)(({ theme }) => ({
 }))
 
 const GreyBox = styled(Paper)(({ theme }) => ({
-  backgroundColor: "grey", // Set the background color to grey
+  backgroundColor: "#151515", // Set the background color to grey
   ...theme.typography.body2,
   padding: theme.spacing(2),
   textAlign: "center",
   color: "white", // Set the text color to white
   fontWeight: "bold", // Set the font weight to bold
+  borderRadius: "20px",
 }))
 
 const SavingAccount = () => {
@@ -55,12 +56,13 @@ const SavingAccount = () => {
               color: "white",
               fontSize: 12,
               fontWeight: 400,
-              padding: "0px 0px",
+              padding: "10px 0px",
             }}
+            fontFamily={"Inter"}
           >
             Your Account Type : {accountType}
           </Typography>
-          <Stack direction="row" spacing={2}>
+          <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={2}>
             <Box>
               <Typography
                 sx={{
@@ -69,6 +71,7 @@ const SavingAccount = () => {
                   fontWeight: 400,
                   padding: "0px 0px",
                 }}
+                fontFamily={"Inter"}
               >
                 Balance
               </Typography>
@@ -84,6 +87,7 @@ const SavingAccount = () => {
                   fontWeight: 400,
                   padding: "0px 0px",
                 }}
+                fontFamily={"Inter"}
               >
                 No: of Withdrawals Left
               </Typography>
@@ -92,7 +96,7 @@ const SavingAccount = () => {
               </GreyBox>
             </Box>
           </Stack>
-          <Box>
+          <Box padding={{ paddingTop: "20px" }}>
             <Typography
               sx={{
                 color: "white",
@@ -100,86 +104,110 @@ const SavingAccount = () => {
                 fontWeight: 400,
                 padding: "0px 0px",
               }}
+              fontFamily={"Inter"}
             >
               Transaction
             </Typography>
           </Box>
         </Box>
-        <GreyBox  >
-          <Grid container spacing={2}>
-            <Grid item xs={6} >
-              <Typography
-                sx={{
-                  color: "white",
-                  fontSize: 12,
-                  fontWeight: 400,
-                  padding: "0px 0px",
-                }}
-              >
-                To Account:
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                variant="outlined"
-                sx={{
-                  borderRadius: "50px",
-                  backgroundColor: "white",
-                  "& fieldset": { border: "none" },
-                  "& input": {
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                  },
-                }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Typography
-                sx={{
-                  color: "white",
-                  fontSize: 12,
-                  fontWeight: 400,
-                  padding: "0px 0px",
-                }}
-              >
-                Amount:
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                variant="outlined"
-                sx={{
-                  borderRadius: "50px",
-                  backgroundColor: "white",
-                  "& fieldset": { border: "none" },
-                  "& input": {
-                    paddingTop: "6px",
-                    paddingBottom: "6px",
-                  },
-                }}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            variant="contained"
+        <Box sx={{ paddingLeft: "100px" }}>
+          <Paper
             sx={{
-              backgroundColor: "#FFCF43",
-              color: "black",
-              "&:hover": {
-                backgroundColor: "yellow", // Specify the hover color
-              },
+              paddingLeft: "50px",
+              backgroundColor: "#151515",
+              textAlign: "left",
+              borderRadius: "20px",
             }}
           >
-            Proceed
-          </Button>
-        </GreyBox>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Typography
+                  sx={{
+                    color: "white",
+                    fontSize: 12,
+                    fontWeight: 400,
+                    padding: "0px 0px",
+                  }}
+                  fontFamily={"Inter"}
+                >
+                  To Account:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  variant="outlined"
+                  sx={{
+                    borderRadius: "50px",
+                    backgroundColor: "white",
+                    "& fieldset": { border: "none" },
+                    "& input": {
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Typography
+                  sx={{
+                    color: "white",
+                    fontSize: 12,
+                    fontWeight: 400,
+                    padding: "0px 0px",
+                  }}
+                  fontFamily={"Inter"}
+                >
+                  Amount:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  variant="outlined"
+                  sx={{
+                    borderRadius: "50px",
+                    backgroundColor: "white",
+                    "& fieldset": { border: "none" },
+                    "& input": {
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                    },
+                  }}
+                />
+              </Grid>
+            </Grid>
+            <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
+              <Button
+                variant="contained"
+                sx={{
+                  fontFamily: "Inter",
+                  textTransform: "none",
+                  fontWeight: 600,
+                  backgroundColor: "#FFCF43",
+                  color: "black",
+                  "&:hover": {
+                    backgroundColor: "yellow", // Specify the hover color
+                  },
+                  borderRadius: "20px", // Add this to round the button edges
+                }}
+              >
+                Proceed
+              </Button>
+            </Box>
+          </Paper>
+        </Box>
       </Stack>
       <Stack spacing={0}>
-        <Typography color={'white'}>Account History</Typography>
+        <Typography
+          fontFamily={"Inter"}
+          color={"white"}
+          padding={{ paddingBottom: "20px" }}
+        >
+          Account History
+        </Typography>
         <GreyBox>
-          <Typography>Transfer from Account</Typography>
-          <Typography>Transfer from Account</Typography>
-          <Typography>Transfer from Account</Typography>
+          <Typography fontFamily={"Inter"}>Transfer from Account</Typography>
+          <Typography fontFamily={"Inter"}>Transfer from Account</Typography>
+          <Typography fontFamily={"Inter"}>Transfer from Account</Typography>
         </GreyBox>
       </Stack>
     </Stack>
