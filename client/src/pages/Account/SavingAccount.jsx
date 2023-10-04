@@ -202,7 +202,7 @@ const SavingAccount = () => {
           color={"white"}
           padding={{ paddingBottom: "20px" }}
         >
-          Account History
+          Transaction History
         </Typography>
         <GreyBox>
           <Typography fontFamily={"Inter"}>Transfer from Account</Typography>
