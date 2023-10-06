@@ -1,3 +1,5 @@
+-- create database
+--creating tables
 CREATE TABLE `customer_type` (
   `type_id` INT,
   `type_name` VARCHAR(20),
@@ -130,110 +132,9 @@ CREATE TABLE `withdrawal` (
   FOREIGN KEY (`account_number`) REFERENCES `account`(`account_number`)
 );
 
-alter table online_requested_loan
-    add constraint online_requested_loan_loan_loan_id_fk
-        foreign key (loan_id) references loan (loan_id);
-DELIMITER //
-create PROCEDURE DeleteFDLoan(IN FD_ID_in varchar(36))
-BEGIN
-    DELETE FROM Loan where request_id in(
-        select request_id from onlineLoanRequest where FD_id = FD_ID_in
-        );
-end //
-DELIMITER ;
+-- creating procedures
 
-DELIMITER //
-
-create PROCEDURE DeleteAccountFD(IN account_number_in BIGINT)
-BEGIN
-    DELETE FROM FixedDeposit where saving_account_number = account_number_in;
-end //
-DELIMITER ;
-
-
-DELIMITER //
-
-create PROCEDURE DeleteCustomerAccount(customer_ID_in BIGINT )
-BEGIN
-    DELETE FROM Account where customer_NIC= customer_ID_in;
-
-
-end //
-DELIMITER ;
-
-DELIMITER //
-create PROCEDURE DeleteAccountSavingAccount(account_number_in BIGINT,type enum('savings', 'current'))
-BEGIN
-    if type = 'savings' then
-        delete from saving_account where account_number = account_number_in;
-    end if ;
-end //
-DELIMITER ;
-
-DELIMITER //
-create TRIGGER customer_delete_trigger
-after delete on Customer
-    for each row
-    BEGIN
-        CALL DeleteCustomerAccount(OLD.customer_NIC);
-    end;
-//
-DELIMITER ;
-DROP TRIGGER IF EXISTS account_delete_trigger;
-
-show triggers ;
-create trigger account_delete_trigger
-    after delete
-    on Account
-    for each row
-begin
-    CALL DeleteAccountSavingAccount(OLD.account_number, OLD.type);
-end;
-
-create trigger FD_delete_trigger
-    after delete
-    on saving_account
-    for each row
-begin
-    call DeleteAccountFD(OLD.account_number);
-end;
-
-create trigger loan_delete_trigger_1
-    after delete
-    on FixedDeposit
-    for each row
-begin
-    call DeleteFDLoan(OLD.FD_id);
-end;
-
-DELIMITER //
-create PROCEDURE DeleteCustomerLoan(IN customer_NIC_IN BIGINT)
-BEGIN
-    DELETE FROM Loan where Loan.customer_NIC = customer_NIC_IN;
-end //
-DELIMITER ;
-
-create trigger loan_delete_trigger_2
-    after delete
-    on Customer
-    for each row
-begin
-    CALL DeleteCustomerLoan(OLD.customer_NIC);
-end;
-
-DELIMITER //
-create PROCEDURE DeleteCustomerUser(IN customer_NIC_IN BIGINT)
-BEGIN
-    DELETE FROM User where user_NIC = customer_NIC_IN;
-end //
-DELIMITER ;
-create trigger customer_delete_trigger_user
-    after delete
-    on Customer
-    for each row
-begin
-    CALL DeleteCustomerUser(OLD.customer_NIC);
-end;
+-
 DELIMITER //
 create PROCEDURE DeleteFDLoan(IN FD_ID_in varchar(36))
 BEGIN
@@ -257,7 +158,7 @@ DELIMITER ;
 
 
 DELIMITER //
-
+-- deleting fixed deposit when savings account number is given
 create PROCEDURE DeleteAccountFD(IN account_number_in BIGINT)
 BEGIN
     DELETE FROM fixedDeposit where saving_account_number = account_number_in;
@@ -265,6 +166,7 @@ end //
 DELIMITER ;
 
 
+-- deleting customer account when customer NIC is given
 DELIMITER //
 
 create PROCEDURE DeleteCustomerAccount(customer_NIC_in BIGINT )
@@ -275,6 +177,7 @@ BEGIN
 end //
 DELIMITER ;
 
+-- deleting saving account when account number and type is given
 DELIMITER //
 create PROCEDURE DeleteAccountSavingAccount(account_number_in BIGINT,type enum('savings', 'current'))
 BEGIN
@@ -284,6 +187,18 @@ BEGIN
 end //
 DELIMITER ;
 
+
+-- deleting user when customer NIC is given
+DELIMITER //
+create PROCEDURE DeleteCustomerUser(IN customer_NIC_IN BIGINT)
+BEGIN
+    DELETE FROM user where user_NIC = customer_NIC_IN;
+end //
+DELIMITER ;
+----------------------------------------------------------------------------------------------------------
+-- creating triggers
+
+-- trigger for deleting customer account when customer is deleted
 DELIMITER //
 create TRIGGER customer_delete_trigger
 after delete on customer
@@ -293,9 +208,10 @@ after delete on customer
     end;
 //
 DELIMITER ;
-DROP TRIGGER IF EXISTS account_delete_trigger;
 
-show triggers ;
+
+
+-- trigger for deleting savings account when account is deleted
 create trigger account_delete_trigger
     after delete
     on account
@@ -304,6 +220,7 @@ begin
     CALL DeleteAccountSavingAccount(OLD.account_number, OLD.type);
 end;
 
+-- trigger for deleting fixed deposit when savings account is deleted
 create trigger FD_delete_trigger
     after delete
     on saving_account
@@ -312,6 +229,7 @@ begin
     call DeleteAccountFD(OLD.account_number);
 end;
 
+-- trigger for deleting loan when fixed deposit is deleted
 create trigger loan_delete_trigger_1
     after delete
     on fixedDeposit
@@ -319,6 +237,8 @@ create trigger loan_delete_trigger_1
 begin
     call DeleteFDLoan(OLD.FD_id);
 end;
+
+-- trigger for deleting onlin  requested loan when loan is deleted
 create trigger online_loan_delete_trigger
     after delete
     on loan
@@ -327,17 +247,7 @@ begin
     call DeleteOnlineRequestedLoan(OLD.loan_id,OLD.request_type);
 end;
 
-
-DROP TRIGGER IF EXISTS loan_delete_trigger;
-
-
-
-DELIMITER //
-create PROCEDURE DeleteCustomerUser(IN customer_NIC_IN BIGINT)
-BEGIN
-    DELETE FROM user where user_NIC = customer_NIC_IN;
-end //
-DELIMITER ;
+-- trigger for deleting user when customer is deleted
 create trigger customer_delete_trigger_user
     after delete
     on customer
