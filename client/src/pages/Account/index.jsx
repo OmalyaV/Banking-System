@@ -4,11 +4,12 @@ import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
 import SavingAccount from "./SavingAccount"
+import CheckingAccount from "./CheckingAccount"
 import Footer from "../../components/Footer"
 
-function CheckingAccountDetails() {
-  return <div>Details related to Checking Account</div>
-}
+// function CheckingAccountDetails() {
+//   return <div>Details related to Checking Account</div>
+// }
 
 const Account = () => {
   const [selectedAccount, setSelectedAccount] = useState(null)
@@ -49,7 +50,7 @@ const Account = () => {
       </Stack>
       <Box mt={2}>
         {selectedAccount === "SavingAccount" && <SavingAccount />}
-        {selectedAccount === "CheckingAccount" && <CheckingAccountDetails />}
+        {selectedAccount === "CheckingAccount" && <CheckingAccount />}
         {/* Add conditions for other account types' details here */}
       </Box>
       <Footer/>
