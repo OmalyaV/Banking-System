@@ -16,22 +16,7 @@ class SavingAccount {
         return output_message;
       }
 
-    static async getAccountsByNICAndType(NIC, type) {
-        const sqlQuery = 'SELECT account_number, balance FROM defaultdb.account WHERE customer_NIC = ? and type = ?';
-        try{
-            const [rows,fields] = await db.execute(sqlQuery, [NIC, type]);
-
-            const account = rows? rows.map(row=>({
-                account_number: row.account_number,
-                balance: row.balance
-            })) : null;
-            return account;
-        }
-        catch(error){
-            console.error('Error fetching user by NIC and type:', error);
-            throw error;
-        }
-    }
+    
 
     static async getAccountByAccountNumber(account_number) {
         const sqlQuery = 'SELECT * FROM defaultdb.Account WHERE account_number = ?';
@@ -50,22 +35,9 @@ class SavingAccount {
         }
     }
     
-    static async updateBalance(account_number, balance) {
-        const sqlQuery = 'call defaultdb.updateBalance(?,?)';
-        try{
-            const [rows] = await db.execute(sqlQuery, [account_number,balance]);
-
-            const account = rows? rows[0] : null;
-            return account;
+    
             
-            }
-            
-        
-        catch(error){
-            console.error('Error fetching user by account number:', error);
-            throw error;
-        }
-    }
+       
 }
 
 

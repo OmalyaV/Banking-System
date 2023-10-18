@@ -1,12 +1,13 @@
 import Account from "../models/account.model.js"
-const add_account = async (req, res) => {
+const add_current_account = async (req, res) => {
     const account_number = req.body.account_number
     const type = req.body.type
     const customer_NIC = req.body.customer_NIC
     const branch_code = req.body.branch_code
     const balance = req.body.balance
 
-    
+    if (type == "saving") {
+        
     try{
     const account = await Account.createAccount(account_number, type,customer_NIC, branch_code, balance)
       console.log("Account created")
@@ -17,6 +18,29 @@ const add_account = async (req, res) => {
   
     console.log("Add Account function")
   }
+}
+
+const add_saving_account = async (req, res) => {
+    const account_number = req.body.account_number
+    const type = req.body.type
+    const customer_NIC = req.body.customer_NIC
+    const branch_code = req.body.branch_code
+    const balance = req.body.balance
+    const plan_id = req.body.plan_id
+
+    if (type == "saving") {
+        
+    try{
+    const account = await Account.createSavingAccount(account_number, type,customer_NIC, branch_code, balance, plan_id)
+      console.log("Account created")
+    } catch (err) {
+      console.log(err)
+      return res.send({ approved: false })
+    }
+  
+    console.log("Add Account function")
+  }
+}
 
 const get_account_list = async (req, res) => {
     const NIC = req.body.NIC
@@ -54,7 +78,7 @@ const get_account_details = async (req, res) => {
 
 }
 
-export default {add_account, get_account_list, get_account_details}
+export default {add_current_account, add_saving_account, get_account_list, get_account_details}
 
 
  
