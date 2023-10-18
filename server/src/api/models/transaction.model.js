@@ -10,31 +10,20 @@ class Trsnsaction {
       
     }
 
-    static async createTransaction(sender_account_number,receiver_account_number,transfer_amount,transaction_date,transaction_time) {
-        try{
-       await db.beginTransaction();
-       const sqlQuery1 = 'UPDATE defaultdb.Account SET balance = balance  ? WHERE account_number = ?';
-       const sqlQuery2 = 'INSERT INTO defaultdb.Transaction (transaction_id,sender_account_number,receiver_account_number,transfer_amount,transaction_date,transaction_time) VALUES (uuid(), ?, ?, ?, ?,?)';
-         const [rows1,fields1] = await db.execute(sqlQuery1, [transfer_amount,sender_account_number]);
-            const [rows2,fields2] = await db.execute(sqlQuery1, [transfer_amount,receiver_account_number]);
-            const [rows3,fields3] = await db.execute(sqlQuery2, [sender_account_number,receiver_account_number,transfer_amount,transaction_date,transaction_time]);
-            await db.commit();
-            return rows3;
-
-        }
+    static async createTransaction(sender_account_number,receiver_account_number,transfer_amount) {
+        sqlQuery = 'CALL defaultdb.doTransaction(?,?,?)';
         
-        catch  (error){
-            console.log("error in transaction")
-            await db.rollback();
-            throw error;
-
-        }
+            const [rows,fields] = await db.execute(sqlQuery, [sender_account_number,receiver_account_number,transfer_amount]);
+            const output_message = rows ? rows[0] : null;
+            console.log(output_message)
+            return output_message;
+            
         
        
       }
 
     static async getTransactionByAccountNumber(account_number) {
-        const sqlQuery = 'SELECT transaction_id,sender_account_number,receiver_account_number,transfer_amount,transaction_date,transaction_time FROM defaultdb.Transaction WHERE sender_account_number = ? OR receiver_account_number = ?';
+        const sqlQuery = 'SELECT transaction_id,sender_account_number,receiver_account_number,transfer_amount,transaction_date,transaction_time FROM defaultdb.transaction WHERE sender_account_number = ? OR receiver_account_number = ?';
         try{
             const [rows,fields] = await db.execute(sqlQuery, [account_number,account_number]);
 

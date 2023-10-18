@@ -1,17 +1,18 @@
 // const db = require("./db") // Import your database configuration
 import db from "./db.js"
 class User {
-  constructor(customer_NIC, username, password_hash) {
+  constructor(customer_NIC, username, password_hash, user_type) {
     this.customer_NIC = customer_NIC
     this.username = username
     this.password_hash = password_hash
+    this.user_type = user_type
     
   }
 
-  static async createUser(username, password_hash,customer_NIC) {
+  static async createUser(username, password_hash,customer_NIC,user_type) {
     const { rows } = await db.query(
-      'INSERT INTO defaultdb.User (user_NIC, username, password_hash) VALUES (?, ?, ?)',
-      [customer_NIC, username, password_hash]
+      'CALL defaultdb.registerUser(?,?,?,?)',
+      [customer_NIC, username, password_hash, user_type]
   
     )
 
