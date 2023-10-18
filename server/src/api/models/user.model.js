@@ -20,7 +20,7 @@ class User {
   }
 
   static async getUserByUsername(NIC) {
-    const sqlQuery = 'SELECT password_hash FROM defaultdb.User WHERE user_NIC = ?';
+    const sqlQuery = 'SELECT password_hash FROM defaultdb.user WHERE user_NIC = ?';
     
     try {
       // Log the final SQL query with the parameter value
