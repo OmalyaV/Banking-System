@@ -1,18 +1,15 @@
 import db from "./db.js"
-class Account {
-    constructor(account_number, type,customer_NIC, branch_code, balance) {
+class SavingAccount {
+    constructor(account_number, plan_id) {
         this.account_number = account_number
-        this.type = type
-        this.customer_NIC = customer_NIC
-        this.branch_code = branch_code
-        this.balance = balance
+        this.plan_id = plan_id
       
     }
 
-    static async createCurrentAccount(account_number, type,customer_NIC, branch_code, balance) {
+    static async createSavingAccount(account_number, type,customer_NIC, branch_code, initial_deposit, plan_id) {
         const { rows } = await db.query(
-          'CALL defaultdb.createBankAccount(?,?,?,?,?)'
-          [account_number, type,customer_NIC, branch_code, balance]
+          'CALL defaultdb.createSavingBankAccount(?,?,?,?,?,?)'
+          [account_number, type,customer_NIC, branch_code, initial_deposit, plan_id]
       
         )
         const output_message = rows ? rows[0] : null;
@@ -20,7 +17,7 @@ class Account {
       }
 
     static async getAccountsByNICAndType(NIC, type) {
-        const sqlQuery = 'SELECT account_number, balance FROM defaultdb.Account WHERE customer_NIC = ? and type = ?';
+        const sqlQuery = 'SELECT account_number, balance FROM defaultdb.account WHERE customer_NIC = ? and type = ?';
         try{
             const [rows,fields] = await db.execute(sqlQuery, [NIC, type]);
 
