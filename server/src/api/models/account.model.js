@@ -11,7 +11,7 @@ class Account {
 
     static async createCurrentAccount(account_number, type,customer_NIC, branch_code, balance) {
         const { rows } = await db.query(
-          'CALL defaultdb.createBankAccount(?,?,?,?,?)'
+          'CALL defaultdb.createBankAccount(?,?,?,?,?)',
           [account_number, type,customer_NIC, branch_code, balance]
       
         )

@@ -20,7 +20,7 @@ class User {
   }
 
   static async getUserByUsername(NIC) {
-    const sqlQuery = 'SELECT password_hash FROM defaultdb.user WHERE user_NIC = ?';
+    const sqlQuery = 'SELECT * FROM defaultdb.user WHERE user_NIC = ?';
     
     try {
       // Log the final SQL query with the parameter value
@@ -30,9 +30,14 @@ class User {
       const [rows, fields] = await db.execute(sqlQuery, [NIC ]);
       console.log(rows)
       console.log(fields)
-      const password_hash = rows ? rows[0] : null;
-      console.log(password_hash)
-      return password_hash.password_hash.toString();
+      const user = rows ? rows[0] : null;
+      //console.log(user)
+      return new User(
+        user.user_NIC,
+        user.username,
+        user.password_hash,
+        user.user_type
+      );
     } catch (error) {
       // Handle the database query error here
       console.error('Error fetching user by NIC:', error);
