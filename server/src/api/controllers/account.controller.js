@@ -1,14 +1,17 @@
 import Account from "../models/account.model.js"
+import SavingAccount from "../models/savingAccount.model.js"
+let created_accounts = 10;
 const add_current_account = async (req, res) => {
-    const account_number = req.body.account_number
     const type = req.body.type
     const customer_NIC = req.body.customer_NIC
     const branch_code = req.body.branch_code
     const balance = req.body.balance
-
-    if (type == "saving") {
-        
+    
+    
+    
     try{
+    created_accounts = created_accounts + 1;
+    const account_number  = created_accounts.toString().padStart(10, '0');
     const account = await Account.createAccount(account_number, type,customer_NIC, branch_code, balance)
       console.log("Account created")
     } catch (err) {
@@ -17,21 +20,23 @@ const add_current_account = async (req, res) => {
     }
   
     console.log("Add Account function")
-  }
+  
 }
 
 const add_saving_account = async (req, res) => {
-    const account_number = req.body.account_number
+    
     const type = req.body.type
     const customer_NIC = req.body.customer_NIC
     const branch_code = req.body.branch_code
     const balance = req.body.balance
     const plan_id = req.body.plan_id
 
-    if (type == "saving") {
+    if (type == "savings") {
         
     try{
-    const account = await Account.createSavingAccount(account_number, type,customer_NIC, branch_code, balance, plan_id)
+    created_accounts = created_accounts + 1;
+    const account_number  = created_accounts.toString().padStart(10, '0');
+    const account = await SavingAccount.createSavingAccount(account_number, type,customer_NIC, branch_code, balance, plan_id)
       console.log("Account created")
     } catch (err) {
       console.log(err)

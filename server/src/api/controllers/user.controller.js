@@ -11,7 +11,8 @@ const login = async (req, res) => {
   const password = req.body.password
 
   try {
-    const hash = await User.getUserByUsername(NIC)
+    const user = await User.getUserByUsername(NIC)
+    const hash = user.password_hash
     console.log(hash)
     if (hash === null) {
       console.log("User not found")
@@ -22,7 +23,7 @@ const login = async (req, res) => {
     console.log(NIC, password, hash)
     if (match) {
       console.log("Login successful")
-      return res.send({ approved: true })
+      return res.send({ approved: true ,user_type: user.user_type, customer_NIC: user.customer_NIC, username: user.username })
     } else {
       console.log("Login failed")
       return res.send({ approved: false })

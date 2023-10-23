@@ -8,7 +8,7 @@ class SavingAccount {
 
     static async createSavingAccount(account_number, type,customer_NIC, branch_code, initial_deposit, plan_id) {
         const { rows } = await db.query(
-          'CALL defaultdb.createSavingBankAccount(?,?,?,?,?,?)'
+          'CALL defaultdb.createSavingBankAccount(?,?,?,?,?,?)',
           [account_number, type,customer_NIC, branch_code, initial_deposit, plan_id]
       
         )
@@ -42,4 +42,4 @@ class SavingAccount {
 
 
 
-export default Account
+export default SavingAccount
