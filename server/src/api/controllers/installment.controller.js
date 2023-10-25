@@ -1,52 +1,51 @@
-import Loan from "../models/loan.model.js";
-
-const add_loan = async (req, res) => {
-    const amount = req.body.amount
-    const interest_rate = req.body.interest_rate
-    const loan_period = req.body.loan_period
-    const approved = req.body.approved
-    const request_type = req.body.request_type
-    const customer_NIC = req.body.customer_NIC
-    const branch_code = req.body.branch_code
-
-    
-    try{
-    const loan = await Loan.createLoan(amount, interest_rate,loan_period,approved,request_type,customer_NIC,branch_code)
-      console.log("Loan created")
-        return res.send({ approved: true }, { loan: loan })
-    } catch (err) {
-      console.log(err)
-      return res.send({ approved: false })
-    }
-  
-    // console.log("Add Account function")
-  
-}
+import Installment from "../models/installments.model.js"
 
 
 
-const my_loan_list = async (req, res) => {
+
+
+const getMyInstallments = async (req, res) => {
     const NIC = req.body.NIC
     
     try{
-    const loan = await Loan.getLoanByCustomerNIC(NIC)
-        console.log("Loan list fetched")
-        console.log(loan)
-        return res.send({ loan: loan })
+    const installment = await Installment.getMyInstallments(NIC)
+        console.log("Installment list fetched")
+        console.log(installment)
+        return res.send({ installment: installment })
     
     } catch (err) {
         console.log(err)
         return res.send({ approved: false })
     }
     finally{
-        console.log("get loan list function")
+        console.log("get user installment list function")
+    }
+
+   // console.log("Get Account list function")
+}
+
+const getLateInstallmentsByBranch = async (req, res) => {
+    const branch_code = req.body.branch_code
+    
+    try{
+    const installment = await Installment.getLateInstallmentsByBranch(branch_code)
+        console.log("Installment list fetched")
+        console.log(installment)
+        return res.send({ installment: installment })
+    
+    } catch (err) {
+        console.log(err)
+        return res.send({ approved: false })
+    }
+    finally{
+        console.log("get late installment list function")
     }
 
    // console.log("Get Account list function")
 }
 
 
-export default {add_loan, my_loan_list}
+export default { getMyInstallments, getLateInstallmentsByBranch}
 
 
  
