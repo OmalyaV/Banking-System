@@ -24,58 +24,39 @@ class Loan {
         return output_message;
       }
 
-    static async getAccountsByNICAndType(NIC, type) {
-        const sqlQuery = 'SELECT account_number, balance FROM defaultdb.Account WHERE customer_NIC = ? and type = ?';
+    
+
+    static async getLoanByCustomerNIC(customer_NIC) {
+        const sqlQuery = 'SELECT * FROM loan WHERE customer_NIC =  and approved = 1?';
         try{
-            const [rows,fields] = await db.execute(sqlQuery, [NIC, type]);
-
-            const account = rows? rows.map(row=>({
-                account_number: row.account_number,
-                balance: row.balance
-            })) : null;
-            return account;
-        }
-        catch(error){
-            console.error('Error fetching user by NIC and type:', error);
-            throw error;
-        }
-    }
-
-    static async getAccountByAccountNumber(account_number) {
-        const sqlQuery = 'SELECT * FROM defaultdb.Account WHERE account_number = ?';
-        try{
-            const [rows] = await db.execute(sqlQuery, [account_number]);
-
-            const account = rows? rows[0] : null;
-            return account;
+            const [rows] = await db.execute(sqlQuery, [customer_NIC]);
+            const loan = rows? rows.map(
+                row=>({
+                loan_id: row.loan_id,
+                amount: row.amount,
+                interest_rate: row.interest_rate,
+                loan_period: row.loan_period,
+                approved: row.approved,
+                request_type: row.request_type,
+                remaining_installments: row.remaining_installments,
+                branch_code: row.branch_code,
+                starting_date: row.starting_date
+            }))
+             : null;
+            return loan;
             
             }
             
         
         catch(error){
-            console.error('Error fetching user by account number:', error);
+            console.error('error whicle fetching data', error);
             throw error;
         }
     }
     
-    static async updateBalance(account_number, balance) {
-        const sqlQuery = 'call defaultdb.updateBalance(?,?)';
-        try{
-            const [rows] = await db.execute(sqlQuery, [account_number,balance]);
-
-            const account = rows? rows[0] : null;
-            return account;
-            
-            }
-            
-        
-        catch(error){
-            console.error('Error fetching user by account number:', error);
-            throw error;
-        }
-    }
+    
 }
 
 
 
-export default Account
+export default Loan;
