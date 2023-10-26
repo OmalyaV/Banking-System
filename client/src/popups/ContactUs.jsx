@@ -29,7 +29,7 @@ const ContactUsPopup = (props) => {
                 }}
                 fontFamily={"Inter"}
               >
-                Contact no:  +94 777 777 777
+                Contact no:  +94 77 777 777
               </Typography>
               <Typography
                 sx={{
