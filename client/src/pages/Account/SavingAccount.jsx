@@ -2,26 +2,10 @@ import React from "react"
 import Paper from "@mui/material/Paper"
 import Stack from "@mui/material/Stack"
 import Box from "@mui/material/Box"
-import { styled } from "@mui/material/styles"
 import { Typography, TextField, InputBase, Grid, Button } from "@mui/material"
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}))
-
-const GreyBox = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#151515", // Set the background color to grey
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: "white", // Set the text color to white
-  fontWeight: "bold", // Set the font weight to bold
-  borderRadius: "20px",
-}))
+import TextInput from "../../components/TextInput"
+import YellowButton from "../../components/YellowButton"
+import GreyBox from "../../components/GreyBox"
 
 const SavingAccount = () => {
   const accountType = "Adult"
@@ -111,14 +95,7 @@ const SavingAccount = () => {
           </Box>
         </Box>
         <Box sx={{ paddingLeft: "100px" }}>
-          <Paper
-            sx={{
-              paddingLeft: "50px",
-              backgroundColor: "#151515",
-              textAlign: "left",
-              borderRadius: "20px",
-            }}
-          >
+          <GreyBox allignment="left" padding="10px 10px 10px 50px">
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <Typography
@@ -134,18 +111,7 @@ const SavingAccount = () => {
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <TextField
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "50px",
-                    backgroundColor: "white",
-                    "& fieldset": { border: "none" },
-                    "& input": {
-                      paddingTop: "6px",
-                      paddingBottom: "6px",
-                    },
-                  }}
-                />
+                <TextInput />
               </Grid>
               <Grid item xs={6}>
                 <Typography
@@ -161,39 +127,13 @@ const SavingAccount = () => {
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <TextField
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "50px",
-                    backgroundColor: "white",
-                    "& fieldset": { border: "none" },
-                    "& input": {
-                      paddingTop: "6px",
-                      paddingBottom: "6px",
-                    },
-                  }}
-                />
+                <TextInput />
               </Grid>
             </Grid>
             <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
-              <Button
-                variant="contained"
-                sx={{
-                  fontFamily: "Inter",
-                  textTransform: "none",
-                  fontWeight: 600,
-                  backgroundColor: "#FFCF43",
-                  color: "black",
-                  "&:hover": {
-                    backgroundColor: "yellow", // Specify the hover color
-                  },
-                  borderRadius: "20px", // Add this to round the button edges
-                }}
-              >
-                Proceed
-              </Button>
+              <YellowButton text="Proceed" />
             </Box>
-          </Paper>
+          </GreyBox>
         </Box>
       </Stack>
       <Stack spacing={0}>
