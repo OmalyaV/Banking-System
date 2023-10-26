@@ -29,7 +29,7 @@ const ContactUsPopup = (props) => {
                 }}
                 fontFamily={"Inter"}
               >
-                Contact no: +94 777 777 777
+                Contact no:  +94 777 777 777
               </Typography>
               <Typography
                 sx={{
@@ -40,7 +40,7 @@ const ContactUsPopup = (props) => {
                 }}
                 fontFamily={"Inter"}
               >
-                Address:No 90, Galle Road,Colombo 03,Sri Lanka
+                Address:  No 90, Galle Road,Colombo 03,Sri Lanka
               </Typography>
               <Typography
                 sx={{
@@ -51,7 +51,7 @@ const ContactUsPopup = (props) => {
                 }}
                 fontFamily={"Inter"}
               >
-                Mail:contact@nexustrust.com
+                Mail:  contact@nexustrust.com
               </Typography>
       </Box>
     </Dialog>
