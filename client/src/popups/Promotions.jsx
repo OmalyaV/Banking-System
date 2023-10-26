@@ -12,15 +12,26 @@ const PromotionPopup = (props) => {
     <Dialog open={open} onClose={handleClose}>
       <Box
         sx={{
-          backgroundColor: "grey",
+          backgroundColor: "black",// Set the background color to black
           margin: 0.1,
-          padding: 0, // Set the background color to black
+          padding: 0, 
           boxShadow: "none", // Remove the shadow
         }}
         alignItems={"center"}
         flex={"row"}
       >
-        <Typography>{name}</Typography>
+        
+        <Typography
+                sx={{
+                  color: "white",
+                  fontSize: 15,
+                  fontWeight: 400,
+                  padding: "50px 25px",
+                }}
+                fontFamily={"Inter"}
+              >
+                Stay Tuned for Exciting Promotions! Currently, there are no promotions available, but we're actively working on bringing you exciting offers. Check back soon for updates and enjoy added value with NexusTrust Bank!
+              </Typography>
       </Box>
     </Dialog>
   )
