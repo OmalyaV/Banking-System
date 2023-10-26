@@ -77,60 +77,11 @@ const Loans = () => {
             </Box>
           </Stack>
           <Box padding={{ paddingTop: "20px" }}>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 15,
-                fontWeight: 400,
-                padding: "0px 0px",
-              }}
-              fontFamily={"Inter"}
-            >
-              Fixed Deposit
-            </Typography>
+            
           </Box>
         </Box>
-        <Box sx={{ paddingLeft: "100px" }}>
-          <GreyBox allignment="left" padding="10px 10px 10px 50px">
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Typography
-                  sx={{
-                    color: "white",
-                    fontSize: 12,
-                    fontWeight: 400,
-                    padding: "0px 0px",
-                  }}
-                  fontFamily={"Inter"}
-                >
-                  Plan:
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <TextInput />
-              </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  sx={{
-                    color: "white",
-                    fontSize: 12,
-                    fontWeight: 400,
-                    padding: "0px 0px",
-                  }}
-                  fontFamily={"Inter"}
-                >
-                  Amount:
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <TextInput />
-              </Grid>
-            </Grid>
-            <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
-              <YellowButton text="Proceed" />
-            </Box>
-          </GreyBox>
-        </Box>
+        
+        
       </Stack>
       <Stack spacing={0}>
         <Typography
@@ -146,17 +97,18 @@ const Loans = () => {
           
         </GreyBox>
         <Box padding={{ paddingTop: "20px" }}>
+        <GreyBox>
             <Typography
-              sx={{
-                color: "white",
-                fontSize: 15,
-                fontWeight: 400,
-                padding: "0px 0px",
-              }}
-              fontFamily={"Inter"}
-            >
-              Fixed Deposit
-            </Typography>
+          fontFamily={"Inter"}
+          color={"white"}
+          padding={{ paddingBottom: "5px" }}
+        >
+          Online Loan Request
+        </Typography>
+            <Box sx={{ padding: "10px 100px", borderRadius: "50px", fontSize: "50px", fontWeight: 400 }}>
+                <YellowButton text="Select FD" sx={{ width: "200px", height: "150px", fontSize: "150px" }} />
+            </Box>
+            </GreyBox>  
         </Box>
         
         
