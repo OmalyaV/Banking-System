@@ -5,9 +5,12 @@ import TwitterIcon from "@mui/icons-material/Twitter"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import YouTubeIcon from "@mui/icons-material/YouTube"
+import Box from "@mui/material/Box"
 
 const Footer = () => {
-  return (
+  return (<Box sx={{
+    backgroundColor: "#151515", // Set the background color to grey
+  }}>
     <Stack>
       <Stack
         direction="row"
@@ -52,6 +55,7 @@ const Footer = () => {
 
       </Stack>
     </Stack>
+    </Box>
   )
 }
 

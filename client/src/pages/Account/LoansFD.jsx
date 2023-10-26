@@ -7,7 +7,8 @@ import TextInput from "../../components/TextInput"
 import YellowButton from "../../components/YellowButton"
 import GreyBox from "../../components/GreyBox"
 
-const SavingAccount = () => {
+const Loans = () => {
+
   const accountType = "Adult"
 
   return (
@@ -154,4 +155,4 @@ const SavingAccount = () => {
   )
 }
 
-export default SavingAccount
+export default Loans
