@@ -24,13 +24,24 @@ const PromotionPopup = (props) => {
         <Typography
                 sx={{
                   color: "white",
-                  fontSize: 15,
+                  fontSize: 18,
                   fontWeight: 400,
-                  padding: "50px 25px",
+                  padding: "10px 25px",
                 }}
                 fontFamily={"Inter"}
               >
-                Stay Tuned for Exciting Promotions! Currently, there are no promotions available, but we're actively working on bringing you exciting offers. Check back soon for updates and enjoy added value with NexusTrust Bank!
+                Stay Tuned for Exciting Promotions! 
+              </Typography>
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: 13,
+                  fontWeight: 400,
+                  padding: "10px 25px",
+                }}
+                fontFamily={"Inter"}
+              >
+                Currently, there are no promotions available, but we're actively working on bringing you exciting offers. Check back soon for updates and enjoy added value with NexusTrust Bank!
               </Typography>
       </Box>
     </Dialog>

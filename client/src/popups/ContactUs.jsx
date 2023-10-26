@@ -14,13 +14,45 @@ const ContactUsPopup = (props) => {
         sx={{
           backgroundColor: "black",
           margin: 0.1,
-          padding: 0, // Set the background color to black
+          padding: "50px 50px", // Set the background color to black
           boxShadow: "none", // Remove the shadow
         }}
         alignItems={"center"}
         flex={"row"}
       >
-        <Typography>{name}</Typography>
+        <Typography
+                sx={{
+                  color: "white",
+                  fontSize: 15,
+                  fontWeight: 400,
+                  padding: "0px 0px",
+                }}
+                fontFamily={"Inter"}
+              >
+                Contact no: +94 777 777 777
+              </Typography>
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: 15,
+                  fontWeight: 400,
+                  padding: "0px 0px",
+                }}
+                fontFamily={"Inter"}
+              >
+                Address:No 90, Galle Road,Colombo 03,Sri Lanka
+              </Typography>
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: 15,
+                  fontWeight: 400,
+                  padding: "0px 0px",
+                }}
+                fontFamily={"Inter"}
+              >
+                Mail:contact@nexustrust.com
+              </Typography>
       </Box>
     </Dialog>
   )
