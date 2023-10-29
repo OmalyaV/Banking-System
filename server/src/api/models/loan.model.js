@@ -1,9 +1,8 @@
 import db from "./db.js"
 class Loan {
-    constructor(loan_id,amount, interest_rate,loan_period,approved,request_type,customer_NIC,remaining_installments,branch_code,starting_date) {
+    constructor(loan_id,amount, interest_rate,loan_period,approved,request_type,customer_NIC,remaining_installments,branch_code,starting_date,description) {
         this.loan_id = loan_id
         this.amount = amount
-        this.interest_rate = interest_rate
         this.loan_period = loan_period
         this.approved = approved
         this.request_type = request_type
@@ -11,13 +10,14 @@ class Loan {
         this.remaining_installments = remaining_installments
         this.branch_code = branch_code
         this.starting_date = starting_date
+        this.description = description
       
     }
 
-    static async createLoan(amount, interest_rate,loan_period,request_type,customer_NIC,branch_code) {
+    static async createLoan(amount,loan_period,request_type,customer_NIC,branch_code,description) {
         const { rows } = await db.query(
-          'CALL defaultdb.insertToLoan( ?, ?, ?, ?, ?, ?, ?)',
-            [amount, interest_rate,loan_period,0,request_type,customer_NIC,branch_code]
+          'CALL defaultdb.insertToLoan( UUID(),?, ?, ?, ?, ?, ?, ?)',
+            [amount,loan_period,0,request_type,customer_NIC,branch_code, description]
       
         )
         const output_message = rows ? rows[0] : null;
