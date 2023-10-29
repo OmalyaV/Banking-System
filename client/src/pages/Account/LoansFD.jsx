@@ -34,18 +34,7 @@ const Loans = () => {
               padding: "0px 0px",
             }}
           >
-            Savings Account
-          </Typography>
-          <Typography
-            sx={{
-              color: "white",
-              fontSize: 12,
-              fontWeight: 400,
-              padding: "10px 0px",
-            }}
-            fontFamily={"Inter"}
-          >
-            Your Account Type : {accountType}
+            Fixed Deposits & Loans
           </Typography>
           <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={2}>
             <Box>
@@ -58,12 +47,16 @@ const Loans = () => {
                 }}
                 fontFamily={"Inter"}
               >
-                Balance
+                Fixed Deposits
               </Typography>
               <GreyBox>
-                <Typography>$500.00</Typography>
+                <Typography font family={"Inter"}>1 year   -14%      $30,000.00</Typography>
+                <Typography font family={"Inter"}>6 months   -13%    $30,000.00</Typography>
+                <Typography font family={"Inter"}>3 months   -12%    $30,000.00</Typography>
               </GreyBox>
             </Box>
+          </Stack>
+          <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={2}>
             <Box>
               <Typography
                 sx={{
@@ -74,83 +67,53 @@ const Loans = () => {
                 }}
                 fontFamily={"Inter"}
               >
-                No: of Withdrawals Left
+                Fixed Deposits Plans
               </Typography>
               <GreyBox>
-                <Typography>3</Typography>
+                <Typography font family={"Inter"}>Plan Basic : For 1 year at interest of 14%</Typography>
+                <Typography font family={"Inter"}>Plan Basic : For 6 months at interest of 13%</Typography>
+                <Typography font family={"Inter"}>Plan Basic : For 3 months at interest of 12%</Typography>
               </GreyBox>
             </Box>
           </Stack>
           <Box padding={{ paddingTop: "20px" }}>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 12,
-                fontWeight: 400,
-                padding: "0px 0px",
-              }}
-              fontFamily={"Inter"}
-            >
-              Transaction
-            </Typography>
+            
           </Box>
         </Box>
-        <Box sx={{ paddingLeft: "100px" }}>
-          <GreyBox allignment="left" padding="10px 10px 10px 50px">
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Typography
-                  sx={{
-                    color: "white",
-                    fontSize: 12,
-                    fontWeight: 400,
-                    padding: "0px 0px",
-                  }}
-                  fontFamily={"Inter"}
-                >
-                  To Account:
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <TextInput />
-              </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  sx={{
-                    color: "white",
-                    fontSize: 12,
-                    fontWeight: 400,
-                    padding: "0px 0px",
-                  }}
-                  fontFamily={"Inter"}
-                >
-                  Amount:
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <TextInput />
-              </Grid>
-            </Grid>
-            <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
-              <YellowButton text="Proceed" />
-            </Box>
-          </GreyBox>
-        </Box>
+        
+        
       </Stack>
       <Stack spacing={0}>
         <Typography
           fontFamily={"Inter"}
           color={"white"}
-          padding={{ paddingBottom: "20px" }}
+          padding={{ paddingBottom: "10px" }}
         >
-          Transaction History
+          Loans
         </Typography>
         <GreyBox>
-          <Typography fontFamily={"Inter"}>Transfer from Account</Typography>
-          <Typography fontFamily={"Inter"}>Transfer from Account</Typography>
-          <Typography fontFamily={"Inter"}>Transfer from Account</Typography>
+          <Typography fontFamily={"Inter"}>10 months -10%</Typography>
+          <Typography fontFamily={"Inter"}>12 months  12%</Typography>
+          
         </GreyBox>
+        <Box padding={{ paddingTop: "20px" }}>
+        <GreyBox>
+            <Typography
+          fontFamily={"Inter"}
+          color={"white"}
+          padding={{ paddingBottom: "5px" }}
+        >
+          Online Loan Request
+        </Typography>
+            <Box sx={{ padding: "10px 100px", borderRadius: "50px", fontSize: "50px", fontWeight: 400 }}>
+                <YellowButton text="Select FD" sx={{ width: "200px", height: "150px", fontSize: "150px" }} />
+            </Box>
+            </GreyBox>  
+        </Box>
+        
+        
       </Stack>
+      
     </Stack>
   )
 }
