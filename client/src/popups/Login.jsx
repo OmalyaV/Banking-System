@@ -1,4 +1,5 @@
 import * as React from "react"
+
 import PropTypes from "prop-types"
 import Dialog from "@mui/material/Dialog"
 import Typography from "@mui/material/Typography"
@@ -9,13 +10,18 @@ import axios from "axios"
 import api from "../apiConfig"
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
+import {useNavigate} from "react-router-dom"
 
 export default function LoginPopup(props) {
+  const navigate = useNavigate()
   const { user, userType, login, logout } = useContext(AuthContext)
   const { onClose, open } = props
   const [username, setUsername] = React.useState("")
   const [password, setPassword] = React.useState("")
-
+  const [accountSelect, setAccountSelect] = React.useState(0)
+  const handleButtonClick = (goToAccount) => {
+    setAccountSelect(goToAccount)
+  }
   const handleClose = () => {
     onClose(true)
   }
@@ -34,7 +40,7 @@ export default function LoginPopup(props) {
         // Handle the response as needed
         console.log("Login successful!", response.data)
         login("user")
-        
+        navigate("/account")
         // You can also close the dialog or perform other actions on success
         onClose(true)
       })
@@ -119,6 +125,7 @@ export default function LoginPopup(props) {
           <YellowButton text="Login" onClick={handleLogin} />
         </Box>
       </Box>
+      
     </Dialog>
   )
 }
