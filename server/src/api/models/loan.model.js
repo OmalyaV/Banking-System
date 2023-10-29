@@ -1,6 +1,6 @@
 import db from "./db.js"
 class Loan {
-    constructor(loan_id,amount, interest_rate,loan_period,approved,request_type,customer_NIC,remaining_installments,branch_code,starting_date,description) {
+    constructor(loan_id,amount,loan_period,approved,request_type,customer_NIC,remaining_installments,branch_code,starting_date,description) {
         this.loan_id = loan_id
         this.amount = amount
         this.loan_period = loan_period
