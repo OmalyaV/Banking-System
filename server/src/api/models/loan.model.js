@@ -14,10 +14,10 @@ class Loan {
       
     }
 
-    static async createLoan(amount, interest_rate,loan_period,approved,request_type,customer_NIC,branch_code) {
+    static async createLoan(amount, interest_rate,loan_period,request_type,customer_NIC,branch_code) {
         const { rows } = await db.query(
           'CALL defaultdb.insertToLoan( ?, ?, ?, ?, ?, ?, ?)',
-            [amount, interest_rate,loan_period,approved,request_type,customer_NIC,branch_code]
+            [amount, interest_rate,loan_period,0,request_type,customer_NIC,branch_code]
       
         )
         const output_message = rows ? rows[0] : null;
@@ -27,7 +27,7 @@ class Loan {
     
 
     static async getLoanByCustomerNIC(customer_NIC) {
-        const sqlQuery = 'SELECT * FROM loan WHERE customer_NIC =  and approved = 1?';
+        const sqlQuery = 'SELECT * FROM loan WHERE customer_NIC =?  and approved = 1';
         try{
             const [rows] = await db.execute(sqlQuery, [customer_NIC]);
             const loan = rows? rows.map(
