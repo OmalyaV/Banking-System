@@ -20,17 +20,9 @@ const AboutUsPopup = (props) => {
         alignItems={"center"}
         flex={"row"}
       >
-         <Typography
-                sx={{
-                  color: "white",
-                  fontSize: 15,
-                  fontWeight: 400,
-                  padding: "25px 25px",
-                }}
-                fontFamily={"Inter"}
-              >
-                Welcome to Nexus Trust Bank, your reliable and innovative banking partner. At Nexus Trust Bank, we are committed to providing you with a seamless and secure banking experience that caters to your financial needs, aspirations, and goals.
-              </Typography>
+         <Typography>
+               
+         </Typography>
              
       </Box>
     </Dialog>
