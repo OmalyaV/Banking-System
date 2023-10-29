@@ -11,8 +11,8 @@ function App() {
   return (
     <div className="App">
       <AuthContextProvider>
-        <Account/>
-        {/* <Welcome/> */}
+        {/* <Account/> */}
+        <Welcome/>
       </AuthContextProvider>
     </div>
   )
