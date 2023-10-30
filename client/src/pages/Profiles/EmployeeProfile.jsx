@@ -106,6 +106,7 @@ const EmployeeProfile = () => {
       </Stack>
   <Stack direction="column" alignItems="left" spacing={4} sx={{ width: "25%", padding: "20px" }}>
       <YellowButton text="Submit a Loan Request" />
+      <YellowButton text="Register New Customer" />
     </Stack>
     </Stack>
   );
