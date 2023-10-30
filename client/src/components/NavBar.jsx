@@ -21,6 +21,7 @@ import AboutUsPopup from "../popups/AboutUs"
 import GreyBox from "./GreyBox"
 import { Paper } from "@mui/material"
 import { useNavigate } from "react-router-dom"
+import RegisterPopup from "../popups/Register"
 const pages = ["About Us", "Digital Banking", "Promotions", "Contact Us"]
 
 function NavBar() {
@@ -36,6 +37,7 @@ function NavBar() {
   const [anchorElProfileMenu, setAnchorElProfileMenu] = React.useState(null)
   const [openPopups, setOpenPopups] = React.useState({})
   const [isOverlayVisible, setOverlayVisible] = React.useState(false)
+  
 
   const handleOpenProfileMenu = (event) => {
     setAnchorElProfileMenu(event.currentTarget)
