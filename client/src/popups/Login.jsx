@@ -11,6 +11,7 @@ import api from "../apiConfig"
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
 import {useNavigate} from "react-router-dom"
+import HideInput from "../components/HideInput"
 
 export default function LoginPopup(props) {
   const navigate = useNavigate()
@@ -123,7 +124,8 @@ export default function LoginPopup(props) {
           </Grid>
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
-              <TextInput onValueChange={handlePasswordChange} isPassword ={true} />
+              {/* <TextInput onValueChange={handlePasswordChange} isPassword ={true} /> */}
+              <HideInput onValueChange={handlePasswordChange} />
             </Box>
           </Grid>
         </Grid>

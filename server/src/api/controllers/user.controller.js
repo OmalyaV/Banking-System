@@ -41,13 +41,13 @@ const register = async (req, res) => {
   const user_type = req.body.user_type
   
   const hash = await generateHash(password)
-  //try {
+  try {
     const user = await User.createUser(username, hash,NIC ,user_type)
     console.log("User created")
-  //} catch (err) {
-    //console.log(err)
-    //return res.send({ approved: false })
-  //}
+  } catch (err) {
+    console.log(err)
+    return res.send({ approved: false })
+  }
 
   console.log("Registration function")
 }
