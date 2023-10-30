@@ -11,6 +11,10 @@ const NewsBar = () => {
         backgroundImage: 'url("assets/images/welcome_image.png")',
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Stack direction="row" spacing={"100px"} justifyContent="center">
@@ -32,6 +36,8 @@ const NewsBar = () => {
             </Typography>
           </Box>
         </Stack>
+
+        <Stack direction="column" spacing={"20px"} paddingTop={"100px"} alignItems={"center"}>
         <Button
           variant="contained"
           sx={{
@@ -50,6 +56,7 @@ const NewsBar = () => {
         >
           Employee Login
         </Button>
+        </Stack>
       </Stack>
     </div>
   )
