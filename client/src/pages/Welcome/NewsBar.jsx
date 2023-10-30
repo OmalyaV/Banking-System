@@ -22,13 +22,17 @@ const NewsBar = () => {
         backgroundImage: 'url("assets/images/welcome_image.png")',
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       <Stack direction="row" spacing={"100px"} justifyContent="center">
         <Stack direction="column" spacing={"0px"} textAlign="left">
-          <Typography fontSize={"72px"}>Your</Typography>
-          <Typography fontSize={"72px"}>Financial Future</Typography>
-          <Typography fontSize={"72px"}>Starts Here</Typography>
+          <Typography fontSize={"72px"} sx={{ lineHeight: "72px", fontWeight: 600 }}>Your</Typography>
+          <Typography fontSize={"72px"} sx={{ lineHeight: "72px", fontWeight: 600 }}>Financial Future</Typography>
+          <Typography fontSize={"72px"} sx={{ lineHeight: "72px", fontWeight: 600 }}>Starts Here</Typography>
           <Box width={"500px"}>
             <Typography fontSize={"15px"}>
               Welcome to NexusTrust Bank, where your financial future starts.
@@ -38,7 +42,7 @@ const NewsBar = () => {
             </Typography>
           </Box>
         </Stack>
-        <Stack direction="column" spacing={"20px"} paddingTop={"150px"}>
+        <Stack direction="column" spacing={"20px"} paddingTop={"100px"} alignItems={"center"}>
           <Button
             variant="contained"
             sx={{
