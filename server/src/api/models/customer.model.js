@@ -10,27 +10,11 @@ class Customer {
     
   }
 
-  // static async createCustomer(customer_NIC, name, date_of_birth, telephone_number, email) {
-  //   const { rows } = await db.query(
-  //       'INSERT INTO public."Customer" (customer_NIC, name, date_of_birth, telephone_number, email) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-  //       [customer_NIC, name, date_of_birth, telephone_number, email]
-     
-  //   )
 
-  //   const customer = rows[0]
-  //   return new Customer(
-  //       customer.customer_NIC,
-  //       customer.name,
-  //       customer.date_of_birth,
-  //       customer.telephone_number,
-  //       customer.email
-
-  //   )
-  // }
 
   static async createCustomer(customer_NIC, name, date_of_birth, telephone_number, email) {
     const { rows } = await db.query(
-      'INSERT INTO defaultdb.Customer (customer_NIC, name, date_of_birth, telephone_number, email) VALUES (?, ?, ?,?,?)',
+      'CALL defaultdb.insertToCustomer(?,?,?,?,?)',
       [customer_NIC, name, date_of_birth, telephone_number, email]
   
     )
@@ -38,7 +22,7 @@ class Customer {
 
   
   static async getCustomerByNIC(NIC,name) {
-    const sqlQuery = 'SELECT * FROM defaultdb.Customer WHERE customer_NIC = ? and name = ?';
+    const sqlQuery = 'SELECT * FROM defaultdb.customer WHERE customer_NIC = ? and name = ?';
     
     try {
       // Log the final SQL query with the parameter value
