@@ -2,14 +2,15 @@ import express from "express"
 
 import userController from "../controllers/user.controller.js"
 
-const { login, register, check_eligibility } = userController
+const { login, registerCustomer,registerEmployee, check_eligibility } = userController
 
 const router = express.Router()
 
 router.get("/")
 router.post("/login", login)
-router.post("/register", register)
+router.post("/register", registerCustomer)
 router.post("/check_eligibility", check_eligibility)
+router.post("/registerEmployee", registerEmployee)
 
 
 // module.exports = router

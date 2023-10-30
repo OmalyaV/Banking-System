@@ -9,6 +9,7 @@ import axios from "axios"
 import api from "../apiConfig"
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
+import HideInput from "../components/HideInput"
 
 
 export default function RegisterPopup(props) {

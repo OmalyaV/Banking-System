@@ -9,13 +9,23 @@ class User {
     
   }
 
-  static async createUser(username, password_hash,customer_NIC,user_type) {
+  static async createCustomerUser(username, password_hash,customer_NIC) {
     const { rows } = await db.query(
-      'CALL defaultdb.registerUser(?,?,?,?)',
-      [customer_NIC, username, password_hash, user_type]
+      'CALL defaultdb.registerCustomerUser(?,?,?,?)',
+      [customer_NIC, username, password_hash]
+    )
+    const message  = rows[0][0].output_message
+    return message
+    
+  }
+  static async createEmployeeUser(username, password_hash,customer_NIC) {
+    const { rows } = await db.query(
+      'CALL defaultdb.registerEmployeeUser(?,?,?,?)',
+      [customer_NIC, username, password_hash]
   
     )
-
+    const message  = rows[0][0].output_message
+    return message
     
   }
 
