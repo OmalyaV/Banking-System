@@ -32,6 +32,7 @@ function NavBar() {
   }
   const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
+  const [registerOpen, setRegisterOpen] = React.useState(false)
   const { user, userType, login, logout } = useContext(AuthContext)
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElProfileMenu, setAnchorElProfileMenu] = React.useState(null)
@@ -81,13 +82,18 @@ function NavBar() {
   }
 
   const registerPopupOpen = () => {
+    setRegisterOpen(true)
     console.log("Register popup opened")
+  }
+  const registerPopupClose = () => {
+    setRegisterOpen(false)
+    console.log("Register popup closed")
   }
 
   const handleClickOpen = () => {
     setOpen(true)
   }
-
+  
   const handleClose = () => {
     setOpen(false)
   }
@@ -241,6 +247,7 @@ function NavBar() {
             </Box>
           )}
           <LoginPopup open={open} onClose={handleClose} />
+          <RegisterPopup open={registerOpen} onClose={registerPopupClose} />
           <ContactUsPopup
             open={openPopups["Contact Us"]}
             onClose={handleClosePopup}
