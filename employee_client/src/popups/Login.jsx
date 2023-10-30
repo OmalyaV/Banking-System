@@ -10,16 +10,11 @@ import api from "../apiConfig"
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
 
-export default function RegisterPopup(props) {
-
-
+export default function LoginPopup(props) {
+  const { user, userType, login, logout } = useContext(AuthContext)
   const { onClose, open } = props
-  
-  const [NICNumber, setNICNumber] = React.useState("")
-  const [UserName, setFullName] = React.useState("")
-  const [UserType, setBranch] = React.useState("")
-  const [Password, setPassword] = React.useState("")
-  const [ConfirmPassword , setConfirmPassword ] = React.useState("")
+  const [username, setUsername] = React.useState("")
+  const [password, setPassword] = React.useState("")
 
   const handleClose = () => {
     onClose(true)
@@ -28,18 +23,17 @@ export default function RegisterPopup(props) {
   const handleLogin = () => {
     // Create a data object to send in the POST request
     const data = {
-      NICNumber: "PQR4526801",
-      UserName: "Rasa Dias",
-      UserType:"customer",
-      Password:"123456",
+      NIC: "VXZ4598992",
+      password: "joe@457",
     }
 
     // Make a POST request to your server
     api
-      .post("/user/register", data) // Replace "/api/login" with your actual API endpoint
+      .post("/user/login", data) // Replace "/api/login" with your actual API endpoint
       .then((response) => {
         // Handle the response as needed
-        console.log("Register successful!", response.data)
+        console.log("Login successful!", response.data)
+        login("user")
         
         // You can also close the dialog or perform other actions on success
         onClose(true)
@@ -72,7 +66,7 @@ export default function RegisterPopup(props) {
           fontFamily={"Inter"}
           align="center"
         >
-          Register
+          Login
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -85,46 +79,9 @@ export default function RegisterPopup(props) {
               }}
               fontFamily={"Inter"}
             >
-              NIC Number :
+              Username :
             </Typography>
           </Grid>
-          <Grid item xs={6}>
-            <Box padding={"20px 0px"}>
-              <TextInput />
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 18,
-                fontWeight: 400,
-                padding: "20px 70px",
-              }}
-              fontFamily={"Inter"}
-            >
-              Userame :
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Box padding={"20px 0px"}>
-              <TextInput />
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 18,
-                fontWeight: 400,
-                padding: "20px 70px",
-              }}
-              fontFamily={"Inter"}
-            >
-              User Type :
-            </Typography>
-          </Grid>
-          
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
               <TextInput />
@@ -148,24 +105,6 @@ export default function RegisterPopup(props) {
               <TextInput />
             </Box>
           </Grid>
-          <Grid item xs={6}>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 18,
-                fontWeight: 400,
-                padding: "20px 70px",
-              }}
-              fontFamily={"Inter"}
-            >
-              Confirm Password :
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Box padding={"20px 0px"}>
-              <TextInput />
-            </Box>
-          </Grid>
         </Grid>
 
         <Box
@@ -177,14 +116,14 @@ export default function RegisterPopup(props) {
             display: "flex",
           }}
         >
-          <YellowButton text="Register" onClick={handleLogin} />
+          <YellowButton text="Login" onClick={handleLogin} />
         </Box>
       </Box>
     </Dialog>
   )
 }
 
-RegisterPopup.propTypes = {
+LoginPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
 }
