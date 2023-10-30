@@ -46,7 +46,7 @@ const Footer = () => {
             </Typography>
             <Stack direction="row" spacing={1}>
               <img
-                src="/assets/navbar_call.png"
+                src="assets/images/navbar_call.png"
                 alt="mission"
                 style={{ height: "20px", width: "20px" }}
               />
@@ -54,7 +54,7 @@ const Footer = () => {
             </Stack>
             <Stack direction="row" spacing={1}>
               <img
-                src="/assets/navbar_mail.png"
+                src="assets/images/navbar_mail.png"
                 alt="mission"
                 style={{ height: "20px", width: "20px" }}
               />
@@ -62,7 +62,7 @@ const Footer = () => {
             </Stack>
             <Stack direction="row" spacing={1}>
               <img
-                src="/assets/navbar_location.png"
+                src="assets/images/navbar_location.png"
                 alt="mission"
                 style={{ height: "20px", width: "20px" }}
               />
