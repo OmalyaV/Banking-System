@@ -30,6 +30,8 @@ export default function RegisterPopup(props) {
     const data = {
       NICNumber: "PQR4526801",
       UserName: "Rasa Dias",
+      UserType:"customer",
+      Password:"123456",
     }
 
     // Make a POST request to your server
@@ -101,7 +103,7 @@ export default function RegisterPopup(props) {
               }}
               fontFamily={"Inter"}
             >
-              Full Name :
+              Userame :
             </Typography>
           </Grid>
           <Grid item xs={6}>
@@ -119,63 +121,10 @@ export default function RegisterPopup(props) {
               }}
               fontFamily={"Inter"}
             >
-              Email Address :
+              User Type :
             </Typography>
           </Grid>
-          <Grid item xs={6}>
-            <Box padding={"20px 0px"}>
-              <TextInput />
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 18,
-                fontWeight: 400,
-                padding: "20px 70px",
-              }}
-              fontFamily={"Inter"}
-            >
-              Year of Birth :
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Box padding={"20px 0px"}>
-              <TextInput />
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 18,
-                fontWeight: 400,
-                padding: "20px 70px",
-              }}
-              fontFamily={"Inter"}
-            >
-              Branch :
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Box padding={"20px 0px"}>
-              <TextInput />
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 18,
-                fontWeight: 400,
-                padding: "20px 70px",
-              }}
-              fontFamily={"Inter"}
-            >
-              Account Type :
-            </Typography>
-          </Grid>
+          
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
               <TextInput />
