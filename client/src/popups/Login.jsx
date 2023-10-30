@@ -123,7 +123,7 @@ export default function LoginPopup(props) {
           </Grid>
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
-              <TextInput onValueChange={handlePasswordChange} />
+              <TextInput onValueChange={handlePasswordChange} isPassword ={true} />
             </Box>
           </Grid>
         </Grid>

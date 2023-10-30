@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextField } from '@mui/material'
 
-const TextInput = ({ onValueChange }) => {
+const TextInput = ({ onValueChange,isPassword = false}) => {
   const [value, setValue] = React.useState("")
 
   const handleChange = (event) => {
@@ -12,9 +12,11 @@ const TextInput = ({ onValueChange }) => {
     onValueChange(newValue);
   };
   return (
-    <TextField
+    <TextField 
+    
       value={value}
       variant="outlined"
+      type= {isPassword ? "password" : "text"}
       onChange={handleChange}
       sx={{
         borderRadius: "50px",
