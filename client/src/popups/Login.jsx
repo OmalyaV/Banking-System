@@ -16,31 +16,45 @@ export default function LoginPopup(props) {
   const navigate = useNavigate()
   const { user, userType, login, logout } = useContext(AuthContext)
   const { onClose, open } = props
-  const [username, setUsername] = React.useState("")
+  const [nic, setNic] = React.useState("")
   const [password, setPassword] = React.useState("")
   const [accountSelect, setAccountSelect] = React.useState(0)
   const handleButtonClick = (goToAccount) => {
     setAccountSelect(goToAccount)
   }
+
   const handleClose = () => {
     onClose(true)
   }
-
+  const handleNicChange = (newNic) => {
+    setNic(newNic)
+  }
+  const handlePasswordChange = (newPassword) => {
+    setPassword(newPassword)
+  }
   const handleLogin = () => {
     // Create a data object to send in the POST request
+    // const data = {
+    //   NIC: "VXZ4598992",
+    //   password: "joe@457",
+    // }
     const data = {
-      NIC: "VXZ4598992",
-      password: "joe@457",
+      NIC: nic,
+      password: password,
     }
-
     // Make a POST request to your server
     api
       .post("/user/login", data) // Replace "/api/login" with your actual API endpoint
       .then((response) => {
         // Handle the response as needed
+        if (response.data.approved){
         console.log("Login successful!", response.data)
         login("user")
         navigate("/account")
+        }
+        else{
+          console.log("Login unsuccessful!", response.data)
+        }
         // You can also close the dialog or perform other actions on success
         onClose(true)
       })
@@ -78,6 +92,7 @@ export default function LoginPopup(props) {
           <Grid item xs={6}>
             <Typography
               sx={{
+                
                 color: "white",
                 fontSize: 18,
                 fontWeight: 400,
@@ -85,12 +100,12 @@ export default function LoginPopup(props) {
               }}
               fontFamily={"Inter"}
             >
-              Username :
+              NIC Number:
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
-              <TextInput />
+              <TextInput onValueChange={handleNicChange} />
             </Box>
           </Grid>
           <Grid item xs={6}>
@@ -108,7 +123,7 @@ export default function LoginPopup(props) {
           </Grid>
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
-              <TextInput />
+              <TextInput onValueChange={handlePasswordChange} />
             </Box>
           </Grid>
         </Grid>

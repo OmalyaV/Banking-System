@@ -20,8 +20,6 @@ import DigitalBankingPopup from "../popups/DigitalBanking"
 import AboutUsPopup from "../popups/AboutUs"
 import GreyBox from "./GreyBox"
 import { Paper } from "@mui/material"
-import { useNavigate } from "react-router-dom"
-import RegisterPopup from "../popups/Register"
 const pages = ["About Us", "Digital Banking", "Promotions", "Contact Us"]
 
 function NavBar() {
@@ -30,15 +28,13 @@ function NavBar() {
     fontWeight: 500, // You can adjust font weight as needed
     fontSize: "12px",
   }
-  const navigate = useNavigate()
+
   const [open, setOpen] = React.useState(false)
-  const [registerOpen, setRegisterOpen] = React.useState(false)
   const { user, userType, login, logout } = useContext(AuthContext)
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElProfileMenu, setAnchorElProfileMenu] = React.useState(null)
   const [openPopups, setOpenPopups] = React.useState({})
   const [isOverlayVisible, setOverlayVisible] = React.useState(false)
-  
 
   const handleOpenProfileMenu = (event) => {
     setAnchorElProfileMenu(event.currentTarget)
@@ -58,7 +54,6 @@ function NavBar() {
   const handleLogout = () => {
     logout()
     setAnchorElProfileMenu(null)
-    navigate("/")
   }
 
   const handleOpenPopup = (page) => {
@@ -82,18 +77,13 @@ function NavBar() {
   }
 
   const registerPopupOpen = () => {
-    setRegisterOpen(true)
     console.log("Register popup opened")
-  }
-  const registerPopupClose = () => {
-    setRegisterOpen(false)
-    console.log("Register popup closed")
   }
 
   const handleClickOpen = () => {
     setOpen(true)
   }
-  
+
   const handleClose = () => {
     setOpen(false)
   }
@@ -247,7 +237,6 @@ function NavBar() {
             </Box>
           )}
           <LoginPopup open={open} onClose={handleClose} />
-          <RegisterPopup open={registerOpen} onClose={registerPopupClose} />
           <ContactUsPopup
             open={openPopups["Contact Us"]}
             onClose={handleClosePopup}
