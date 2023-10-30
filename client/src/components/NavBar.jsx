@@ -20,6 +20,7 @@ import DigitalBankingPopup from "../popups/DigitalBanking"
 import AboutUsPopup from "../popups/AboutUs"
 import GreyBox from "./GreyBox"
 import { Paper } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 const pages = ["About Us", "Digital Banking", "Promotions", "Contact Us"]
 
 function NavBar() {
@@ -28,7 +29,7 @@ function NavBar() {
     fontWeight: 500, // You can adjust font weight as needed
     fontSize: "12px",
   }
-
+  const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
   const { user, userType, login, logout } = useContext(AuthContext)
   const [anchorElNav, setAnchorElNav] = React.useState(null)
@@ -54,6 +55,7 @@ function NavBar() {
   const handleLogout = () => {
     logout()
     setAnchorElProfileMenu(null)
+    navigate("/")
   }
 
   const handleOpenPopup = (page) => {
