@@ -7,11 +7,14 @@ import YellowButton from "../../components/YellowButton"; // Make sure to import
 import GreyBox from "../../components/GreyBox";
 import Grid from "@mui/material/Grid";
 
-const ManagerProfile = () => {
+const UserProfile = () => {
   const userID = "123456789";
   const userName = "ABC";
   const userAge = "22";
   const userTelephone = "+234 123 456 789";
+  const accountNo = "123456789";
+  const plan = "Saving Account";
+  const bracnh = "Marine Province";
 
   return (
     <Stack
@@ -37,7 +40,7 @@ const ManagerProfile = () => {
                 mb:2,
               }}
             >
-              Manager Portal
+              My Profile
             </Typography>
           </Box>
           <Box>
@@ -95,74 +98,60 @@ const ManagerProfile = () => {
                 color: "white",
                 fontSize: 14,
                 fontWeight: 400,
+                mb:2,
               }}
               fontFamily={"Inter"}
             >
               Telephone No: {userTelephone}
             </Typography>
-          </Box>
-          
+            <Typography
+              sx={{
+                color: "white",
+                fontSize: 24,
+                fontWeight: 700,
+              }}
+              fontFamily={"Inter"}
+            >
+              Account Details
+            </Typography>
+            <Typography
+              sx={{
+                color: "white",
+                fontSize: 14,
+                fontWeight: 400,
+                mb:2,
+              }}
+              fontFamily={"Inter"}
+            >
+              Account Number: {accountNo}
+            </Typography>
+            <Typography
+              sx={{
+                color: "white",
+                fontSize: 14,
+                fontWeight: 400,
+                mb:2,
+              }}
+              fontFamily={"Inter"}
+            >
+              Plan: {plan}
+            </Typography>
+            <Typography
+              sx={{
+                color: "white",
+                fontSize: 14,
+                fontWeight: 400,
+                mb:2,
+              }}
+              fontFamily={"Inter"}
+            >
+              Branch: {bracnh}
+            </Typography>
+          </Box>  
         </Stack>
       </Stack>
-      <Stack direction="column" spacing={4} >
-      <Typography
-  sx={{
-    color: "#FFCF43",
-    fontSize: 24,
-    fontWeight: 700,
-    textAlign: "left",
-  }}
->
-  Loans to approve
-</Typography>
-<Grid container spacing={2}>
-  <Grid item xs={6}>
-    <GreyBox sx={{ width: "50%", height: "100px", padding: "10px 10px 10px 50px" }}>
-      <Stack direction="column" alignItems="flex-start" spacing={4} sx={{ width: "100%" }}>
-        <Typography
-          sx={{
-            color: "white",
-            fontSize: 14,
-            fontWeight: 700,
-          }}
-        >
-          Account Number : 123456789
-        </Typography>
-        <Typography
-          sx={{
-            color: "white",
-            fontSize: 14,
-            fontWeight: 700,
-          }}
-        >
-          Amount : $500.00
-        </Typography>
-        <Typography
-          sx={{
-            color: "white",
-            fontSize: 14,
-            fontWeight: 700,
-          }}
-        >
-          Time Period(in months) : 12
-        </Typography>
-        <Stack direction="row" alignItems="flex-start" spacing={4} sx={{ width: "100%" }}>
-          <YellowButton text="Approve" />
-          <YellowButton text="Disapprove" />
-        </Stack>
-      </Stack>
-    </GreyBox>
-  </Grid>
-  <Grid item xs={6}>
-  <Stack direction="column" alignItems="left" spacing={4} sx={{ width: "100%", padding: "20px" }}>
-      <YellowButton text="Total Transaction Report" />
-      <YellowButton text="Late Loan Installments" />
-    </Stack>
-  </Grid>
-</Grid>
-    </Stack>
     </Stack>
   );
 };
 
-export default ManagerProfile;
+export default UserProfile;
