@@ -1,0 +1,123 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('https://fonts.googleapis.com/css?family=Inter') format('woff2');
+    /* Add additional font formats as needed */
+    font-weight: normal;
+    font-style: normal;
+  }
+.login-popup-child,
+.login-popup-item {
+  position: absolute;
+  border-radius: var(--br-29xl);
+  height: 99px;
+}
+.login-popup-child {
+  top: 541px;
+  left: 304px;
+  background-color: #ffcf43;
+  width: 216px;
+  cursor: pointer;
+  border-radius: 48px;
+  z-index: 1;
+  position: relative;
+}
+.login-popup-item {
+  top: 382px;
+  left: 284px;
+  background-color: #D9D9D9;
+  border-radius: 48px;
+  width: 426px;
+}
+.account-no5 {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  display: inline-block;
+  width: 163px;
+  height: 24px;
+}
+.account-no-child1 {
+  position: absolute;
+  top: 0;
+  left: 171px;
+  border-radius: 48px;
+  background-color: #D9D9D9;
+  width: 426px;
+  height: 99px;
+  
+}
+.account-no4 {
+  position: absolute;
+  top: 230px;
+  left: 113px;
+  width: 597px;
+  height: 99px;
+}
+.password3 {
+  top: 413px;
+  left: 121px;
+  width: 163px;
+  height: 24px;
+  position:absolute
+}
+.dont-have-an,
+.login2,
+.login3,
+.password3 {
+  
+  display: inline-block;
+}
+.login2 {
+  top: 95px;
+  left: 345px;
+  font-size: 48px;
+  color:white;
+  font-family: 'Inter', sans-serif;
+  width: 134px;
+  height: 54px;
+  position: absolute;
+}
+.dont-have-an{
+  color:white;
+  position:absolute
+}
+.dont-have-an,
+.login3 {
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+.login3 {
+  position: absolute;
+  top: 24px;
+  left: calc(50% - 108.5px);
+  font-size: 40px;
+  font-weight: 600;
+  color: black;
+  width: 217px;
+  height: 99px;
+  z-index: 2;
+  
+}
+.dont-have-an {
+  top: 695px;
+  left: 164px;
+  width: 495px;
+  height: 46px;
+  background-color: black;
+  border-color: black;
+  cursor: pointer;
+}
+.login-popup {
+  /* background-color: var(--color-black); */
+  background-color: black;
+  position: relative;
+  width: 823px;
+  height: 844px;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+  text-align: left;
+  font-size: var(--font-size-5xl);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
