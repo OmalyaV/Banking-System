@@ -22,6 +22,7 @@ const NewsBar = () => {
         backgroundImage: 'url("assets/images/welcome_image.png")',
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
       }}
     >
       <Stack direction="row" spacing={"100px"} justifyContent="center">
@@ -75,7 +76,7 @@ const NewsBar = () => {
               borderRadius: "10px", // Add this to round the button edges
             }}
           >
-            I Already Started
+            I Have Already Started
           </Button>
         </Stack>
       </Stack>
