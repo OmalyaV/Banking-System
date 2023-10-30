@@ -1,7 +1,18 @@
 import React from "react"
 import { Stack, Box, Typography, Button } from "@mui/material"
+import LoginPopup from "../../popups/Login"
+
+
+
 
 const NewsBar = () => {
+  const [open, setOpen] = React.useState(false)
+  const loginPopupOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
   return (
     <div
       class="image"
@@ -51,6 +62,7 @@ const NewsBar = () => {
             Start My Financial Future
           </Button>
           <Button
+            onClick={loginPopupOpen}
             variant="contained"
             style={{border: "1px solid black"}}
             sx={{
@@ -71,6 +83,7 @@ const NewsBar = () => {
           </Button>
         </Stack>
       </Stack>
+      <LoginPopup open={open} onClose={handleClose} />
     </div>
   )
 }
