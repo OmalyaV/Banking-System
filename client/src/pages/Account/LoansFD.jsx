@@ -50,9 +50,15 @@ const Loans = () => {
                 Fixed Deposits
               </Typography>
               <GreyBox>
-                <Typography font family={"Inter"}>1 year   -14%      $30,000.00</Typography>
-                <Typography font family={"Inter"}>6 months   -13%    $30,000.00</Typography>
-                <Typography font family={"Inter"}>3 months   -12%    $30,000.00</Typography>
+                  <Typography fontFamily="Inter" style={{ textAlign: "left" }}>
+                                 1 year   -14%      $30,000.00
+                 </Typography>
+                   <Typography fontFamily="Inter" style={{ textAlign: "left" }}>
+                              6 months   -13%    $30,000.00
+                 </Typography>
+                 <Typography fontFamily="Inter" style={{ textAlign: "left" }}>
+                              3 months   -12%    $30,000.00
+                 </Typography>
               </GreyBox>
             </Box>
           </Stack>
@@ -70,9 +76,9 @@ const Loans = () => {
                 Fixed Deposits Plans
               </Typography>
               <GreyBox>
-                <Typography font family={"Inter"}>Plan Basic : For 1 year at interest of 14%</Typography>
-                <Typography font family={"Inter"}>Plan Basic : For 6 months at interest of 13%</Typography>
-                <Typography font family={"Inter"}>Plan Basic : For 3 months at interest of 12%</Typography>
+                <Typography font family={"Inter"} style={{ textAlign: "left" }}>Plan Basic : For 1 year at interest of 14%</Typography>
+                <Typography font family={"Inter"} style={{ textAlign: "left" }}>Plan Basic : For 6 months at interest of 13%</Typography>
+                <Typography font family={"Inter"} style={{ textAlign: "left" }}>Plan Basic : For 3 months at interest of 12%</Typography>
               </GreyBox>
             </Box>
           </Stack>
@@ -80,7 +86,7 @@ const Loans = () => {
             
           </Box>
         </Box>
-        
+        x
         
       </Stack>
       <Stack spacing={0}>
