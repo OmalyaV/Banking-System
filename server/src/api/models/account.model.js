@@ -20,7 +20,7 @@ class Account {
       }
 
     static async getAccountsByNICAndType(NIC, type) {
-        const sqlQuery = 'SELECT account_number, balance FROM defaultdb.Account WHERE customer_NIC = ? and type = ?';
+        const sqlQuery = 'SELECT account_number, balance FROM defaultdb.account WHERE customer_NIC = ? and type = ?';
         try{
             const [rows,fields] = await db.execute(sqlQuery, [NIC, type]);
 

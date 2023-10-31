@@ -22,6 +22,7 @@ import GreyBox from "./GreyBox"
 import { Paper } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import RegisterPopup from "../popups/Register"
+
 const pages = ["About Us", "Digital Banking", "Promotions", "Contact Us"]
 
 function NavBar() {
@@ -40,6 +41,7 @@ function NavBar() {
   const [isOverlayVisible, setOverlayVisible] = React.useState(false)
   
 
+  const {username} = useContext(AuthContext)
   const handleOpenProfileMenu = (event) => {
     setAnchorElProfileMenu(event.currentTarget)
     setOverlayVisible(true)
@@ -201,6 +203,7 @@ function NavBar() {
                 <PowerSettingsNewIcon />
               </IconButton> */}
               <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
+                <Typography></Typography>
                 <IconButton
                   size="large"
                   aria-label="account of current user"
