@@ -13,10 +13,12 @@ import { styled } from "@mui/material/styles"
 import { Typography, TextField, InputBase, Grid, Button } from "@mui/material"
 import { useContext } from "react"
 import { AccountContext } from "../../context/AccountContext"
+import { CurrentAccountContext } from "../../context/CurrentAccountContext"
 import api from "../../apiConfig"
 import YellowButton from "../../components/YellowButton"
 import { AuthContext } from "../../context/AuthContext"
 import AccountListPopup from "../../popups/AccountListPopup"
+import CurrentAccountList from "../../popups/CurrentAccountList"
 
 function createData(Date,FromAccount, ToAccount,  Amount ) {
   return {Date,FromAccount, ToAccount,  Amount };
@@ -50,11 +52,12 @@ const GreyBox = styled(Paper)(({ theme }) => ({
 
 const CheckingAccount = () => {
   // const accountType = "Adult"
-  const {account, setCustomerAccount} = useContext(AccountContext)
+//  const {account, setCustomerCurrentAccount} = useContext(CurrentAccountContext)
+   const {account, setCustomerAccount} = useContext(AccountContext)
   const { user, username,userType, login, logout } = useContext(AuthContext)
-  const [accountType , setAccountType] = React.useState("Your account type")
+ 
   const [balance , setBalance] = React.useState(0)
-  const [withdrawalsLeft , setWithdrawalsLeft] = React.useState(0)
+  
   const [accountList, setAccountList] = React.useState([])
   const[accountListPopupOpen, setAccountListPopupOpen] = React.useState(false)
 
@@ -95,17 +98,16 @@ const CheckingAccount = () => {
 
   React.useEffect(() => {
     console.log(account)
+
     api
-      .post("/account/saving_account_details",{
+      .post("/account/account_details",{
         account_number: account
-      }) // Replace "/api/login" with your actual API endpoint
+      }) 
       .then((response) => {
        
         if (response.data.approved){
         console.log("Account details fetched!", response.data)
         setBalance(response.data.account.balance)
-        setWithdrawalsLeft(response.data.account.number_of_withdrawals)
-        setAccountType(response.data.account.name)
         //navigate("/account")
         }
         else{
@@ -122,6 +124,7 @@ const CheckingAccount = () => {
   return (
     <Stack direction="row" spacing={20}>
       <Stack spacing={0}>
+      {/* <CurrentAccountList open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/> */}
       <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
         <Box textAlign="left" sx={{ padding: "20px 150px" }}>
           {/* Left Side */}
@@ -150,6 +153,24 @@ const CheckingAccount = () => {
             </Box>
           
           <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={2}>
+            
+          <Box>
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: 12,
+                  fontWeight: 400,
+                  padding: "0px 0px",
+                }}
+                fontFamily={"Inter"}
+              >
+                Account Number
+              </Typography>
+              <GreyBox>
+                <Typography>{account}</Typography>
+              </GreyBox>
+            </Box>
+          
             <Box>
               <Typography
                 sx={{

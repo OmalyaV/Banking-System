@@ -6,8 +6,19 @@ const add_transaction = async (req, res) => {
 
     try{
     const transaction = await Trsnsaction.createTransaction(sender_account_number, receiver_account_number, transfer_amount)
-      console.log(transaction)
-      return res.send({ transaction: transaction })
+    const message = transaction[0]
+    const balance = transaction[1]
+      console.log(message, balance)
+
+      if (message == "transaction success") {
+        console.log("Transaction successful")
+        return res.send({ approved: true, balance: balance, message: message })
+      }
+      else {
+        console.log("Transaction failed")
+        return res.send({ approved: false })
+      }
+      
     } catch (err) {
       console.log(err)
       return res.send({ approved: false })

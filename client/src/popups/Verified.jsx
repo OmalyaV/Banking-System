@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Dialog, Typography, Stack } from "@mui/material"
 
-const SuccessfulPopup = (props) => {
+const Verified = (props) => {
   const { onClose, open,name } = props
 
   const handleClose = () => {
@@ -46,4 +46,4 @@ const SuccessfulPopup = (props) => {
   )
 }
 
-export default SuccessfulPopup
+export default Verified

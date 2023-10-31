@@ -73,7 +73,7 @@ const get_account_details = async (req, res) => {
     try{
     const account = await Account.getAccountByAccountNumber(account_number)
         console.log("Account details fetched")
-        return res.send({ account: account })
+        return res.send({ approved:true, account: account })
     } catch (err) {
         console.log(err)
         return res.send({ approved: false })
