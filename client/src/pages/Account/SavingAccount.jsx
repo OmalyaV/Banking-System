@@ -6,10 +6,40 @@ import { Typography, TextField, InputBase, Grid, Button } from "@mui/material"
 import TextInput from "../../components/TextInput"
 import YellowButton from "../../components/YellowButton"
 import GreyBox from "../../components/GreyBox"
+import AccountListPopup from "../../popups/AccountListPopup"
+import { AuthContext } from "../../context/AuthContext"
+import { useContext } from "react"
+import api from "../../apiConfig"
 
 const SavingAccount = () => {
   const accountType = "Adult"
   const account_number = "0000000001"
+  const [accountList, setAccountList] = React.useState([])
+  const { user, userType, login, logout } = useContext(AuthContext)
+  const handleAccountList=() =>{
+    const data = {
+      NIC: user.customer_NIC,
+      type: 'savings'
+    }
+    api
+      .post("/account/account_list", data) // Replace "/api/login" with your actual API endpoint
+      .then((response) => {
+       
+        if (response.data.approved){
+        console.log("List fetched!", response.data)
+        //navigate("/account")
+        }
+        else{
+          console.log("Login unsuccessful!", response.data)
+        }
+        // You can also close the dialog or perform other actions on success
+        //onClose(true)
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("Login failed:", error)
+      })
+  }
 
   return (
     <Stack direction="row" spacing={20}>

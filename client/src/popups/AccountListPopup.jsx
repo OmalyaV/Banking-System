@@ -1,8 +1,8 @@
 import React from "react"
 import { Box, Dialog, Typography } from "@mui/material"
-import List from "@mui/material"
-import ListItem from "@mui/material"
-import ListItemText from "@mui/material"
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 const AccountListPopup = (props) => {
   const { onClose, open, list } = props
@@ -25,7 +25,7 @@ const AccountListPopup = (props) => {
       >
         <Typography
                 sx={{
-                  color: "white",
+                  color: "yellow",
                   fontSize: 16,
                   fontWeight: 400,
                   padding: "25px 25px",
@@ -37,7 +37,15 @@ const AccountListPopup = (props) => {
               <List>
               {list.map((item, index) => (
                 <ListItem key={index}>
-                <ListItemText primary={item} />
+                <ListItemText 
+                sx={{
+                    color: "white",
+                    fontSize: 13,
+                    fontWeight: 400,
+                    padding: "25px 25px",
+                  }}
+                fontFamily={"Inter"}
+                primary={item} />
           </ListItem>
         ))}
         </List>
@@ -47,4 +55,4 @@ const AccountListPopup = (props) => {
   )
 }
 
-export default DigitalBankingPopup
+export default AccountListPopup

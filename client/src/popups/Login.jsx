@@ -51,6 +51,7 @@ export default function LoginPopup(props) {
         if (response.data.approved){
         console.log("Login successful!", response.data)
         login("user")
+        user(response.data.customer_NIC)
         navigate("/account")
         }
         else{
