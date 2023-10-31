@@ -33,9 +33,9 @@ const CheckingAccount = () => {
   // const accountType = "Adult"
   const {account, setCustomerAccount} = useContext(AccountContext)
   const { user, username,userType, login, logout } = useContext(AuthContext)
-  const [accountType , setAccountType] = React.useState("Your account type")
+ 
   const [balance , setBalance] = React.useState(0)
-  const [withdrawalsLeft , setWithdrawalsLeft] = React.useState(0)
+  
   const [accountList, setAccountList] = React.useState([])
   const[accountListPopupOpen, setAccountListPopupOpen] = React.useState(false)
 
@@ -77,16 +77,14 @@ const CheckingAccount = () => {
   React.useEffect(() => {
     console.log(account)
     api
-      .post("/account/saving_account_details",{
+      .post("/account/account_details",{
         account_number: account
-      }) // Replace "/api/login" with your actual API endpoint
+      }) 
       .then((response) => {
        
         if (response.data.approved){
         console.log("Account details fetched!", response.data)
         setBalance(response.data.account.balance)
-        setWithdrawalsLeft(response.data.account.number_of_withdrawals)
-        setAccountType(response.data.account.name)
         //navigate("/account")
         }
         else{
