@@ -1,17 +1,24 @@
 import React from "react"
 import { Stack, Box, Typography, Button } from "@mui/material"
 import LoginPopup from "../../popups/Login"
-
+import RegisterPopup from "../../popups/Register"
 
 
 
 const NewsBar = () => {
   const [open, setOpen] = React.useState(false)
+  const [openRegister, setOpenRegister] = React.useState(false)
   const loginPopupOpen = () => {
     setOpen(true)
   }
   const handleClose = () => {
     setOpen(false)
+  }
+  const registerPopupOpen = () => {
+    setOpenRegister(true)
+  }
+  const handleRegisterClose = () => {
+    setOpenRegister(false)
   }
   return (
     <div
@@ -44,6 +51,7 @@ const NewsBar = () => {
         </Stack>
         <Stack direction="column" spacing={"20px"} paddingTop={"100px"} alignItems={"center"}>
           <Button
+            onClick={registerPopupOpen}
             variant="contained"
             sx={{
               width: "300px",
@@ -84,6 +92,7 @@ const NewsBar = () => {
         </Stack>
       </Stack>
       <LoginPopup open={open} onClose={handleClose} />
+      <RegisterPopup open={openRegister} onClose={handleRegisterClose} />
     </div>
   )
 }
