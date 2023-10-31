@@ -13,8 +13,8 @@ const PromotionPopup = (props) => {
       <Box
         sx={{
           backgroundColor: "black",// Set the background color to black
-          margin: 0.1,
-          padding: 0, 
+          margin: 0.3,
+          padding: 1, 
           boxShadow: "none", // Remove the shadow
         }}
         alignItems={"center"}
@@ -24,9 +24,10 @@ const PromotionPopup = (props) => {
         <Typography
                 sx={{
                   color: "white",
-                  fontSize: 18,
-                  fontWeight: 400,
-                  padding: "10px 25px",
+                  fontSize: 28,
+                  fontWeight: "bold",
+                  padding: "12px 25px",
+                  textAlign: "center"
                 }}
                 fontFamily={"Inter"}
               >
@@ -35,9 +36,9 @@ const PromotionPopup = (props) => {
               <Typography
                 sx={{
                   color: "white",
-                  fontSize: 13,
+                  fontSize: 18,
                   fontWeight: 400,
-                  padding: "10px 25px",
+                  padding: "12px 25px",
                 }}
                 fontFamily={"Inter"}
               >
