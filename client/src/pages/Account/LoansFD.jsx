@@ -47,7 +47,7 @@ const Loans = () => {
                 }}
                 fontFamily={"Inter"}
               >
-                Fixed Deposits
+                My Fixed Deposits
               </Typography>
               <GreyBox>
                   <Typography fontFamily="Inter" style={{ textAlign: "left" }}>
@@ -76,9 +76,9 @@ const Loans = () => {
                 Fixed Deposits Plans
               </Typography>
               <GreyBox>
-                <Typography font family={"Inter"} style={{ textAlign: "left" }}>Plan Basic : For 1 year at interest of 14%</Typography>
                 <Typography font family={"Inter"} style={{ textAlign: "left" }}>Plan Basic : For 6 months at interest of 13%</Typography>
-                <Typography font family={"Inter"} style={{ textAlign: "left" }}>Plan Basic : For 3 months at interest of 12%</Typography>
+                <Typography font family={"Inter"} style={{ textAlign: "left" }}>Plan Basic : For 1 year at interest of 14%</Typography>
+                <Typography font family={"Inter"} style={{ textAlign: "left" }}>Plan Basic : For 3 years at interest of 15%</Typography>
               </GreyBox>
             </Box>
           </Stack>
@@ -89,19 +89,22 @@ const Loans = () => {
         x
         
       </Stack>
-      <Stack spacing={0}>
+      
+       
+        <Stack spacing={0}>
         <Typography
           fontFamily={"Inter"}
           color={"white"}
-          padding={{ paddingBottom: "10px" }}
+          padding={{ paddingBottom: "20px" }}
         >
-          Loans
+          My Loans
         </Typography>
         <GreyBox>
-          <Typography fontFamily={"Inter"}>10 months -10%</Typography>
-          <Typography fontFamily={"Inter"}>12 months  12%</Typography>
-          
+          <Typography fontFamily={"Inter"}>Loan 1</Typography>
+          <Typography fontFamily={"Inter"}>Loan 2</Typography>
+          <Typography fontFamily={"Inter"}>Loan 3</Typography>
         </GreyBox>
+      
         <Box padding={{ paddingTop: "20px" }}>
         <GreyBox>
             <Typography

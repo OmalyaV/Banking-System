@@ -7,19 +7,19 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Dialog, Typography } from "@mui/material"
-function createData(Account, Amount,  DueDate ) {
-  return {Account, Amount, DueDate };
+function createData(From, To, Amount, Date,Time ) {
+  return {From, To, Amount, Date, Time};
 }
 
 const rows = [
-  createData('wewreee', 159, 6.0, 24),
-  createData('wetyr', 237, 9.0, 37),
-  createData('asdfdh', 262, 16.0, 24),
-  createData('rfgbc', 305, 3.7, 67),
-  createData('drewrtgh', 356, 16.0, 49),
+  createData('wewreee', 159, 6.0, 24, 4.0),
+  createData('wetyr', 237, 9.0, 37, 4.3),
+  createData('asdfdh', 262, 16.0, 24, 6.0),
+  createData('rfgbc', 305, 3.7, 67, 4.3),
+  createData('drewrtgh', 356, 16.0, 49, 3.9),
 ];
 
-const LateLoanInstalementsPopup = (props) => {
+const TotalTransactionReportPopup = (props) => {
   const { onClose, open, name } = props
 
   const handleClose = () => {
@@ -39,17 +39,18 @@ const LateLoanInstalementsPopup = (props) => {
               padding: "0px 0px",
             }}
           >
-            Late Loan Instalements
+            Total Transaction Report
           </Typography>
       </Box>
       
       <Table sx={{ minWidth: 500 ,color: "#FFCF43", border: '1px solid white'}} >
         <TableHead>
           <TableRow>
-            <TableCell sx={{ color: 'white', border: '1px solid white'}}>Account </TableCell>
-            <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>Amount</TableCell>
-            <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>DueDate&nbsp;</TableCell>
-            
+            <TableCell sx={{ color: 'white', border: '1px solid white'}}>From </TableCell>
+            <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>To</TableCell>
+            <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>Amount&nbsp;</TableCell>
+            <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>Date&nbsp;</TableCell>
+            <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>Time&nbsp;</TableCell>
            
           </TableRow>
         </TableHead>
@@ -60,11 +61,12 @@ const LateLoanInstalementsPopup = (props) => {
               
             >
               <TableCell component="th" scope="row" sx={{ color: 'white', border: '1px solid white' }}>
-                {row.Account}
+                {row.From}
               </TableCell>
-              <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>{row.Amount}</TableCell>
-              <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>{row.DueDate}</TableCell>
-             
+              <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>{row.To}</TableCell>
+              <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>{row.Amount}</TableCell>
+              <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>{row.Date}</TableCell>
+              <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>{row.Time}</TableCell>
              
             </TableRow>
           ))}
@@ -75,4 +77,4 @@ const LateLoanInstalementsPopup = (props) => {
   )
 }
 
-export default LateLoanInstalementsPopup
+export default TotalTransactionReportPopup
