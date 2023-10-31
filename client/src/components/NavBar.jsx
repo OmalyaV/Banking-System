@@ -30,7 +30,7 @@ function NavBar() {
   const customFontStyle = {
     fontFamily: "Inter",
     fontWeight: 500, // You can adjust font weight as needed
-    fontSize: "12px",
+    fontSize: "15px",
   }
 
   const scrollToAboutUs = () => {

@@ -79,7 +79,7 @@ const Footer = () => {
                 alt="mission"
                 style={{ height: "20px", width: "20px" }}
               />
-              <Typography color="white"> contact@nexustrustbank</Typography>
+              <Typography color="white"> contact@nexustrustbank.com</Typography>
             </Stack>
             <Stack direction="row" spacing={1}>
               <img
