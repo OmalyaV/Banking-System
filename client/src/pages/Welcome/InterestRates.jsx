@@ -4,7 +4,9 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord"
 
 const InterestRates = () => {
   return (
-    <Box padding={"20px"}>
+    <Box padding={"20px"}
+          id = "interestrates"
+          >
       <Typography fontSize={"40px"}>Interest Rates</Typography>
       <Stack
         display="flex"

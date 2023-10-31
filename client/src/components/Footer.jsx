@@ -6,8 +6,17 @@ import InstagramIcon from "@mui/icons-material/Instagram"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import YouTubeIcon from "@mui/icons-material/YouTube"
 import Box from "@mui/material/Box"
+import {Link} from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Footer = () => {
+  const scrollToAboutUs = () => {
+    const aboutUsSection = document.getElementById("aboutus");
+    if (aboutUsSection) {
+      aboutUsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+  
   return (
     <Box
       sx={{
@@ -28,7 +37,19 @@ const Footer = () => {
             </Typography>
             <Stack direction="row" spacing={10}>
               <Stack spacing={2}>
-                <Typography color="white"> About Us</Typography>
+                <button onClick={scrollToAboutUs}
+                style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "white",
+                padding: 0,
+                fontSize: "inherit",
+                marginLeft: "-45px"
+                }}
+                 >
+                About Us
+                </button>
                 <Typography color="white"> Digital Banking</Typography>
                 <Typography color="white"> Promotions </Typography>
                 <Typography color="white"> Contact Us </Typography>
@@ -40,7 +61,7 @@ const Footer = () => {
               </Stack>
             </Stack>
           </Stack>
-          <Stack spacing={2} textAlign="left">
+          <Stack spacing={2} textAlign="left" id = "contactus">
             <Typography color="#FFCF43" fontSize="20px">
               Reach Us
             </Typography>
