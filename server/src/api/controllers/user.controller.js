@@ -9,7 +9,6 @@ import Customer from "../models/customer.model.js"
 const login = async (req, res) => {
   const NIC = req.body.NIC
   const password = req.body.password
-
   try {
     const user = await User.getUserByUsername(NIC)
     const hash = user.password_hash
@@ -38,31 +37,29 @@ const registerCustomer = async (req, res) => {
   const NIC = req.body.NIC
   const username = req.body.username
   const password = req.body.password
-  
-  
   const hash = await generateHash(password)
   try {
+    console.log(NIC, username, hash)
     const message = await User.createCustomerUser(username, hash,NIC)
-    if (message == "success") {
+    if (message == "successful") {
       console.log("User created")
       return res.send({ approved: true })  
     } else {
+      console.log(message)
       console.log("User not created")
       return res.send({ approved: false })
     }
   } catch (err) {
     console.log(err)
     return res.send({ approved: false })
-  }
-
-  console.log("Registration function")
+  }  
+  finally{console.log("Registration function")}
 }
+
 const registerEmployee = async (req, res) => {
   const NIC = req.body.NIC
   const username = req.body.username
   const password = req.body.password
-  
-  
   const hash = await generateHash(password)
   try {
     const message = await User.createEmployeeUser(username, hash,NIC)
@@ -77,8 +74,7 @@ const registerEmployee = async (req, res) => {
     console.log(err)
     return res.send({ approved: false })
   }
-
-  console.log("Registration function")
+  finally{console.log("Registration function")}
 }
 
 

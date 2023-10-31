@@ -6,7 +6,13 @@ export const comparePassword = async (password, hash) => {
 }
 
 export const generateHash = async (password) => {
-  return await bcrypt.hash(password, 10)
+  try{
+    return await bcrypt.hash(password, 10)
+  }
+  catch(err){
+    console.log("Error hashing the password:", err)
+  }
+  
 }
 
 export const is_Customer = async (NIC, name) => {
