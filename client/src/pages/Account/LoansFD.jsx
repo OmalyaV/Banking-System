@@ -12,7 +12,7 @@ const Loans = () => {
   const accountType = "Adult"
 
   return (
-    <Stack direction="row" spacing={20}>
+    <Stack direction="row" spacing={5} justifyContent="center">
       <Stack spacing={0}>
         <Box textAlign="left" sx={{ padding: "20px 150px" }}>
           {/* Left Side */}
@@ -67,7 +67,7 @@ const Loans = () => {
               </GreyBox>
             </Box>
           </Stack>
-          <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={3}>
+          <Stack padding={{ paddingTop: "20px" }} direction="row" spacing={3}>
             <Box>
               <Typography
                 sx={{
@@ -87,21 +87,20 @@ const Loans = () => {
               </GreyBox>
             </Box>
           </Stack>
-          <Box padding={{ paddingTop: "20px" }}>
-            
-          </Box>
+
         </Box>
         
         
       </Stack>
 
-      <Stack padding={{ paddingTop: "10px" }} direction="column" spacing={3}>
+      <Stack padding={{ paddingTop: "10px" }} direction="column" spacing={3} >
       <Box>
             <Typography
             sx={{
               color: "#FFCF43",
               fontSize: 20,
               fontWeight: 500,
+              paddingTop: "80px",
             }}
           >
             Loans
@@ -128,25 +127,140 @@ const Loans = () => {
           
         </GreyBox>
         </Box>
+
         <Box padding={{ paddingTop: "20px" }}>
-        <GreyBox>
             <Typography
-          fontFamily={"Inter"}
-          color={"white"}
-          padding={{ paddingBottom: "5px" }}
-        >
-          Online Loan Request
-        </Typography>
-            <Box sx={{ padding: "10px 100px", borderRadius: "50px", fontSize: "50px", fontWeight: 400 }}>
-                <YellowButton text="Select FD" sx={{ width: "200px", height: "150px", fontSize: "150px" }} />
+              sx={{
+                color: "white",
+                fontSize: 18,
+                fontWeight: "bold",
+                padding: "0px 0px",
+              }}
+              fontFamily={"Inter"}
+            >
+              Online Loan Request
+            </Typography>
+          </Box>
+        <Box sx={{ paddingLeft: "50px" }}>
+          <Paper
+            sx={{
+              paddingLeft: "50px",
+              backgroundColor: "#151515",
+              textAlign: "left",
+              borderRadius: "20px",
+              width: "500px",
+            }}
+          >
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Typography
+                  sx={{
+                    color: "white",
+                    fontWeight: 400,
+                    padding: "0px 0px",
+                  }}
+                  fontFamily={"Inter"}
+                >
+                  FD:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  variant="outlined"
+                  sx={{
+                    borderRadius: "50px",
+                    backgroundColor: "white",
+                    "& fieldset": { border: "none" },
+                    "& input": {
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                    },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Typography
+                  sx={{
+                    color: "white",
+                    fontWeight: 400,
+                    padding: "0px 0px",
+                  }}
+                  fontFamily={"Inter"}
+                >
+                  Amount:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  variant="outlined"
+                  sx={{
+                    borderRadius: "50px",
+                    backgroundColor: "white",
+                    "& fieldset": { border: "none" },
+                    "& input": {
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                    },
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={6}>
+                <Typography
+                  sx={{
+                    color: "white",
+                    fontWeight: 400,
+                    padding: "0px 0px",
+                  }}
+                  fontFamily={"Inter"}
+                >
+                  Time Period
+                  (in months):
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  variant="outlined"
+                  sx={{
+                    borderRadius: "50px",
+                    backgroundColor: "white",
+                    "& fieldset": { border: "none" },
+                    "& input": {
+                      paddingTop: "6px",
+                      paddingBottom: "6px",
+                    },
+                  }}
+                />
+              </Grid>
+
+            </Grid>
+            <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
+              <Button
+                variant="contained"
+                sx={{
+                  fontFamily: "Inter",
+                  textTransform: "none",
+                  fontWeight: 600,
+                  backgroundColor: "#FFCF43",
+                  color: "black",
+                  "&:hover": {
+                    backgroundColor: "yellow", // Specify the hover color
+                  },
+                  borderRadius: "20px", // Add this to round the button edges
+                }}
+              >
+                Proceed
+              </Button>
             </Box>
-            </GreyBox>  
+          </Paper>
         </Box>
         
+        
+        
       </Stack>
-      
-    </Stack>
-  )
+      </Stack>
+  );
+    
 }
 
 export default Loans
