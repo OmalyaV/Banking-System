@@ -13,13 +13,13 @@ function App() {
     <div className="App">
       <AuthContextProvider>
         <Router>
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Welcome />} />
         </Routes>
         <Routes>
           <Route path="/account" element={<Account />} />
-        </Routes>
-        {/* <Welcome /> */}
+        </Routes> */}
+        <Account />
         </Router>
       </AuthContextProvider>
     </div>
