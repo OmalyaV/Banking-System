@@ -20,6 +20,7 @@ const AccountListPopup = (props) => {
     onClose(true)
     console.log(goToAccount)
     setCustomerAccount(goToAccount)
+    //handleAccountDetails(goToAccount) 
   }
 
   return (

@@ -12,8 +12,12 @@ import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
 import {useNavigate} from "react-router-dom"
 import HideInput from "../components/HideInput"
+import Cookies from "universal-cookie";
+
 
 export default function LoginPopup(props) {
+  
+  const cookies = new Cookies();
   const navigate = useNavigate()
   const { user, username,userType, login, logout } = useContext(AuthContext)
   const { onClose, open } = props
@@ -33,6 +37,19 @@ export default function LoginPopup(props) {
   const handlePasswordChange = (newPassword) => {
     setPassword(newPassword)
   }
+
+
+  // const handleUserLogin = () => {
+  //   cookies.set("authenticated", "true", { path: "/" });
+  //   setUser({ username: "exampleUser" });
+  // };
+
+  // // Example: User Logout (remove authentication cookie)
+  // const handleUserLogout = () => {
+  //   cookies.remove("authenticated", { path: "/" });
+  //   setUser(null);
+  // };
+
   const handleLogin = () => {
     // Create a data object to send in the POST request
     // const data = {
@@ -52,6 +69,8 @@ export default function LoginPopup(props) {
         console.log("Login successful!", response.data)
         login(response.data.user)
         console.log(response.data.user)
+        const user = response.data.user
+        cookies.set("user", {user}, { path: "/" });
         //user(response.data.customer_NIC)
         navigate("/account")
         }

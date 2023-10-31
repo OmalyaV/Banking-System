@@ -48,12 +48,7 @@ const Content = () => {
         <AboutUs />
         <InterestRates />
         <MaximizeSavings />
-        {isAuthenticated ? (
-          <div>
-            <p>Welcome, {user ? user.username : "Guest"}</p>
-            <button onClick={handleUserLogout}>Logout</button>
-          </div>
-        ) : null}
+        
       </Stack>
     </Box>
   );

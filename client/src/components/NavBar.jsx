@@ -11,7 +11,7 @@ import Button from "@mui/material/Button"
 import MenuItem from "@mui/material/MenuItem"
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew"
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined"
-import { useContext } from "react"
+import { useContext,useEffect } from "react"
 import { AuthContext } from "../context/AuthContext"
 import LoginPopup from "../popups/Login"
 import ContactUsPopup from "../popups/ContactUs"
@@ -22,6 +22,7 @@ import GreyBox from "./GreyBox"
 import { Paper } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import RegisterPopup from "../popups/Register"
+import Cookies from "universal-cookie";
 
 const pages = ["About Us", "Digital Banking", "Promotions", "Contact Us"]
 
@@ -31,6 +32,7 @@ function NavBar() {
     fontWeight: 500, // You can adjust font weight as needed
     fontSize: "12px",
   }
+  const cookies = new Cookies();
   const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
   const [registerOpen, setRegisterOpen] = React.useState(false)
@@ -40,8 +42,15 @@ function NavBar() {
   const [openPopups, setOpenPopups] = React.useState({})
   const [isOverlayVisible, setOverlayVisible] = React.useState(false)
   
-
   const {username} = useContext(AuthContext)
+
+  useEffect(() => {
+    if (cookies.get("user") !== undefined) {
+      login(cookies.get("user"))
+    }
+  },[])
+
+
   const handleOpenProfileMenu = (event) => {
     setAnchorElProfileMenu(event.currentTarget)
     setOverlayVisible(true)
@@ -60,6 +69,7 @@ function NavBar() {
   const handleLogout = () => {
     logout()
     setAnchorElProfileMenu(null)
+    cookies.remove("user", { path: "/" });
     navigate("/")
   }
 

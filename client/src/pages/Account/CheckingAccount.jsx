@@ -4,6 +4,12 @@ import Stack from "@mui/material/Stack"
 import Box from "@mui/material/Box"
 import { styled } from "@mui/material/styles"
 import { Typography, TextField, InputBase, Grid, Button } from "@mui/material"
+import { useContext } from "react"
+import { AccountContext } from "../../context/AccountContext"
+import api from "../../apiConfig"
+import YellowButton from "../../components/YellowButton"
+import { AuthContext } from "../../context/AuthContext"
+import AccountListPopup from "../../popups/AccountListPopup"
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -24,11 +30,80 @@ const GreyBox = styled(Paper)(({ theme }) => ({
 }))
 
 const CheckingAccount = () => {
-  const accountType = "Adult"
+  // const accountType = "Adult"
+  const {account, setCustomerAccount} = useContext(AccountContext)
+  const { user, username,userType, login, logout } = useContext(AuthContext)
+  const [accountType , setAccountType] = React.useState("Your account type")
+  const [balance , setBalance] = React.useState(0)
+  const [withdrawalsLeft , setWithdrawalsLeft] = React.useState(0)
+  const [accountList, setAccountList] = React.useState([])
+  const[accountListPopupOpen, setAccountListPopupOpen] = React.useState(false)
+
+  const handleListOpen=()=>{
+    setAccountListPopupOpen(true)
+    handleAccountList()
+  }
+
+  const handleListClose =()=>{
+    setAccountListPopupOpen(false)
+  }
+
+  const handleAccountList=() =>{
+    console.log(user)
+    const data = {
+      NIC: user,
+      type: 'savings'
+    }
+    api
+      .post("/account/account_list", data) // Replace "/api/login" with your actual API endpoint
+      .then((response) => {
+       
+        if (response.data.approved){
+        console.log("List fetched!", response.data)
+        setAccountList(response.data.account)
+        //navigate("/account")
+        }
+        else{
+          console.log("something went wrong!", response.data)
+        }
+        //onClose(true)
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("account list fetching failed:", error)
+      })
+  }
+
+  React.useEffect(() => {
+    console.log(account)
+    api
+      .post("/account/saving_account_details",{
+        account_number: account
+      }) // Replace "/api/login" with your actual API endpoint
+      .then((response) => {
+       
+        if (response.data.approved){
+        console.log("Account details fetched!", response.data)
+        setBalance(response.data.account.balance)
+        setWithdrawalsLeft(response.data.account.number_of_withdrawals)
+        setAccountType(response.data.account.name)
+        //navigate("/account")
+        }
+        else{
+          console.log("something went wrong!", response.data)
+        }
+        //onClose(true)
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("account details fetching failed:", error)
+      })
+    }, [account])
 
   return (
     <Stack direction="row" spacing={20}>
       <Stack spacing={0}>
+      <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
         <Box textAlign="left" sx={{ padding: "20px 150px" }}>
           {/* Left Side */}
           <Typography
@@ -51,6 +126,9 @@ const CheckingAccount = () => {
           >
             Checking Account
           </Typography>
+          <Box sx={{ padding: "10px 5px", borderRadius: "20px" }}>
+              <YellowButton text="Select your checking account" onClick={handleListOpen}/>
+            </Box>
           <Typography
             sx={{
               color: "white",
@@ -76,7 +154,7 @@ const CheckingAccount = () => {
                 Balance
               </Typography>
               <GreyBox>
-                <Typography>$500.00</Typography>
+                <Typography>{balance} LKR</Typography>
               </GreyBox>
             </Box>
             

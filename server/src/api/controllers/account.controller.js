@@ -84,7 +84,23 @@ const get_account_details = async (req, res) => {
 
 }
 
-export default {add_current_account, add_saving_account, get_account_list, get_account_details}
+const get_saving_account_details = async (req, res) => {
+    const account_number = req.body.account_number
+    try{
+    const account = await SavingAccount.getAccountByAccountNumber(account_number)
+        console.log("Account details fetched")
+        return res.send({ approved:true,account: account[0] })
+    } catch (err) {
+        console.log(err)
+        return res.send({ approved: false })
+    }
+    finally{
+        console.log("Get Account details function")
+    }
+
+}
+
+export default {add_current_account, add_saving_account, get_account_list, get_account_details, get_saving_account_details}
 
 
  

@@ -10,6 +10,8 @@ function AuthContextProvider(props) {
     setUser(user.customer_NIC)
     setUserType(user.user_type)
     setUsername(user.username)
+    console.log("usernames",user.username,user.user_type)
+
   }
 
   const logout = () => {

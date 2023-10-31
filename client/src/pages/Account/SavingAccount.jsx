@@ -14,11 +14,13 @@ import { AccountContext } from "../../context/AccountContext"
 const SavingAccount = () => {
 
   const {account, setCustomerAccount} = useContext(AccountContext)
-  const accountType = "Adult"
   const account_number = "0000000001"
   const [accountList, setAccountList] = React.useState([])
   const[accountListPopupOpen, setAccountListPopupOpen] = React.useState(false)
   const { user, username,userType, login, logout } = useContext(AuthContext)
+  const [balance , setBalance] = React.useState(0)
+  const [withdrawalsLeft , setWithdrawalsLeft] = React.useState(0)
+  const [accountType , setAccountType] = React.useState("Your account type")
   const handleListOpen=()=>{
     setAccountListPopupOpen(true)
     handleAccountList()
@@ -52,6 +54,32 @@ const SavingAccount = () => {
       })
   }
 
+  React.useEffect(() => {
+    console.log(account)
+    api
+      .post("/account/saving_account_details",{
+        account_number: account
+      }) // Replace "/api/login" with your actual API endpoint
+      .then((response) => {
+       
+        if (response.data.approved){
+        console.log("Account details fetched!", response.data)
+        setBalance(response.data.account.balance)
+        setWithdrawalsLeft(response.data.account.number_of_withdrawals)
+        setAccountType(response.data.account.name)
+        //navigate("/account")
+        }
+        else{
+          console.log("something went wrong!", response.data)
+        }
+        //onClose(true)
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("account details fetching failed:", error)
+      })
+    }, [account])
+  
   return (
     <Stack direction="row" spacing={20}>
       <Stack spacing={0}>
@@ -117,7 +145,7 @@ const SavingAccount = () => {
                 Balance
               </Typography>
               <GreyBox>
-                <Typography>$500.00</Typography>
+                <Typography>{balance}</Typography>
               </GreyBox>
             </Box>
             <Box>
@@ -133,7 +161,7 @@ const SavingAccount = () => {
                 No: of Withdrawals Left
               </Typography>
               <GreyBox>
-                <Typography>3</Typography>
+                <Typography>{withdrawalsLeft}</Typography>
               </GreyBox>
             </Box>
           </Stack>

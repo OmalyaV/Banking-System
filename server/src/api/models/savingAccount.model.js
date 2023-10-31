@@ -19,14 +19,14 @@ class SavingAccount {
     
 
     static async getAccountByAccountNumber(account_number) {
-        const sqlQuery = 'SELECT * FROM defaultdb.Account WHERE account_number = ?';
+        const sqlQuery = 'CALL defaultdb.getAccountByAccountNumber(?)';
         try{
             const [rows] = await db.execute(sqlQuery, [account_number]);
 
             const account = rows? rows[0] : null;
             return account;
             
-            }
+        }
             
         
         catch(error){
