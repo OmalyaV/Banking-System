@@ -36,13 +36,24 @@ const Loans = () => {
           >
             Fixed Deposits & Loans
           </Typography>
-          <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={2}>
+          <Stack padding={{ paddingTop: "10px" }} direction="column" spacing={2}>
+            <Box>
+            <Typography
+            sx={{
+              color: "#FFCF43",
+              fontSize: 20,
+              fontWeight: 500,
+            }}
+          >
+            Fixed Deposits
+          </Typography>
+              </Box>
             <Box>
               <Typography
                 sx={{
                   color: "white",
-                  fontSize: 12,
-                  fontWeight: 400,
+                  fontSize: 18,
+                  fontWeight: "bold",
                   padding: "0px 0px",
                 }}
                 fontFamily={"Inter"}
@@ -56,13 +67,13 @@ const Loans = () => {
               </GreyBox>
             </Box>
           </Stack>
-          <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={2}>
+          <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={3}>
             <Box>
               <Typography
                 sx={{
                   color: "white",
-                  fontSize: 12,
-                  fontWeight: 400,
+                  fontSize: 18,
+                  fontWeight: "bold",
                   padding: "0px 0px",
                 }}
                 fontFamily={"Inter"}
@@ -71,8 +82,8 @@ const Loans = () => {
               </Typography>
               <GreyBox>
                 <Typography font family={"Inter"}>Plan Basic : For 1 year at interest of 14%</Typography>
-                <Typography font family={"Inter"}>Plan Basic : For 6 months at interest of 13%</Typography>
-                <Typography font family={"Inter"}>Plan Basic : For 3 months at interest of 12%</Typography>
+                <Typography font family={"Inter"}>Plan Gold : For 6 months at interest of 13%</Typography>
+                <Typography font family={"Inter"}>Plan Premium : For 3 months at interest of 12%</Typography>
               </GreyBox>
             </Box>
           </Stack>
@@ -83,19 +94,40 @@ const Loans = () => {
         
         
       </Stack>
-      <Stack spacing={0}>
+
+      <Stack padding={{ paddingTop: "10px" }} direction="column" spacing={3}>
+      <Box>
+            <Typography
+            sx={{
+              color: "#FFCF43",
+              fontSize: 20,
+              fontWeight: 500,
+            }}
+          >
+            Loans
+          </Typography>
+              </Box>
+        <Box>
         <Typography
           fontFamily={"Inter"}
           color={"white"}
           padding={{ paddingBottom: "10px" }}
         >
-          Loans
+          <Typography
+            sx={{
+              fontWeight: "bold",
+              fontSize: 18,
+            }}
+          >
+            Loans
+          </Typography>
         </Typography>
         <GreyBox>
           <Typography fontFamily={"Inter"}>10 months -10%</Typography>
-          <Typography fontFamily={"Inter"}>12 months  12%</Typography>
+          <Typography fontFamily={"Inter"}>12 months -12%</Typography>
           
         </GreyBox>
+        </Box>
         <Box padding={{ paddingTop: "20px" }}>
         <GreyBox>
             <Typography
@@ -110,7 +142,6 @@ const Loans = () => {
             </Box>
             </GreyBox>  
         </Box>
-        
         
       </Stack>
       
