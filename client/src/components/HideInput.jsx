@@ -2,7 +2,7 @@ import React from 'react'
 import {  OutlinedInput, InputAdornment, IconButton } from '@mui/material'
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-const HideInput = () => {
+const HideInput = ({ onValueChange}) => {
     const [showPassword, setShowPassword] = React.useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -10,9 +10,18 @@ const HideInput = () => {
     const handleMouseDownPassword = (event) => {
       event.preventDefault();
     };
+    const [value, setValue] = React.useState("")
+    const handleChange = (event) => {
+      const newValue = event.target.value;
+      setValue(newValue);
+  
+      // Call the callback function to update the username in the parent component
+      onValueChange(newValue);
+    };
   return (
 
     <OutlinedInput
+      onChange={handleChange}
       id="standard-adornment-password"
       type={showPassword ? 'text' : 'password'}
       endAdornment={

@@ -9,40 +9,65 @@ import axios from "axios"
 import api from "../apiConfig"
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
-
+import HideInput from "../components/HideInput"
+import LoginPopup from "./Login"
 
 export default function RegisterPopup(props) {
 
 
   const { onClose, open } = props
-  
   const [NICNumber, setNICNumber] = React.useState("")
-  const [UserName, setFullName] = React.useState("")
-  const [UserType, setBranch] = React.useState("")
+  const [Username, setUsername] = React.useState("")
   const [Password, setPassword] = React.useState("")
   const [ConfirmPassword , setConfirmPassword ] = React.useState("")
+  const [loginOpen, setLoginOpen] = React.useState(false)
 
+  const handleNICNumberChange = (newNICNumber) => {
+    setNICNumber(newNICNumber)
+  }
+  const handleUsernameChange = (newUsername) => {
+    setUsername(newUsername)
+  }
+  const handlePasswordChange = (newPassword) => {
+    setPassword(newPassword)
+  }
+  const handleConfirmPasswordChange = (newConfirmPassword) => {
+    setConfirmPassword(newConfirmPassword)
+  }
   const handleClose = () => {
     onClose(true)
   }
-
-  const handleLogin = () => {
-    // Create a data object to send in the POST request
+  const handleLoginOpen = () => {
+    setLoginOpen(true)
+  }
+  const handleLoginClose = () => {
+    setLoginOpen(false)
+  }
+  const handlePasswordmatch = ()=> {
+      
+  }
+  const handleRegister = () => {
+    // const data = {
+    //   NICNumber: "PQR4526801",
+    //   UserName: "Rasa Dias",
+    //   Password:"123456",
+    // }
     const data = {
-      NICNumber: "PQR4526801",
-      UserName: "Rasa Dias",
-      UserType:"customer",
-      Password:"123456",
+      NIC: NICNumber,
+      username: Username,
+      password:Password,
     }
-
-    // Make a POST request to your server
+    console.log(data)
     api
-      .post("/user/register", data) // Replace "/api/login" with your actual API endpoint
+      .post("/user/registerCustomer", data)
       .then((response) => {
-        // Handle the response as needed
-        console.log("Register successful!", response.data)
-        
-        // You can also close the dialog or perform other actions on success
+        if (response.data.approved){
+          console.log("Register successful!", response.data)
+          handleLoginOpen() 
+        }
+        else{
+          console.log("Register unsuccessful!", response.data)
+        }   
         onClose(true)
       })
       .catch((error) => {
@@ -91,7 +116,7 @@ export default function RegisterPopup(props) {
           </Grid>
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
-              <TextInput />
+              <TextInput onValueChange={handleNICNumberChange} />
             </Box>
           </Grid>
           <Grid item xs={6}>
@@ -109,28 +134,10 @@ export default function RegisterPopup(props) {
           </Grid>
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
-              <TextInput />
+              <TextInput onValueChange={handleUsernameChange} />
             </Box>
           </Grid>
-          <Grid item xs={6}>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 18,
-                fontWeight: 400,
-                padding: "20px 70px",
-              }}
-              fontFamily={"Inter"}
-            >
-              User Type :
-            </Typography>
-          </Grid>
-          
-          <Grid item xs={6}>
-            <Box padding={"20px 0px"}>
-              <TextInput />
-            </Box>
-          </Grid>
+
           <Grid item xs={6}>
             <Typography
               sx={{
@@ -146,7 +153,7 @@ export default function RegisterPopup(props) {
           </Grid>
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
-              <TextInput />
+              <HideInput onValueChange={handlePasswordChange} />
             </Box>
           </Grid>
           <Grid item xs={6}>
@@ -164,11 +171,17 @@ export default function RegisterPopup(props) {
           </Grid>
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
-              <TextInput />
+              <HideInput onValueChange={handleConfirmPasswordChange} />
             </Box>
           </Grid>
         </Grid>
-
+        { Password!==ConfirmPassword ?<Typography sx={{
+                color: "white",
+                fontSize: 18,
+                fontWeight: 400,
+                padding: "10px 10px",
+              }}
+              fontFamily={"Inter"}>Not Matched</Typography>:  <Box sx={{widows:"100px 100px"}}></Box>}
         <Box
           sx={{
             padding: "20px",
@@ -178,9 +191,11 @@ export default function RegisterPopup(props) {
             display: "flex",
           }}
         >
-          <YellowButton text="Register" onClick={handleLogin} />
+          
+          <YellowButton text="Register" onClick={handleRegister} />
         </Box>
       </Box>
+      <LoginPopup onClose={handleLoginClose} open={loginOpen} />
     </Dialog>
   )
 }
