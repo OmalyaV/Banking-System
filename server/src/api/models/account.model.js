@@ -37,7 +37,7 @@ class Account {
     }
 
     static async getAccountByAccountNumber(account_number) {
-        const sqlQuery = 'SELECT * FROM defaultdb.Account WHERE account_number = ?';
+        const sqlQuery = 'SELECT balance FROM defaultdb.Account WHERE account_number = ? and type = "current"';
         try{
             const [rows] = await db.execute(sqlQuery, [account_number]);
 
