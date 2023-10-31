@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles"
 import { Typography, TextField, InputBase, Grid, Button } from "@mui/material"
 import { useContext } from "react"
 import { AccountContext } from "../../context/AccountContext"
+import { CurrentAccountContext } from "../../context/CurrentAccountContext"
 import api from "../../apiConfig"
 import YellowButton from "../../components/YellowButton"
 import { AuthContext } from "../../context/AuthContext"
@@ -31,6 +32,7 @@ const GreyBox = styled(Paper)(({ theme }) => ({
 
 const CheckingAccount = () => {
   // const accountType = "Adult"
+ //const {currentAccount, setCustomerCurrentAccount} = useContext(CurrentAccountContext)
   const {account, setCustomerAccount} = useContext(AccountContext)
   const { user, username,userType, login, logout } = useContext(AuthContext)
  
@@ -76,6 +78,7 @@ const CheckingAccount = () => {
 
   React.useEffect(() => {
     console.log(account)
+
     api
       .post("/account/account_details",{
         account_number: account
@@ -129,6 +132,24 @@ const CheckingAccount = () => {
             </Box>
           
           <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={2}>
+            
+          <Box>
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: 12,
+                  fontWeight: 400,
+                  padding: "0px 0px",
+                }}
+                fontFamily={"Inter"}
+              >
+                Account Number
+              </Typography>
+              <GreyBox>
+                <Typography>{account}</Typography>
+              </GreyBox>
+            </Box>
+          
             <Box>
               <Typography
                 sx={{
