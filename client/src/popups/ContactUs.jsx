@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Dialog, Typography } from "@mui/material"
+import { Box, Dialog, Typography, Stack } from "@mui/material"
 
 const ContactUsPopup = (props) => {
   const { onClose, open,name } = props
@@ -20,39 +20,38 @@ const ContactUsPopup = (props) => {
         alignItems={"center"}
         flex={"row"}
       >
-        <Typography
-                sx={{
-                  color: "white",
-                  fontSize: 15,
-                  fontWeight: 400,
-                  padding: "0px 0px",
-                }}
-                fontFamily={"Inter"}
-              >
-                Contact no:  +94 77 777 777
+        <Stack spacing={2} textAlign="left">
+            <Typography color="white" fontSize="30px" fontWeight="bold" textAlign="center">
+              Contact Us
+            </Typography>
+            <Stack direction="row" spacing={1}>
+              <img
+                src="assets/images/navbar_call.png"
+                alt="mission"
+                style={{ height: "20px", width: "20px" }}
+              />
+              <Typography color="white"> +248 123 456 789</Typography>
+            </Stack>
+            <Stack direction="row" spacing={1}>
+              <img
+                src="assets/images/navbar_mail.png"
+                alt="mission"
+                style={{ height: "20px", width: "20px" }}
+              />
+              <Typography color="white"> contact@nexustrustbank.com</Typography>
+            </Stack>
+            <Stack direction="row" spacing={1}>
+              <img
+                src="assets/images/navbar_location.png"
+                alt="mission"
+                style={{ height: "20px", width: "20px" }}
+              />
+              <Typography color="white" width={"240px"}>
+                123 Ocean Avenue,Coral Bay, Seaside City, Marine Province, Zip
+                Code: 56789
               </Typography>
-              <Typography
-                sx={{
-                  color: "white",
-                  fontSize: 15,
-                  fontWeight: 400,
-                  padding: "0px 0px",
-                }}
-                fontFamily={"Inter"}
-              >
-                Address:  No 90, Galle Road,Colombo 03,Sri Lanka
-              </Typography>
-              <Typography
-                sx={{
-                  color: "white",
-                  fontSize: 15,
-                  fontWeight: 400,
-                  padding: "0px 0px",
-                }}
-                fontFamily={"Inter"}
-              >
-                Mail:  contact@nexustrust.com
-              </Typography>
+            </Stack>
+          </Stack>
       </Box>
     </Dialog>
   )
