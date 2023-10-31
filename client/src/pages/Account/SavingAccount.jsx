@@ -9,6 +9,7 @@ import GreyBox from "../../components/GreyBox"
 
 const SavingAccount = () => {
   const accountType = "Adult"
+  const account_number = "0000000001"
 
   return (
     <Stack direction="row" spacing={20}>
@@ -30,10 +31,24 @@ const SavingAccount = () => {
               color: "#FFCF43",
               fontSize: 20,
               fontWeight: 500,
-              padding: "0px 0px",
+              padding: "0px 5px",
             }}
           >
-            Savings Account
+            Savings Accounts
+          </Typography>
+          <Box sx={{ padding: "10px 5px", borderRadius: "20px" }}>
+              <YellowButton text="Select your saving account" />
+            </Box>
+            <Typography
+            sx={{
+              color: "white",
+              fontSize: 12,
+              fontWeight: 400,
+              padding: "10px 0px",
+            }}
+            fontFamily={"Inter"}
+          >
+           Account Number : {account_number}
           </Typography>
           <Typography
             sx={{
@@ -44,7 +59,7 @@ const SavingAccount = () => {
             }}
             fontFamily={"Inter"}
           >
-            Your Account Type : {accountType}
+          Account Type : {accountType}
           </Typography>
           <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={2}>
             <Box>

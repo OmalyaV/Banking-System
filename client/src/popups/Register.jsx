@@ -68,7 +68,7 @@ export default function RegisterPopup(props) {
         else{
           console.log("Register unsuccessful!", response.data)
         }   
-        onClose(true)
+        // onClose(true)
       })
       .catch((error) => {
         // Handle errors
