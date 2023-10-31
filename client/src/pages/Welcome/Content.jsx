@@ -26,7 +26,7 @@ const Content = () => {
     setUser(null);
   };
 
-  const sessionTimeoutDuration = 60000; // 60,000 milliseconds (1 minute)
+  const sessionTimeoutDuration = 900000; // 60,000 milliseconds (1 minute)
 
   // Set the session timeout when the component mounts
   useEffect(() => {
