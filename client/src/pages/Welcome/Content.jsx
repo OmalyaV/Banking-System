@@ -10,40 +10,35 @@ import Cookies from "universal-cookie";
 const Content = () => {
   const cookies = new Cookies();
 
+  // Initialize user state and check if the user is authenticated
   const [user, setUser] = useState(null);
   const isAuthenticated = cookies.get("authenticated") === "true";
 
+  // Example: User Login (set authentication cookie)
   const handleUserLogin = () => {
     cookies.set("authenticated", "true", { path: "/" });
     setUser({ username: "exampleUser" });
-
-    setSessionTimeout();
   };
 
+  // Example: User Logout (remove authentication cookie)
   const handleUserLogout = () => {
     cookies.remove("authenticated", { path: "/" });
     setUser(null);
-
-    clearTimeout(sessionTimeout);
   };
 
-  const sessionTimeoutDuration = 900000; // 15mins in milliseconds
+  const sessionTimeoutDuration = 60000; // 60,000 milliseconds (1 minute)
 
-  let sessionTimeout;
-
-  const setSessionTimeout = () => {
-    clearTimeout(sessionTimeout);
-    sessionTimeout = setTimeout(() => {
+  // Set the session timeout when the component mounts
+  useEffect(() => {
+    const sessionTimeout = setTimeout(() => {
       handleUserLogout();
       alert("Session timed out. You have been logged out.");
     }, sessionTimeoutDuration);
-  };
 
-  useEffect(() => {
     return () => {
-      clearTimeout(sessionTimeout); 
+      clearTimeout(sessionTimeout); // Clear the session timeout on unmount
     };
-  }, []);
+  }, []); // Empty dependency array to run this effect once when the component mounts
 
   return (
     <Box sx={{ backgroundColor: "#151515", color: "#FFFFFF" }}>
@@ -53,6 +48,12 @@ const Content = () => {
         <AboutUs />
         <InterestRates />
         <MaximizeSavings />
+        {isAuthenticated ? (
+          <div>
+            <p>Welcome, {user ? user.username : "Guest"}</p>
+            <button onClick={handleUserLogout}>Logout</button>
+          </div>
+        ) : null}
       </Stack>
     </Box>
   );
