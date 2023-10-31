@@ -6,13 +6,56 @@ import { Typography, TextField, InputBase, Grid, Button } from "@mui/material"
 import TextInput from "../../components/TextInput"
 import YellowButton from "../../components/YellowButton"
 import GreyBox from "../../components/GreyBox"
-
+import AccountListPopup from "../../popups/AccountListPopup"
+import { AuthContext } from "../../context/AuthContext"
+import { useContext } from "react"
+import api from "../../apiConfig"
+import { AccountContext } from "../../context/AccountContext"
 const SavingAccount = () => {
+
+  const {account, setCustomerAccount} = useContext(AccountContext)
   const accountType = "Adult"
+  const account_number = "0000000001"
+  const [accountList, setAccountList] = React.useState([])
+  const[accountListPopupOpen, setAccountListPopupOpen] = React.useState(false)
+  const { user, username,userType, login, logout } = useContext(AuthContext)
+  const handleListOpen=()=>{
+    setAccountListPopupOpen(true)
+    handleAccountList()
+  }
+  const handleListClose =()=>{
+    setAccountListPopupOpen(false)
+  }
+  const handleAccountList=() =>{
+    console.log(user)
+    const data = {
+      NIC: user,
+      type: 'savings'
+    }
+    api
+      .post("/account/account_list", data) // Replace "/api/login" with your actual API endpoint
+      .then((response) => {
+       
+        if (response.data.approved){
+        console.log("List fetched!", response.data)
+        setAccountList(response.data.account)
+        //navigate("/account")
+        }
+        else{
+          console.log("something went wrong!", response.data)
+        }
+        //onClose(true)
+      })
+      .catch((error) => {
+        // Handle errors
+        console.error("account list fetching failed:", error)
+      })
+  }
 
   return (
     <Stack direction="row" spacing={20}>
       <Stack spacing={0}>
+        <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
         <Box textAlign="left" sx={{ padding: "20px 150px" }}>
           {/* Left Side */}
           <Typography
@@ -30,10 +73,24 @@ const SavingAccount = () => {
               color: "#FFCF43",
               fontSize: 20,
               fontWeight: 500,
-              padding: "0px 0px",
+              padding: "0px 5px",
             }}
           >
-            Savings Account
+            Savings Accounts
+          </Typography>
+          <Box sx={{ padding: "10px 5px", borderRadius: "20px" }}>
+              <YellowButton text="Select your saving account" onClick={handleListOpen}/>
+            </Box>
+            <Typography
+            sx={{
+              color: "white",
+              fontSize: 12,
+              fontWeight: 400,
+              padding: "10px 0px",
+            }}
+            fontFamily={"Inter"}
+          >
+           Account Number : {account}
           </Typography>
           <Typography
             sx={{
@@ -44,7 +101,7 @@ const SavingAccount = () => {
             }}
             fontFamily={"Inter"}
           >
-            Your Account Type : {accountType}
+          Account Type : {accountType}
           </Typography>
           <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={2}>
             <Box>

@@ -50,11 +50,12 @@ const add_saving_account = async (req, res) => {
 const get_account_list = async (req, res) => {
     const NIC = req.body.NIC
     const type = req.body.type
+    console.log("inside account controller",NIC, type)
     try{
     const account = await Account.getAccountsByNICAndType(NIC, type)
         console.log("Account list fetched")
-        console.log(account)
-        return res.send({ account: account })
+        console.log("hi",account)
+        return res.send({ approved:true, account: account })
         
     } catch (err) {
         console.log(err)

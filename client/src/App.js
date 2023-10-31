@@ -7,6 +7,8 @@ import Account from "./pages/Account"
 import Welcome from "./pages/Welcome"
 import AuthContextProvider, { AuthContext } from "./context/AuthContext"
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
+import { AccountContext } from "./context/AccountContext"
+import AccountContextProvider from "./context/AccountContext"
 
 function App() {
   return (
@@ -16,9 +18,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Welcome />} />
         </Routes>
+          <AccountContextProvider>
         <Routes>
-          <Route path="/account" element={<Account />} />
+            <Route path="/account" element={<Account />} />
+
         </Routes>
+          </AccountContextProvider>
         {/* <Welcome /> */}
         </Router>
       </AuthContextProvider>
