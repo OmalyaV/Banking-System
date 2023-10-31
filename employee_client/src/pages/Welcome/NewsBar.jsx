@@ -11,13 +11,17 @@ const NewsBar = () => {
         backgroundImage: 'url("assets/images/welcome_image.png")',
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Stack direction="row" spacing={"100px"} justifyContent="center">
         <Stack direction="column" spacing={"0px"} textAlign="left">
-          <Typography fontSize={"72px"}>BankerLink : Fostering</Typography>
-          <Typography fontSize={"72px"}>Collaboration, Wellness,</Typography>
-          <Typography fontSize={"72px"}>and Success</Typography>
+          <Typography fontSize={"72px"} sx={{ lineHeight: "72px", fontWeight: 600 }}>Empowering</Typography>
+          <Typography fontSize={"72px"} sx={{ lineHeight: "72px", fontWeight: 600 }}>Your Success:</Typography>
+          <Typography fontSize={"72px"} sx={{ lineHeight: "72px", fontWeight: 600 }}>Employee Hub</Typography>
           <Box width={"500px"}>
             <Typography fontSize={"15px"}>
               Welcome to NexusTrust Bank, where your professional journey
@@ -28,10 +32,12 @@ const NewsBar = () => {
               environment, enabling them to reach their full potential while
               contributing to our shared success. Join us on this exciting
               professional expedition, and let's build a prosperous future
-              together..
+              together.
             </Typography>
           </Box>
         </Stack>
+
+        <Stack direction="column" spacing={"20px"} paddingTop={"100px"} alignItems={"center"}>
         <Button
           variant="contained"
           sx={{
@@ -50,6 +56,7 @@ const NewsBar = () => {
         >
           Employee Login
         </Button>
+        </Stack>
       </Stack>
     </div>
   )
