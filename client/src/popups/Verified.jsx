@@ -32,7 +32,7 @@ const SuccessfulPopup = (props) => {
                 }}
                 fontFamily={"Inter"}
               >
-                Successful
+                Verfied
                 <img
                 src={"assets/images/tick.png"}
                 alt="tick"

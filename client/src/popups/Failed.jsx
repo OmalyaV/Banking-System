@@ -13,7 +13,7 @@ const FailedPopup = (props) => {
       <Box
         sx={{
           backgroundColor: "black",// Set the background color to black
-          margin: 0.5,
+          margin: 0.1,
           padding: "20px", 
           boxShadow: "none", // Remove the shadow
         }}
@@ -26,7 +26,7 @@ const FailedPopup = (props) => {
                 variant="h4"
                 sx={{
                   color: "white",
-                  fontSize: 48,
+                  fontSize: 40,
                   fontWeight: "bold",
                   padding: "10px 25px",
                 }}
