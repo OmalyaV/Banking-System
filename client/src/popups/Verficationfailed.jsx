@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Dialog, Typography, Stack } from "@mui/material"
 
-const SuccessfulPopup = (props) => {
+const FailedPopup = (props) => {
   const { onClose, open,name } = props
 
   const handleClose = () => {
@@ -32,10 +32,10 @@ const SuccessfulPopup = (props) => {
                 }}
                 fontFamily={"Inter"}
               >
-                Successful
+                Verification Failed
                 <img
-                src={"assets/images/tick.png"}
-                alt="tick"
+                src={"assets/images/cross.png"}
+                alt="failed"
                 style={{ height: "48px", width: "50px" }}
               />
               </Typography>
@@ -46,4 +46,4 @@ const SuccessfulPopup = (props) => {
   )
 }
 
-export default SuccessfulPopup
+export default FailedPopup
