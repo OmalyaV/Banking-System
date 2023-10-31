@@ -1,8 +1,8 @@
 import React from 'react'
 import { TextField } from '@mui/material'
 
-const TextInput = ({ onValueChange,isPassword = false}) => {
-  const [value, setValue] = React.useState("")
+const TextInput = ({ value,onValueChange,isPassword = false}) => {
+  const [inputValue, setValue] = React.useState("")
 
   const handleChange = (event) => {
     const newValue = event.target.value;

@@ -21,8 +21,8 @@ const SavingAccount = () => {
   const [balance , setBalance] = React.useState(0)
   const [withdrawalsLeft , setWithdrawalsLeft] = React.useState(0)
   const [accountType , setAccountType] = React.useState("Your account type")
-  const [toAccount , setToAccount] = React.useState("To Account")
-  const [amount , setAmount] = React.useState("Amount")
+  const [toAccount , setToAccount] = React.useState("")
+  const [amount , setAmount] = React.useState("")
   const [successfulPopupOpen, setSuccessfulPopupOpen] = React.useState(false)
   const handleSuccessfulPopupOpen = () => {
     setSuccessfulPopupOpen(true)
@@ -57,8 +57,8 @@ const SavingAccount = () => {
         console.log("Transfer success!", response.data.message)
         setBalance(response.data.balance)
         handleSuccessfulPopupOpen()
-        handleToAccountChange("To Account")
-        handleAmountChange("Amount")
+        handleToAccountChange("")
+        handleAmountChange("")
         }
         else{
           console.log("something went wrong!", response.data) }})
@@ -222,7 +222,7 @@ const SavingAccount = () => {
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <TextInput onValueChange={handleToAccountChange} />
+                <TextInput value={toAccount} onValueChange={handleToAccountChange} />
               </Grid>
               <Grid item xs={6}>
                 <Typography
@@ -238,7 +238,7 @@ const SavingAccount = () => {
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <TextInput  onValueChange={handleAmountChange}/>
+                <TextInput value={amount} onValueChange={handleAmountChange}/>
               </Grid>
             </Grid>
             <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
