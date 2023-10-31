@@ -52,7 +52,7 @@ const CheckingAccount = () => {
     console.log(user)
     const data = {
       NIC: user,
-      type: 'savings'
+      type: 'current'
     }
     api
       .post("/account/account_list", data) // Replace "/api/login" with your actual API endpoint
@@ -129,17 +129,7 @@ const CheckingAccount = () => {
           <Box sx={{ padding: "10px 5px", borderRadius: "20px" }}>
               <YellowButton text="Select your checking account" onClick={handleListOpen}/>
             </Box>
-          <Typography
-            sx={{
-              color: "white",
-              fontSize: 12,
-              fontWeight: 400,
-              padding: "10px 0px",
-            }}
-            fontFamily={"Inter"}
-          >
-            Your Account Type : {accountType}
-          </Typography>
+          
           <Stack padding={{ paddingTop: "10px" }} direction="row" spacing={2}>
             <Box>
               <Typography
@@ -154,7 +144,7 @@ const CheckingAccount = () => {
                 Balance
               </Typography>
               <GreyBox>
-                <Typography>{balance} LKR</Typography>
+                <Typography>{balance} SCR</Typography>
               </GreyBox>
             </Box>
             
