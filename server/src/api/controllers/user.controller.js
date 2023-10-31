@@ -22,7 +22,9 @@ const login = async (req, res) => {
     console.log(NIC, password, hash)
     if (match) {
       console.log("Login successful")
-      return res.send({ approved: true ,user_type: user.user_type, customer_NIC: user.customer_NIC, username: user.username })
+      const { password_hash, ...userWithoutPassword } = user; // Exclude password_hash from the user object
+      return res.send({ approved: true, user: userWithoutPassword }) // Send the user object without password_hash
+    
     } else {
       console.log("Login failed")
       return res.send({ approved: false })

@@ -15,7 +15,7 @@ import HideInput from "../components/HideInput"
 
 export default function LoginPopup(props) {
   const navigate = useNavigate()
-  const { user, userType, login, logout } = useContext(AuthContext)
+  const { user, username,userType, login, logout } = useContext(AuthContext)
   const { onClose, open } = props
   const [nic, setNic] = React.useState("")
   const [password, setPassword] = React.useState("")
@@ -50,7 +50,9 @@ export default function LoginPopup(props) {
         // Handle the response as needed
         if (response.data.approved){
         console.log("Login successful!", response.data)
-        login("user")
+        login(response.data.user)
+        console.log(response.data.user)
+        //user(response.data.customer_NIC)
         navigate("/account")
         }
         else{
