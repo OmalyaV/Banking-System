@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom"
 import RegisterPopup from "../popups/Register"
 import Cookies from "universal-cookie";
 
-const pages = ["About Us", "Digital Banking", "Promotions", "Contact Us"]
+const pages = ["Digital Banking", "Promotions", "Contact Us"]
 
 function NavBar() {
   const customFontStyle = {
@@ -32,6 +32,15 @@ function NavBar() {
     fontWeight: 500, // You can adjust font weight as needed
     fontSize: "12px",
   }
+
+  const scrollToAboutUs = () => {
+    const aboutUsSection = document.getElementById("aboutus");
+    if (aboutUsSection) {
+      aboutUsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+  
+
   const cookies = new Cookies();
   const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
@@ -159,7 +168,6 @@ function NavBar() {
                     textAlign="center"
                     className="Typography--heading"
                   >
-                    {page}
                   </Typography>
                 </MenuItem>
               ))}
@@ -197,6 +205,7 @@ function NavBar() {
               >
                 {page}
               </Button>
+              
             ))}
           </Box>
 
@@ -258,6 +267,7 @@ function NavBar() {
                 Register
               </Button>
             </Box>
+            
           )}
           <LoginPopup open={open} onClose={handleClose} />
           <RegisterPopup open={registerOpen} onClose={registerPopupClose} />
@@ -281,6 +291,7 @@ function NavBar() {
             onClose={handleClosePopup}
             name={"About Us"}
           />
+
           <Menu
             id="profile-menu"
             anchorEl={anchorElProfileMenu}

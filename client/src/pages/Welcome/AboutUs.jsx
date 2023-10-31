@@ -4,6 +4,7 @@ import React from "react"
 const AboutUs = () => {
   return (
     <Box
+      id = "aboutus"
       paddingTop={"20px"}
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
