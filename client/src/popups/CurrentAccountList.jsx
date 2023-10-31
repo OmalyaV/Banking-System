@@ -11,7 +11,7 @@ import { useContext } from "react"
 
 const CurrentAccountList = (props) => {
 
-  const {account, setCustomerAccount} = useContext(CurrentAccountContext)
+  const {account, setCustomerCurrentAccount} = useContext(CurrentAccountContext)
   const { onClose, open, list } = props
 
   const handleClose = () => {
@@ -21,7 +21,7 @@ const CurrentAccountList = (props) => {
   const handleButtonClick = (goToAccount) => () => {
     onClose(true)
     console.log(goToAccount)
-    setCustomerAccount(goToAccount)
+    setCustomerCurrentAccount(goToAccount)
     //handleAccountDetails(goToAccount) 
   }
 

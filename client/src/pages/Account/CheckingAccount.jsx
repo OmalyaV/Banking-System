@@ -33,8 +33,8 @@ const GreyBox = styled(Paper)(({ theme }) => ({
 
 const CheckingAccount = () => {
   // const accountType = "Adult"
-//  const {account, setCustomerCurrentAccount} = useContext(CurrentAccountContext)
-   const {account, setCustomerAccount} = useContext(AccountContext)
+ const {account, setCustomerCurrentAccount} = useContext(CurrentAccountContext)
+   //const {account, setCustomerAccount} = useContext(AccountContext)
   const { user, username,userType, login, logout } = useContext(AuthContext)
  
   const [balance , setBalance] = React.useState(0)
@@ -105,8 +105,8 @@ const CheckingAccount = () => {
   return (
     <Stack direction="row" spacing={20}>
       <Stack spacing={0}>
-      {/* <CurrentAccountList open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/> */}
-      <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
+      <CurrentAccountList open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
+      {/* <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/> */}
         <Box textAlign="left" sx={{ padding: "20px 150px" }}>
           {/* Left Side */}
           <Typography
