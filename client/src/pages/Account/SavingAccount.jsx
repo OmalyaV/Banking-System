@@ -11,16 +11,25 @@ import { AuthContext } from "../../context/AuthContext"
 import { useContext } from "react"
 import api from "../../apiConfig"
 import { AccountContext } from "../../context/AccountContext"
+import SuccessfulPopup from "../../popups/Successful"
 const SavingAccount = () => {
 
   const {account, setCustomerAccount} = useContext(AccountContext)
-  const account_number = "0000000001"
   const [accountList, setAccountList] = React.useState([])
   const[accountListPopupOpen, setAccountListPopupOpen] = React.useState(false)
   const { user, username,userType, login, logout } = useContext(AuthContext)
   const [balance , setBalance] = React.useState(0)
   const [withdrawalsLeft , setWithdrawalsLeft] = React.useState(0)
   const [accountType , setAccountType] = React.useState("Your account type")
+  const [toAccount , setToAccount] = React.useState("To Account")
+  const [amount , setAmount] = React.useState("Amount")
+  const [successfulPopupOpen, setSuccessfulPopupOpen] = React.useState(false)
+  const handleSuccessfulPopupOpen = () => {
+    setSuccessfulPopupOpen(true)
+  }
+  const handleSuccessfulPopupClose = () => {
+    setSuccessfulPopupOpen(false)
+  }
   const handleListOpen=()=>{
     setAccountListPopupOpen(true)
     handleAccountList()
@@ -28,52 +37,68 @@ const SavingAccount = () => {
   const handleListClose =()=>{
     setAccountListPopupOpen(false)
   }
+  const handleToAccountChange = (newToAccount) => {
+    setToAccount(newToAccount)
+  }
+  const handleAmountChange = (newAmount) => {
+    setAmount(newAmount)
+  }
+
+  const handleTransaction = () => {
+    const data = {
+      sender_account_number: account,
+      receiver_account_number: toAccount,
+      transfer_amount: amount
+    }
+    api
+      .post("/transaction/transaction", data) 
+      .then((response) => {
+        if (response.data.approved){
+        console.log("Transfer success!", response.data.message)
+        setBalance(response.data.balance)
+        handleSuccessfulPopupOpen()
+        handleToAccountChange("To Account")
+        handleAmountChange("Amount")
+        }
+        else{
+          console.log("something went wrong!", response.data) }})
+      .catch((error) => {
+        console.error("account details fetching failed:", error)
+      })}
+
   const handleAccountList=() =>{
     console.log(user)
     const data = {
       NIC: user,
-      type: 'savings'
-    }
+      type: 'savings'}
     api
       .post("/account/account_list", data) // Replace "/api/login" with your actual API endpoint
       .then((response) => {
-       
         if (response.data.approved){
         console.log("List fetched!", response.data)
         setAccountList(response.data.account)
-        //navigate("/account")
         }
         else{
           console.log("something went wrong!", response.data)
         }
-        //onClose(true)
       })
       .catch((error) => {
-        // Handle errors
         console.error("account list fetching failed:", error)
-      })
-  }
+      })}
 
   React.useEffect(() => {
     console.log(account)
     api
       .post("/account/saving_account_details",{
-        account_number: account
-      }) // Replace "/api/login" with your actual API endpoint
+        account_number: account}) 
       .then((response) => {
-       
         if (response.data.approved){
         console.log("Account details fetched!", response.data)
         setBalance(response.data.account.balance)
         setWithdrawalsLeft(response.data.account.number_of_withdrawals)
         setAccountType(response.data.account.name)
-        //navigate("/account")
         }
-        else{
-          console.log("something went wrong!", response.data)
-        }
-        //onClose(true)
-      })
+        else{console.log("something went wrong!", response.data)}})
       .catch((error) => {
         // Handle errors
         console.error("account details fetching failed:", error)
@@ -84,6 +109,7 @@ const SavingAccount = () => {
     <Stack direction="row" spacing={20}>
       <Stack spacing={0}>
         <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
+        <SuccessfulPopup open ={successfulPopupOpen} onClose={handleSuccessfulPopupClose} text={"Transaction Successful"}/>
         <Box textAlign="left" sx={{ padding: "20px 150px" }}>
           {/* Left Side */}
           <Typography
@@ -196,7 +222,7 @@ const SavingAccount = () => {
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <TextInput />
+                <TextInput onValueChange={handleToAccountChange} />
               </Grid>
               <Grid item xs={6}>
                 <Typography
@@ -212,11 +238,11 @@ const SavingAccount = () => {
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <TextInput />
+                <TextInput  onValueChange={handleAmountChange}/>
               </Grid>
             </Grid>
             <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
-              <YellowButton text="Proceed" />
+              <YellowButton text="Proceed" onClick={handleTransaction} />
             </Box>
           </GreyBox>
         </Box>

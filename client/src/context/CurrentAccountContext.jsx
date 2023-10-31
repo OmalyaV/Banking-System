@@ -6,7 +6,7 @@ function CurrentAccountContextProvider(props) {
 //   const [userType, setUserType] = useState("guest")
 //   const [username, setUsername] = useState("guest")
 
-    const [currentAccount, setAccount] = useState(null)
+    const [account, setAccount] = useState("account number")
 
 //   const login = (user) => {
 //     setUser(user.customer_NIC)
@@ -20,13 +20,13 @@ function CurrentAccountContextProvider(props) {
 //     setUsername("guest")
 //   }
 
-    const setCustomerCurrentAccount = (currentAccount) => {
-        setAccount(currentAccount)
+    const setCustomerCurrentAccount = (account) => {
+        setAccount(account)
     }
 
 
   return (
-    <CurrentAccountContext.Provider value={{ currentAccount,setCustomerCurrentAccount }}>
+    <CurrentAccountContext.Provider value={{ account,setCustomerCurrentAccount }}>
       {props.children}
     </CurrentAccountContext.Provider>
   )

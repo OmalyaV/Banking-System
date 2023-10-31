@@ -11,14 +11,20 @@ class Trsnsaction {
     }
 
     static async createTransaction(sender_account_number,receiver_account_number,transfer_amount) {
-        const sqlQuery = 'CALL defaultdb.doTransaction(?,?,?)';
+        let message = ''
+        let balance = 0
+        const sqlQuery = 'CALL defaultdb.doTransaction(?,?,?,@message, @balance)';
         //console.log(sqlQuery)
         
             const [rows,fields] = await db.execute(sqlQuery, [sender_account_number,receiver_account_number,transfer_amount]);
-            //console.log(rows)
-            const output_message = rows ? rows[0] : null;
-            //console.log(output_message)
-            return output_message;
+            
+            const [[output_message]] = await db.query('SELECT @message AS output_message');
+            const [[output_balance]] = await db.query('SELECT @balance AS output_balance');
+            message = output_message.output_message;
+            balance = output_balance.output_balance;
+    // const message  = rows[0][0].output_message
+            console.log(message)
+            return [message, balance];
             
         
        

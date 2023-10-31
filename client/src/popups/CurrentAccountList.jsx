@@ -3,14 +3,15 @@ import { Box, Dialog, Typography } from "@mui/material"
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { CurrentAccountContext } from "../context/CurrentAccountContext";
 import {Button} from "@mui/material";
 import { AccountContext } from "../context/AccountContext"
 
 import { useContext } from "react"
 
-const AccountListPopup = (props) => {
+const CurrentAccountList = (props) => {
 
-  const {account, setCustomerAccount} = useContext(AccountContext)
+  const {account, setCustomerAccount} = useContext(CurrentAccountContext)
   const { onClose, open, list } = props
 
   const handleClose = () => {
@@ -69,4 +70,4 @@ const AccountListPopup = (props) => {
   )
 }
 
-export default AccountListPopup
+export default CurrentAccountList
