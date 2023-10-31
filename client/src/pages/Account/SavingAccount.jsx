@@ -10,15 +10,26 @@ import AccountListPopup from "../../popups/AccountListPopup"
 import { AuthContext } from "../../context/AuthContext"
 import { useContext } from "react"
 import api from "../../apiConfig"
-
+import { AccountContext } from "../../context/AccountContext"
 const SavingAccount = () => {
+
+  const {account, setCustomerAccount} = useContext(AccountContext)
   const accountType = "Adult"
   const account_number = "0000000001"
   const [accountList, setAccountList] = React.useState([])
-  const { user, userType, login, logout } = useContext(AuthContext)
+  const[accountListPopupOpen, setAccountListPopupOpen] = React.useState(false)
+  const { user, username,userType, login, logout } = useContext(AuthContext)
+  const handleListOpen=()=>{
+    setAccountListPopupOpen(true)
+    handleAccountList()
+  }
+  const handleListClose =()=>{
+    setAccountListPopupOpen(false)
+  }
   const handleAccountList=() =>{
+    console.log(user)
     const data = {
-      NIC: user.customer_NIC,
+      NIC: user,
       type: 'savings'
     }
     api
@@ -27,23 +38,24 @@ const SavingAccount = () => {
        
         if (response.data.approved){
         console.log("List fetched!", response.data)
+        setAccountList(response.data.account)
         //navigate("/account")
         }
         else{
-          console.log("Login unsuccessful!", response.data)
+          console.log("something went wrong!", response.data)
         }
-        // You can also close the dialog or perform other actions on success
         //onClose(true)
       })
       .catch((error) => {
         // Handle errors
-        console.error("Login failed:", error)
+        console.error("account list fetching failed:", error)
       })
   }
 
   return (
     <Stack direction="row" spacing={20}>
       <Stack spacing={0}>
+        <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
         <Box textAlign="left" sx={{ padding: "20px 150px" }}>
           {/* Left Side */}
           <Typography
@@ -67,7 +79,7 @@ const SavingAccount = () => {
             Savings Accounts
           </Typography>
           <Box sx={{ padding: "10px 5px", borderRadius: "20px" }}>
-              <YellowButton text="Select your saving account" />
+              <YellowButton text="Select your saving account" onClick={handleListOpen}/>
             </Box>
             <Typography
             sx={{
@@ -78,7 +90,7 @@ const SavingAccount = () => {
             }}
             fontFamily={"Inter"}
           >
-           Account Number : {account_number}
+           Account Number : {account}
           </Typography>
           <Typography
             sx={{

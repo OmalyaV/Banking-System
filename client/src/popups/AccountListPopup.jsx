@@ -3,12 +3,23 @@ import { Box, Dialog, Typography } from "@mui/material"
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import {Button} from "@mui/material";
+import { AccountContext } from "../context/AccountContext"
+import { useContext } from "react"
 
 const AccountListPopup = (props) => {
+
+  const {account, setCustomerAccount} = useContext(AccountContext)
   const { onClose, open, list } = props
 
   const handleClose = () => {
     onClose(true)
+  }
+
+  const handleButtonClick = (goToAccount) => () => {
+    onClose(true)
+    console.log(goToAccount)
+    setCustomerAccount(goToAccount)
   }
 
   return (
@@ -37,7 +48,8 @@ const AccountListPopup = (props) => {
               <List>
               {list.map((item, index) => (
                 <ListItem key={index}>
-                <ListItemText 
+                  <Button onClick={handleButtonClick(item.account_number)}>{item.account_number}</Button>
+                {/* <ListItemText 
                 sx={{
                     color: "white",
                     fontSize: 13,
@@ -45,7 +57,7 @@ const AccountListPopup = (props) => {
                     padding: "25px 25px",
                   }}
                 fontFamily={"Inter"}
-                primary={item} />
+                primary={item.account_number} /> */}
           </ListItem>
         ))}
         </List>

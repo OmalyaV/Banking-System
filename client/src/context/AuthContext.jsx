@@ -7,7 +7,7 @@ function AuthContextProvider(props) {
   const [username, setUsername] = useState("guest")
 
   const login = (user) => {
-    setUser(user.user_NIC)
+    setUser(user.customer_NIC)
     setUserType(user.user_type)
     setUsername(user.username)
   }
