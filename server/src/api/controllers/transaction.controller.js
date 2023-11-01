@@ -54,5 +54,20 @@ const add_transaction = async (req, res) => {
           
             //console.log("Get Transaction function")
           }
+    const get_transaction_by_branch = async (req, res) => {
+        const branch_code = req.body.branch_code
+    
+        try{
+        const transaction = await Trsnsaction.getTransactionByBranch(branch_code)
+        
+          console.log("Transaction fetched")
+          return res.send({approved:true, transaction: transaction })
+        } catch (err) {
+          console.log(err)
+          return res.send({ approved: false })
+        }
+      
+        //console.log("Get Transaction function")
+      }
 
-    export default {add_transaction,get_transaction_by_account_number,get_transaction_by_date}
+    export default {add_transaction,get_transaction_by_account_number,get_transaction_by_date, get_transaction_by_branch}

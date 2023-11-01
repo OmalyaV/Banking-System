@@ -31,7 +31,7 @@ const getLateInstallmentsByBranch = async (req, res) => {
     const installment = await Installment.getLateInstallmentsByBranch(branch_code)
         console.log("Installment list fetched")
         console.log(installment)
-        return res.send({ installment: installment })
+        return res.send({ approved:true,installment: installment })
     
     } catch (err) {
         console.log(err)

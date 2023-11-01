@@ -71,6 +71,27 @@ class Trsnsaction {
             throw error;
         }
     }
+    static async getTransactionByBranchCode(branch_code) {
+        const sqlQuery = 'CALL BranchWiseTransactions(?)';
+        try{
+            const [result,fields] = await db.execute(sqlQuery, [branch_code]);
+            const rows = result[0];
+
+            const transaction = rows? rows.map(row=>({
+                transaction_id: row.transaction_id,
+                sender_account_number: row.sender_account_number,
+                receiver_account_number: row.receiver_account_number,
+                transfer_amount: row.transfer_amount,
+                transaction_date: row.transaction_date,
+                transaction_time: row.transaction_time
+            })) : null;
+            return transaction;
+        }
+        catch(error){
+            console.error('Error fetching user by transaction_date :', error);
+            throw error;
+        }
+    }
 
     
 }
