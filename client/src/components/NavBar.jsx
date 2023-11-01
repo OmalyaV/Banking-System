@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom"
 import RegisterPopup from "../popups/Register"
 import Cookies from "universal-cookie";
 
-const pages = ["Digital Banking", "Promotions", "Contact Us"]
+const pages = ["About Us","Digital Banking", "Promotions", "Contact Us"]
 
 function NavBar() {
   const customFontStyle = {
