@@ -6,14 +6,20 @@ import { FDContext } from "../context/FDContext";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import ButtonBase from "@mui/material";
 import { useContext } from "react"
+import OnlineLoanRequestPopup from "./OnlineLoanRequest";
 
 const FDListPopup
  = (props) => {
 
-  
+  const [formOpen, setFormOpen] = React.useState(false)
   const {FD , saveAccount,amount,plan_id,setCustomerFD} = useContext(FDContext)
   const { onClose, open, list } = props
-
+  const handleFormOpen = () => {
+    setFormOpen(true)
+  }
+  const handleFormClose = () => {
+    setFormOpen(false)
+  }
   const handleClose = () => {
     onClose(true)
   }
@@ -22,10 +28,12 @@ const FDListPopup
   }
   const handleButtonClick = (goToFD) => () => {
 
-    onClose(true)
+    //onClose(true)
     console.log(goToFD)
     setCustomerFD(goToFD)
     console.log(FD)
+    handleFormOpen()
+
     //handleAccountDetails(goToAccount) 
   }
   
@@ -102,6 +110,7 @@ const FDListPopup
     </TableBody>
   </Table>
 </TableContainer>
+<OnlineLoanRequestPopup open={formOpen} onClose={handleFormClose} />
     </Dialog>
   )
 }
