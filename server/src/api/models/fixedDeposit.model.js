@@ -11,15 +11,17 @@ class FixedDeposit {
     
 
     static async getFDByNIC(NIC) {
-        const sqlQuery = 'call defaultdb.getFDByNIC(?)';
+        let FdList  = ''
+        const sqlQuery = 'select *  from fixedDeposit where saving_account_number in (select  account_number from saving_account where account_number in (select account_number  from account where customer_NIC = ?))';
         try{
-            const [rows,fields] = await db.execute(sqlQuery, [NIC, type]);
+            const [rows,fields] = await db.execute(sqlQuery, [NIC]);
 
             const FD = rows? rows.map(row=>({
+                FD_id: row.FD_id,
                 saving_account_number: row.saving_account_number,
                 amount: row.amount,
                 plan_id: row.plan_id,
-                starting_date:row.starting_date
+                starting_date:new Date(row.starting_date).toLocaleDateString()
 
             })) : null;
             return FD;

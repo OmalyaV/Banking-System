@@ -13,10 +13,47 @@ import { useContext } from "react"
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import FDListPopup from "../../popups/FDList"
+import api from "../../apiConfig"
 const Loans = () => {
-  
+  const[fdPopupOpen,setFdPopupOpen ] = React.useState(false)
+  const [FDList ,setFDList] = React.useState([])
   const accountType = "Adult"
   const { user, username,userType, login, logout } = useContext(AuthContext)
+  const handleFdListOpen=()=>{
+    setFdPopupOpen(true)
+    handleFdList()
+    console.log(FDList)
+  }
+  const handleFdListClose=()=>{
+    setFdPopupOpen(false)
+  }
+
+  const handleFdList=()=>{
+    const data ={
+      NIC : user
+    }
+    api
+      .post("/FD/my_fd_list", data) 
+      .then((response) => {
+        
+        if (response.data.approved){
+          let fd_list  = response.data.FDs
+          if (!Array.isArray(fd_list)){
+            fd_list = [fd_list]
+          }
+            
+        setFDList(fd_list)
+        console.log(fd_list)
+        console.log("Fd s fetched!")
+        
+        }
+        else{
+          console.log("something went wrong!", response.data) }})
+      .catch((error) => {
+        console.error("FD details fetching failed:", error)
+      })
+  }
   return (
     <Stack direction="row" spacing={20} >
       <Stack spacing={0}>
@@ -139,6 +176,7 @@ const Loans = () => {
           Online Loan Request
         </Typography>
         <Button
+                onClick={handleFdListOpen}
                 variant="contained"
                 sx={{
                   fontFamily: "Inter",
@@ -154,6 +192,7 @@ const Loans = () => {
               >
                 Select FD
               </Button>
+        <FDListPopup open ={fdPopupOpen} onClose ={handleFdListClose} list={FDList} />
         </GreyBox>
         </Box>
         </stack>

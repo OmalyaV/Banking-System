@@ -1,35 +1,36 @@
 import React from "react"
-import { Box, Dialog, Typography } from "@mui/material"
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import { Box, Dialog, Typography ,Grid} from "@mui/material"
 import {Button} from "@mui/material";
 import { AccountContext } from "../context/AccountContext"
 import { FDContext } from "../context/FDContext";
-
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import ButtonBase from "@mui/material";
 import { useContext } from "react"
 
 const FDListPopup
  = (props) => {
 
-  const {account, setCustomerAccount} = useContext(AccountContext)
-  const {FD , setFD} = useContext(FDContext)
+  
+  const {FDSaveAccount , setFDSaveAccount} = useContext(FDContext)
   const { onClose, open, list } = props
 
   const handleClose = () => {
     onClose(true)
   }
-
+  const consoleLogFDs=()=>{
+    console.log(list)
+  }
   const handleButtonClick = (goToFD) => () => {
     onClose(true)
     console.log(goToFD)
-    setFD(goToFD)
+    setFDSaveAccount(goToFD.saving_account_number)
     //handleAccountDetails(goToAccount) 
   }
-
+  
   return (
     <Dialog open={open} onClose={handleClose}>
-      <Box
+     
+      {/* <Box
         sx={{
           backgroundColor: "black",
           margin: 0.1,
@@ -48,26 +49,57 @@ const FDListPopup
                 }}
                 fontFamily={"Inter"}
               >
-                  "My Saving Accounts"
+                  My Fixed Deposits
               </Typography>
-              <List>
-              {list.map((item, index) => (
-                <ListItem key={index}>
-                  <Button onClick={handleButtonClick(item.account_number)}>{item.account_number}</Button>
-                {/* <ListItemText 
-                sx={{
-                    color: "white",
-                    fontSize: 13,
-                    fontWeight: 400,
-                    padding: "25px 25px",
-                  }}
-                fontFamily={"Inter"}
-                primary={item.account_number} /> */}
-          </ListItem>
-        ))}
-        </List>
+              
+              <Grid container spacing={2}>
+                <Grid item xs={3}>Starting Date</Grid>
+                <Grid item xs={3}>Amount</Grid>
+                <Grid item xs={3}>Plan ID</Grid>
+                <Grid item xs={3}>saving account</Grid>
+                </Grid>
+                
+                {list.map((item, index) => (
+                <Grid container spacing={2} key={index}>
+                  <Button key={index} onClick={consoleLogFDs} >
+                    <Grid item xs={3}>{item.starting_date}</Grid>
+                    <Grid item xs={3}>{item.amount}</Grid>
+                    <Grid item xs={3}>{item.plan_id}</Grid>
+                    <Grid item xs={3}>{item.saving_account}</Grid>
+                  </Button>
+                  </Grid>
+                )
+                )}
+               
              
-      </Box>
+             
+      </Box> */}
+      <TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>Starting Date</TableCell>
+        <TableCell>Amount</TableCell>
+        <TableCell>Plan ID</TableCell>
+        <TableCell>Saving Account</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+    
+      {list.map((item, index) => (
+        
+        <TableRow key={index} onClick={()=>handleButtonClick(item)} style={{ cursor: 'pointer' }}>
+          <TableCell>{item.starting_date}</TableCell>
+          <TableCell>{item.amount}</TableCell>
+          <TableCell>{item.plan_id}</TableCell>
+          <TableCell>{item.saving_account_number}</TableCell>
+        </TableRow>
+        
+      ))}
+      
+    </TableBody>
+  </Table>
+</TableContainer>
     </Dialog>
   )
 }
