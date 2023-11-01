@@ -21,7 +21,12 @@ const NavigationButton = ({ src, title, onClick }) => {
       }}
     >
       <Stack direction={"column"}>
-        <img src={`assets/images/${src}.png`} alt={title} />
+        <img
+          src={`assets/images/${src}.png`}
+          alt={title}
+          width="150"
+          height="150"
+        />
         <p>{title}</p>
       </Stack>
     </Button>

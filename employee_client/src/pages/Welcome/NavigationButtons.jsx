@@ -62,7 +62,7 @@ const NavigationButtons = () => {
         >
           <NavigationButton
             title="Loan Setup"
-            src="dashboard"
+            src="loans"
             onClick={() => handleOpenPopup("Loan Setup")}
           />
           <NavigationButton
