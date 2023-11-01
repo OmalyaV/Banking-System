@@ -12,6 +12,7 @@ import { useContext } from "react"
 import {FDContext} from "../context/FDContext"
 import HideInput from "../components/HideInput"
 import LoginPopup from "./Login"
+import SuccessfulPopup from "./Successful"
 
 export default function OnlineLoanRequestPopup(props) {
 
@@ -20,7 +21,17 @@ export default function OnlineLoanRequestPopup(props) {
   const [RequestingAmount, setRequestingAmount] = React.useState("")
   const [Period, setPeriod] = React.useState("")
   const[maxLoan,setMaxLoan]=React.useState(0)
+  const [successfulPopupOpen, setSuccessfulPopupOpen] = React.useState(false)
+  const [outPutMessage , setOutPutMessage] = React.useState("")
   const {FD , saveAccount,amount,plan_id,setCustomerFD} = useContext(FDContext)
+  const handleSuccessfulPopupOpen = (message) => {
+    setOutPutMessage(message)
+    setSuccessfulPopupOpen(true)
+  }
+  const handleSuccessfulPopupClose = () => {
+    setSuccessfulPopupOpen(false)
+  }
+
   const handleRequestingAmountChange = (newRequestingAmount) => {
     setRequestingAmount(newRequestingAmount)
   }
@@ -47,6 +58,9 @@ export default function OnlineLoanRequestPopup(props) {
       .then((response) => {
         if (response.data.approved){
         console.log("loan implemented!")
+        console.log(response.data.message)
+        handleSuccessfulPopupOpen(response.data.message)
+        //handleClose()
         
         }
         else{console.log("something went wrong!", response.data)}})
@@ -76,6 +90,7 @@ export default function OnlineLoanRequestPopup(props) {
   
   return (
     <Dialog onClose={handleClose} open={open}>
+      <SuccessfulPopup open={successfulPopupOpen} onClose={handleSuccessfulPopupClose} value={outPutMessage}/>
       <Box
         sx={{
           backgroundColor: "black", // Set the background color to black

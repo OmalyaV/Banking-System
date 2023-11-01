@@ -57,8 +57,11 @@ const createOnlineLoan = async (req, res) => {
     
     try{
     const loan = await OnlineLoan.createOnlineLoan(amount,loan_period,customer_NIC,saving_account_number, FD_id,max_loan)
-      console.log("Loan created")
-        return res.send({ approved: true  , loan: loan })
+    const message = loan[0]
+    const balance = loan[1]
+      console.log(message, balance)
+      
+        return res.send({ approved: true  , message: message, balance: balance})
     } catch (err) {
       console.log(err)
       return res.send({ approved: false })
