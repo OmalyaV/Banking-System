@@ -10,7 +10,7 @@ const login = async (req, res) => {
   const NIC = req.body.NIC
   const password = req.body.password
   try {
-    const user = await User.getUserByNIC(NIC)
+    const user = await User.getUserByUserNIC(NIC)
     const hash = user.password_hash
     console.log(hash)
     if (hash === null) {
