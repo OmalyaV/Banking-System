@@ -10,7 +10,7 @@ const my_fd_list = async (req, res) => {
     const FDs = await FixedDeposit.getFDByNIC(NIC)
         console.log("FD list fetched")
         console.log(FDs)
-        return res.send({ FDs: FDs })
+        return res.send({ approved:true,FDs: FDs })
     
     } catch (err) {
         console.log(err)
