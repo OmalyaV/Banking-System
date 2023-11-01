@@ -12,15 +12,18 @@ const AboutUsPopup = (props) => {
     <Dialog open={open} onClose={handleClose}>
       <Box
         sx={{
-          backgroundColor: "grey",
+          backgroundColor: "black",
           margin: 0.1,
-          padding: 0, // Set the background color to black
+          padding: 0, 
           boxShadow: "none", // Remove the shadow
         }}
         alignItems={"center"}
         flex={"row"}
       >
-        <Typography>{name}</Typography>
+         <Typography>
+               
+         </Typography>
+             
       </Box>
     </Dialog>
   )

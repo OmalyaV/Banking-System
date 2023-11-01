@@ -11,7 +11,7 @@ import Button from "@mui/material/Button"
 import MenuItem from "@mui/material/MenuItem"
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew"
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined"
-import { useContext } from "react"
+import { useContext,useEffect } from "react"
 import { AuthContext } from "../context/AuthContext"
 import LoginPopup from "../popups/Login"
 import ContactUsPopup from "../popups/ContactUs"
@@ -20,21 +20,45 @@ import DigitalBankingPopup from "../popups/DigitalBanking"
 import AboutUsPopup from "../popups/AboutUs"
 import GreyBox from "./GreyBox"
 import { Paper } from "@mui/material"
-const pages = ["About Us", "Digital Banking", "Promotions", "Contact Us"]
+import { useNavigate } from "react-router-dom"
+import RegisterPopup from "../popups/Register"
+import Cookies from "universal-cookie";
+
+const pages = ["About Us","Digital Banking", "Promotions", "Contact Us"]
 
 function NavBar() {
   const customFontStyle = {
     fontFamily: "Inter",
     fontWeight: 500, // You can adjust font weight as needed
-    fontSize: "12px",
+    fontSize: "15px",
   }
 
+  const scrollToAboutUs = () => {
+    const aboutUsSection = document.getElementById("aboutus");
+    if (aboutUsSection) {
+      aboutUsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+  
+
+  const cookies = new Cookies();
+  const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
+  const [registerOpen, setRegisterOpen] = React.useState(false)
   const { user, userType, login, logout } = useContext(AuthContext)
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElProfileMenu, setAnchorElProfileMenu] = React.useState(null)
   const [openPopups, setOpenPopups] = React.useState({})
   const [isOverlayVisible, setOverlayVisible] = React.useState(false)
+  
+  const {username} = useContext(AuthContext)
+
+  useEffect(() => {
+    if (cookies.get("user") !== undefined) {
+      login(cookies.get("user"))
+    }
+  },[])
+
 
   const handleOpenProfileMenu = (event) => {
     setAnchorElProfileMenu(event.currentTarget)
@@ -54,6 +78,8 @@ function NavBar() {
   const handleLogout = () => {
     logout()
     setAnchorElProfileMenu(null)
+    cookies.remove("user", { path: "/" });
+    navigate("/")
   }
 
   const handleOpenPopup = (page) => {
@@ -77,13 +103,18 @@ function NavBar() {
   }
 
   const registerPopupOpen = () => {
+    setRegisterOpen(true)
     console.log("Register popup opened")
+  }
+  const registerPopupClose = () => {
+    setRegisterOpen(false)
+    console.log("Register popup closed")
   }
 
   const handleClickOpen = () => {
     setOpen(true)
   }
-
+  
   const handleClose = () => {
     setOpen(false)
   }
@@ -137,7 +168,6 @@ function NavBar() {
                     textAlign="center"
                     className="Typography--heading"
                   >
-                    {page}
                   </Typography>
                 </MenuItem>
               ))}
@@ -175,6 +205,7 @@ function NavBar() {
               >
                 {page}
               </Button>
+              
             ))}
           </Box>
 
@@ -191,6 +222,7 @@ function NavBar() {
                 <PowerSettingsNewIcon />
               </IconButton> */}
               <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
+                <Typography></Typography>
                 <IconButton
                   size="large"
                   aria-label="account of current user"
@@ -235,8 +267,10 @@ function NavBar() {
                 Register
               </Button>
             </Box>
+            
           )}
           <LoginPopup open={open} onClose={handleClose} />
+          <RegisterPopup open={registerOpen} onClose={registerPopupClose} />
           <ContactUsPopup
             open={openPopups["Contact Us"]}
             onClose={handleClosePopup}
@@ -257,6 +291,7 @@ function NavBar() {
             onClose={handleClosePopup}
             name={"About Us"}
           />
+
           <Menu
             id="profile-menu"
             anchorEl={anchorElProfileMenu}
