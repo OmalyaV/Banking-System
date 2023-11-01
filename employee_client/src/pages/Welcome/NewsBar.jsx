@@ -1,21 +1,22 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Stack, Box, Typography, Button } from "@mui/material"
 import LoginPopup from "../../popups/Login"
 import RegisterPopup from "../../popups/Register"
-
-
+import { AuthContext } from "../../context/AuthContext"
+import { useContext } from "react"
 
 const NewsBar = () => {
+  const { user, username, userType, login, logout } = useContext(AuthContext)
   const [open, setOpen] = React.useState(false)
   const [openRegister, setOpenRegister] = React.useState(false)
   const loginPopupOpen = () => {
-    
     setOpen(true)
   }
   const handleClose = () => {
     setOpen(false)
   }
-  
+
+
   return (
     <div
       class="image"
@@ -72,25 +73,27 @@ const NewsBar = () => {
           paddingTop={"100px"}
           alignItems={"center"}
         >
-          <Button
-            variant="contained"
-            onClick={loginPopupOpen}
-            sx={{
-              width: "300px",
-              height: "50px",
-              fontFamily: "Inter",
-              textTransform: "none",
-              fontWeight: 600,
-              backgroundColor: "#FFCF43",
-              color: "black",
-              "&:hover": {
-                backgroundColor: "#DDCC40", // Specify the hover color
-              },
-              borderRadius: "10px", // Add this to round the button edges
-            }}
-          >
-            Employee Login
-          </Button>
+          {userType === "guest" && (
+            <Button
+              variant="contained"
+              onClick={loginPopupOpen}
+              sx={{
+                width: "300px",
+                height: "50px",
+                fontFamily: "Inter",
+                textTransform: "none",
+                fontWeight: 600,
+                backgroundColor: "#FFCF43",
+                color: "black",
+                "&:hover": {
+                  backgroundColor: "#DDCC40", // Specify the hover color
+                },
+                borderRadius: "10px", // Add this to round the button edges
+              }}
+            >
+              Employee Login
+            </Button>
+          )}
         </Stack>
       </Stack>
       <LoginPopup open={open} onClose={handleClose} />

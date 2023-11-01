@@ -51,6 +51,7 @@ const TotalTransactionReportPopup = (props) => {
         if (response.data.approved){
           setList(response.data.transaction)
           console.log("list fetched!")
+          console.log(response.data.transaction)
         }
         else{
           console.log("something went wrong!", response.data) }})
@@ -83,7 +84,7 @@ const TotalTransactionReportPopup = (props) => {
           <TableCell>{item.sender_account_number}</TableCell>
           <TableCell>{item.receiver_account_number}</TableCell>
           <TableCell>{item.transfer_amount}</TableCell>
-          <TableCell>{item.transfer_date}</TableCell>
+          <TableCell>{item.transaction_date}</TableCell>
         </TableRow>
         
       ))}

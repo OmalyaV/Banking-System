@@ -13,6 +13,7 @@ import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import HideInput from "../components/HideInput"
 import Cookies from "universal-cookie"
+import {Alert} from "@mui/material"
 
 export default function LoginPopup(props) {
   const cookies = new Cookies()
@@ -22,6 +23,12 @@ export default function LoginPopup(props) {
   const [nic, setNic] = React.useState("")
   const [password, setPassword] = React.useState("")
   const [accountSelect, setAccountSelect] = React.useState(0)
+
+
+  const [showAlert, setShowAlert] = React.useState(false);
+  const [alertTimeout, setAlertTimeout] = React.useState(null);
+  const alertDuration = 5; // Duration in seconds
+
   const handleButtonClick = (goToAccount) => {
     setAccountSelect(goToAccount)
   }
@@ -47,20 +54,36 @@ export default function LoginPopup(props) {
       .then((response) => {
         if (response.data.approved) {
           console.log("Login successful!", response.data)
-          if (response.data.userType === "employee") {
+          if (response.data.user.user_type === "employee") {
             login(response.data.user)
             console.log(response.data.user)
             const user = response.data.user
             cookies.set("user", { user }, { path: "/" })
-            navigate("/")
+            onClose(true)
+
+            // navigate("/")
           }else{
-            console.log("Login unsuccessful! Not an Employee", response.data)
+           setShowAlert(true) // Set the state to show the alert
+            console.log("Login unsuccessful!", response.data)
+           // Set a timeout to hide the alert after the specified duration
+           const timeout = setTimeout(() => {
+             setShowAlert(false)
+           }, alertDuration * 1000) // Convert seconds to milliseconds
+
+           setAlertTimeout(timeout) 
           }
         } else {
           console.log("Login unsuccessful!", response.data)
+          setShowAlert(true) // Set the state to show the alert
+
+           const timeout = setTimeout(() => {
+             setShowAlert(false)
+           }, alertDuration * 1000)
+           setAlertTimeout(timeout) 
+
         }
 
-        onClose(true)
+        // onClose(true)
       })
       .catch((error) => {
         // Handle errors
@@ -80,6 +103,9 @@ export default function LoginPopup(props) {
         alignItems={"center"}
         flex={"row"}
       >
+        {showAlert && (
+          <Alert severity="error">Login unsuccessful! Not an Employee</Alert>
+        )}
         <Typography
           sx={{
             color: "white",

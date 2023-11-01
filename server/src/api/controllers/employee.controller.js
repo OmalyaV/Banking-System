@@ -3,6 +3,7 @@ import Employee from "../models/employee.model.js";
 
   const get_employee_branch_code = async (req, res) => {
     const NIC = req.body.NIC
+    
     try{
     const branch_code = await Employee.getEmployeeBranch(NIC)
       console.log("Customer found")

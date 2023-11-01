@@ -53,7 +53,7 @@ const NavigationButtons = () => {
           <NavigationButton title="Contact Us" src="contact_us" />
         </Stack>
       )}
-      {userType !== "employee" && (
+      {userType === "employee" && (
         <Stack
           direction="row"
           spacing={2}
