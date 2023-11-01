@@ -11,7 +11,7 @@ const FDListPopup
  = (props) => {
 
   
-  const {FD , setCustomerFD} = useContext(FDContext)
+  const {FD , saveAccount,amount,plan_id,setCustomerFD} = useContext(FDContext)
   const { onClose, open, list } = props
 
   const handleClose = () => {
@@ -24,7 +24,7 @@ const FDListPopup
 
     onClose(true)
     console.log(goToFD)
-    setCustomerFD(goToFD.FD_id)
+    setCustomerFD(goToFD)
     console.log(FD)
     //handleAccountDetails(goToAccount) 
   }

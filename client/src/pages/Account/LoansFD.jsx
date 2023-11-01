@@ -10,6 +10,7 @@ import { styled } from "@mui/material/styles"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../context/AuthContext"
 import { useContext } from "react"
+import { FDContext } from "../../context/FDContext"
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -19,6 +20,7 @@ const Loans = () => {
   const[fdPopupOpen,setFdPopupOpen ] = React.useState(false)
   const [FDList ,setFDList] = React.useState([])
   const accountType = "Adult"
+  
   const { user, username,userType, login, logout } = useContext(AuthContext)
   const handleFdListOpen=()=>{
     setFdPopupOpen(true)
