@@ -16,15 +16,16 @@ class OnlineLoan {
       
     }
 
-    static async createOnlineLoan(amount,loan_period,request_type,customer_NIC,branch_code, FD_id) {
+    static async createOnlineLoan(amount,loan_period,customer_NIC,saving_account_number, FD_id,max_loan) {
         const { rows } = await db.query(
-          'CALL defaultdb.insertToOnlineRequestedLoan( ?, ?, ?, ?, ?, ?, ? , ?)',
-            [amount,loan_period,0,request_type,customer_NIC,branch_code, FD_id, "online requested loan"]
+          'CALL defaultdb.insertToOnlineRequestedLoan(  ?, ?, ?, ?, ?, ? , ?,?)',
+            [amount,loan_period,'online',customer_NIC,saving_account_number, FD_id, max_loan,"online requested loan"]
       
         )
         const output_message = rows ? rows[0] : null;
         return output_message;
       }
+
 
     
 

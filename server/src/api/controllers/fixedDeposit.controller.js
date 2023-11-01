@@ -29,7 +29,7 @@ const getMaxLoanForFD = async (req, res) => {
     const loan_amount = await FixedDeposit.getMaxLoanForFD(FD_id)
         console.log("Loan amount fetched")
         console.log(loan_amount)
-        return res.send({ loan_amount: loan_amount })
+        return res.send({approved:true, loan_amount: loan_amount })
     
     } catch (err) {
         console.log(err)

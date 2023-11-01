@@ -9,16 +9,18 @@ import axios from "axios"
 import api from "../apiConfig"
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
+import {FDContext} from "../context/FDContext"
 import HideInput from "../components/HideInput"
 import LoginPopup from "./Login"
 
 export default function OnlineLoanRequestPopup(props) {
 
-
+  const { user, username,userType, login, logout } = useContext(AuthContext)
   const { onClose, open } = props
   const [RequestingAmount, setRequestingAmount] = React.useState("")
   const [Period, setPeriod] = React.useState("")
-
+  const[maxLoan,setMaxLoan]=React.useState(0)
+  const {FD , saveAccount,amount,plan_id,setCustomerFD} = useContext(FDContext)
   const handleRequestingAmountChange = (newRequestingAmount) => {
     setRequestingAmount(newRequestingAmount)
   }
@@ -29,8 +31,48 @@ export default function OnlineLoanRequestPopup(props) {
   const handleClose = () => {
     onClose(true)
   }
- 
- 
+  const handleLoan = () => {
+    const data = {
+      amount: RequestingAmount,
+      loan_period: Period,
+      customer_NIC: user,
+      saving_account_number: saveAccount,
+      FD_id: FD,
+      max_loan: maxLoan
+
+    }
+    api
+      .post("/loan/createOnlineLoan",data)
+      
+      .then((response) => {
+        if (response.data.approved){
+        console.log("loan implemented!")
+        
+        }
+        else{console.log("something went wrong!", response.data)}})
+      .catch((error) => {
+        // Handle errors
+        console.error("account details fetching failed:", error)
+      })
+
+  }
+  React.useEffect(() => {
+    api
+      .post("/FD/getMaxLoanForFD",{
+        FD_id: FD})
+      
+      .then((response) => {
+        if (response.data.approved){
+        console.log("max Loan fetched!", response.data.loan_amount)
+        setMaxLoan(response.data.loan_amount)
+        }
+        else{console.log("something went wrong!", response.data)}})
+      .catch((error) => {
+        // Handle errors
+        console.error("account details fetching failed:", error)
+      })
+    }
+  , [FD])
   
   return (
     <Dialog onClose={handleClose} open={open}>
@@ -82,7 +124,7 @@ export default function OnlineLoanRequestPopup(props) {
               }}
               fontFamily={"Inter"}
             >
-              Related Saving Account :
+              Related Saving Account
             </Typography>
           </Grid>
           <Grid item xs={6}>
@@ -95,7 +137,7 @@ export default function OnlineLoanRequestPopup(props) {
                   }}
                   fontFamily={"Inter"}
                 >
-                00000000000001
+                 {saveAccount}
               </Typography>
           </Grid>
 
@@ -122,7 +164,7 @@ export default function OnlineLoanRequestPopup(props) {
                   }}
                   fontFamily={"Inter"}
                 >
-                500
+                {amount} SCR
               </Typography>
           </Grid>
 
@@ -151,7 +193,33 @@ export default function OnlineLoanRequestPopup(props) {
                   }}
                   fontFamily={"Inter"}
                 >
-                1
+                {plan_id}
+              </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography
+              sx={{
+                color: "white",
+                fontSize: 18,
+                fontWeight: 400,
+                padding: "20px 70px",
+              }}
+              fontFamily={"Inter"}
+            >
+              Maximum Loan Limit :
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+              <Typography
+                  sx={{
+                    color: "white",
+                    fontSize: 18,
+                    fontWeight: 400,
+                    padding: "20px 5px",
+                  }}
+                  fontFamily={"Inter"}
+                >
+                {maxLoan} SCR
               </Typography>
           </Grid>
 
@@ -206,7 +274,7 @@ export default function OnlineLoanRequestPopup(props) {
           }}
         >
           
-          <YellowButton text="Proceed" />
+          <YellowButton text="Proceed" onClick={handleLoan}/>
         </Box>
         </Grid>
       </Box>
