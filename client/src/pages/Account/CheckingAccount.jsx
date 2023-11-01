@@ -278,107 +278,6 @@ const CheckingAccount = () => {
             </Box>
           </GreyBox>
         </Box>
-          
-          {/* <Box padding={{ paddingTop: "20px" }}>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 12,
-                fontWeight: 400,
-                padding: "0px 0px",
-              }}
-              fontFamily={"Inter"}
-            >
-              Transaction
-            </Typography>
-          </Box> */}
-        
-        {/* <Box sx={{ paddingLeft: "100px" }}>
-          <Paper
-            sx={{
-              paddingLeft: "50px",
-              backgroundColor: "#151515",
-              textAlign: "left",
-              borderRadius: "20px",
-            }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Typography
-                  sx={{
-                    color: "white",
-                    fontSize: 12,
-                    fontWeight: 400,
-                    padding: "0px 0px",
-                  }}
-                  fontFamily={"Inter"}
-                >
-                  To Account:
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "50px",
-                    backgroundColor: "white",
-                    "& fieldset": { border: "none" },
-                    "& input": {
-                      paddingTop: "6px",
-                      paddingBottom: "6px",
-                    },
-                  }}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <Typography
-                  sx={{
-                    color: "white",
-                    fontSize: 12,
-                    fontWeight: 400,
-                    padding: "0px 0px",
-                  }}
-                  fontFamily={"Inter"}
-                >
-                  Amount:
-                </Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "50px",
-                    backgroundColor: "white",
-                    "& fieldset": { border: "none" },
-                    "& input": {
-                      paddingTop: "6px",
-                      paddingBottom: "6px",
-                    },
-                  }}
-                />
-              </Grid>
-            </Grid>
-            <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
-              <Button
-                onClick={handleTransaction}
-                variant="contained"
-                sx={{
-                  fontFamily: "Inter",
-                  textTransform: "none",
-                  fontWeight: 600,
-                  backgroundColor: "#FFCF43",
-                  color: "black",
-                  "&:hover": {
-                    backgroundColor: "yellow", // Specify the hover color
-                  },
-                  borderRadius: "20px", // Add this to round the button edges
-                }}
-              >
-                Proceed
-              </Button>
-            </Box>
-          </Paper>
-        </Box> */}
         
         
       </Stack>
@@ -386,6 +285,49 @@ const CheckingAccount = () => {
       <Stack spacing={0}>
         
           <TableContainer component={Paper} sx={{ backgroundColor: 'black', border: '2px solid white', padding: '10px' }}>
+      <Box textAlign="left" sx={{ padding: "20px 100px", textAlign: "center", padding: '10px' }}>
+          {/* Left Side */}
+          <Typography
+            sx={{
+              color: "#FFCF43",
+              fontSize: 24,
+              fontWeight: 700,
+              padding: "0px 0px",
+            }}
+          >
+            Transaction History
+          </Typography>
+      </Box>
+      
+      <Table sx={{ minWidth: 300 ,color: "#FFCF43", border: '1px solid white', padding: '10px'}} >
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ color: 'white', border: '1px solid white'}}>Date </TableCell>
+            <TableCell align="right" sx={{ color: 'white', border: '1px solid white', padding: '10px' }}>FromAccount</TableCell>
+            <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>ToAccount&nbsp;</TableCell>
+            <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>Amount&nbsp;</TableCell>
+            </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow
+              key={row.name}
+              
+            >
+              <TableCell component="th" scope="row" sx={{ color: 'white', border: '1px solid white', padding: '10px 20px' }}>
+                {row.Date}
+              </TableCell>
+              <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>{row.FromAccount}</TableCell>
+              <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>{row.ToAccount}</TableCell>
+              <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>{row.Amount}</TableCell>
+             
+             
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    <TableContainer component={Paper} sx={{ backgroundColor: 'black', border: '2px solid white', padding: '10px' }}>
       <Box textAlign="left" sx={{ padding: "20px 100px", textAlign: "center", padding: '10px' }}>
           {/* Left Side */}
           <Typography
