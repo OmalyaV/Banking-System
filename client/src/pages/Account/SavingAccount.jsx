@@ -266,8 +266,8 @@ const SavingAccount = () => {
         </Box>
       </Stack>
       <Stack spacing={0}>
-    <TableComponent/>   
-    <TableComponent/>
+    {/* <TableComponent/>   
+    <TableComponent/> */}
       </Stack>
     </Stack>
   )
