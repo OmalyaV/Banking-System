@@ -34,7 +34,7 @@ class User {
     
   }
 
-  static async getUserByUsername(NIC) {
+  static async getUserByUserNIC(NIC) {
     const sqlQuery = 'SELECT * FROM defaultdb.user WHERE user_NIC = ?';
     
     try {

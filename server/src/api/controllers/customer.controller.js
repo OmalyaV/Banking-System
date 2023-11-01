@@ -17,4 +17,18 @@ const add_customer = async (req, res) => {
   
     console.log("Add Customer function")
   }
-  export default {add_customer}
+
+  const get_customer = async (req, res) => {
+    const NIC = req.body.NIC
+    try{
+    const user = await Customer.getCustomerByNIC(NIC)
+      console.log("Customer found")
+      return res.send({ approved: true, user:user }) // Send the user object without password_hash
+    } catch (err) {
+      console.log(err)
+      return res.send({ approved: false })
+    }
+  finally{
+    console.log("Get Customer function")}
+  }
+  export default {add_customer, get_customer}

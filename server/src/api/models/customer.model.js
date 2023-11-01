@@ -21,26 +21,20 @@ class Customer {
   }
 
   
-  static async getCustomerByNIC(NIC,name) {
-    const sqlQuery = 'SELECT * FROM defaultdb.customer WHERE customer_NIC = ? and name = ?';
+  static async getCustomerByNIC(NIC) {
+    const sqlQuery = 'SELECT name , date_of_birth, telephone_number, email  FROM defaultdb.customer WHERE customer_NIC = ?';
     
     try {
       // Log the final SQL query with the parameter value
-      const finalQuery = db.format(sqlQuery, [NIC,name]);
+      const finalQuery = db.format(sqlQuery, [NIC]);
       console.log('Final SQL Query:', finalQuery);
   
-      const [rows, fields] = await db.execute(sqlQuery, [NIC,name ]);
+      const [rows, fields] = await db.execute(sqlQuery, [NIC]);
       console.log(rows)
       console.log(fields)
       const customer = rows ? rows[0] : null;
       console.log(customer)
-      return new Customer(
-        customer.customer_NIC,
-        customer.name,
-        customer.date_of_birth,
-        customer.telephone_number,
-        customer.email
-      );
+      return customer;
     } catch (error) {
       // Handle the database query error here
       console.error('Error fetching user by NIC and name:', error);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -6,6 +6,10 @@ import { Typography } from "@mui/material";
 import YellowButton from "../../components/YellowButton"; // Make sure to import the YellowButton component
 import GreyBox from "../../components/GreyBox";
 import Grid from "@mui/material/Grid";
+import{useContext} from "react"
+import { AuthContext } from "../../context/AuthContext";
+import api from "../../apiConfig";
+
 
 const UserProfile = () => {
   const userID = "123456789";
@@ -15,6 +19,48 @@ const UserProfile = () => {
   const accountNo = "123456789";
   const plan = "Saving Account";
   const bracnh = "Marine Province";
+  const { user, username,userType, login, logout } = useContext(AuthContext)
+  const [fullname, setFullname] = React.useState("")
+  const [dateOfBirth, setDateOfBirth ] = React.useState("")
+  const [telephone, setTelephone] = React.useState("")
+  const [email, setEmail] = React.useState("")
+  
+
+  const handleFullNameChange = (newFullName) => {
+    setFullname(newFullName)
+  }
+  const handleBirthDateChange = (newDateOfBirth) => {
+    const date = new Date(newDateOfBirth);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+    setDateOfBirth(formattedDate)
+  }
+  const handleTelephoneChange = (newTelephone) => {
+    setTelephone(newTelephone)
+  }
+  React.useEffect(() => {
+    console.log(user)
+    api
+      .post("/customer/get_customer",{
+        NIC: user}) 
+      .then((response) => {
+        if (response.data.approved){
+        console.log("User details fetched!", response.data)
+        handleFullNameChange(response.data.user.name)
+        handleBirthDateChange(response.data.user.date_of_birth)
+        handleTelephoneChange(response.data.user.telephone_number)
+        setEmail(response.data.user.email)
+
+        
+        }
+        else{console.log("something went wrong!", response.data)}})
+      .catch((error) => {
+        // Handle errors
+        console.error("account details fetching failed:", error)
+      })
+    }, [user])
+  
+  
 
   return (
     <Stack
@@ -63,7 +109,7 @@ const UserProfile = () => {
               My Details
             </Typography>
 
-            <Typography
+             <Typography
               sx={{
                 color: "white",
                 fontSize: 14,
@@ -71,7 +117,7 @@ const UserProfile = () => {
               }}
               fontFamily={"Inter"}
             >
-              ID: {userID}
+             NIC number :  {user}
             </Typography>
             <Typography
               sx={{
@@ -81,7 +127,7 @@ const UserProfile = () => {
               }}
               fontFamily={"Inter"}
             >
-              Name: {userName}
+            Full Name:  {fullname}
             </Typography>
             <Typography
               sx={{
@@ -91,28 +137,7 @@ const UserProfile = () => {
               }}
               fontFamily={"Inter"}
             >
-              Age: {userAge}
-            </Typography>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 14,
-                fontWeight: 400,
-                mb:2,
-              }}
-              fontFamily={"Inter"}
-            >
-              Telephone No: {userTelephone}
-            </Typography>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 24,
-                fontWeight: 700,
-              }}
-              fontFamily={"Inter"}
-            >
-              Account Details
+              Date of Birth: {dateOfBirth}
             </Typography>
             <Typography
               sx={{
@@ -123,7 +148,7 @@ const UserProfile = () => {
               }}
               fontFamily={"Inter"}
             >
-              Account Number: {accountNo}
+              Telephone No: {telephone}
             </Typography>
             <Typography
               sx={{
@@ -134,19 +159,9 @@ const UserProfile = () => {
               }}
               fontFamily={"Inter"}
             >
-              Plan: {plan}
+              email:  {email}
             </Typography>
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 14,
-                fontWeight: 400,
-                mb:2,
-              }}
-              fontFamily={"Inter"}
-            >
-              Branch: {bracnh}
-            </Typography>
+           
           </Box>  
         </Stack>
       </Stack>
