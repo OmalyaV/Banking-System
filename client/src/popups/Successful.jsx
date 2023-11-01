@@ -2,10 +2,10 @@ import React from "react"
 import { Box, Dialog, Typography, Stack } from "@mui/material"
 
 const SuccessfulPopup = (props) => {
-  const { onClose, open,name } = props
+  const { onClose, open,value } = props
 
   const handleClose = () => {
-    onClose(name)
+    onClose(true)
   }
 
   return (
@@ -32,12 +32,12 @@ const SuccessfulPopup = (props) => {
                 }}
                 fontFamily={"Inter"}
               >
-                Successful
-                <img
+                {value}
+                {/* <img
                 src={"assets/images/tick.png"}
                 alt="tick"
                 style={{ height: "48px", width: "50px" }}
-              />
+              /> */}
               </Typography>
 
           </Stack>

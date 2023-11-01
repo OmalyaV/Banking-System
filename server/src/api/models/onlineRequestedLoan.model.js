@@ -17,13 +17,19 @@ class OnlineLoan {
     }
 
     static async createOnlineLoan(amount,loan_period,customer_NIC,saving_account_number, FD_id,max_loan) {
+      let message = ''
+      let balance = 0
         const { rows } = await db.query(
-          'CALL defaultdb.insertToOnlineRequestedLoan(  ?, ?, ?, ?, ?, ? , ?,?)',
+          'CALL defaultdb.insertToOnlineRequestedLoan(  ?, ?, ?, ?, ?, ? , ?,?, @balance,@message)',
             [amount,loan_period,'online',customer_NIC,saving_account_number, FD_id, max_loan,"online requested loan"]
-      
         )
-        const output_message = rows ? rows[0] : null;
-        return output_message;
+        const [[output_message]] = await db.query('SELECT @message AS output_message');
+        const [[output_balance]] = await db.query('SELECT @balance AS output_balance');
+        
+        message = output_message.output_message;
+        balance = output_balance.output_balance;
+        console.log(message)
+        return [message, balance];
       }
 
 

@@ -18,14 +18,6 @@ function createData(Date,FromAccount, ToAccount,  Amount ) {
   return {Date,FromAccount, ToAccount,  Amount };
 }
 
-const rows = [
-  createData('wewreee', 159, 6.0, 24),
-  createData('wetyr', 237, 9.0, 37),
-  createData('asdfdh', 262, 16.0, 24),
-  createData('rfgbc', 305, 3.7, 67),
-  createData('drewrtgh', 356, 16.0, 49),
-];
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -57,7 +49,9 @@ const CheckingAccount = () => {
   const [toAccount , setToAccount] = React.useState("")
   const [amount , setAmount] = React.useState("")
   const [successfulPopupOpen, setSuccessfulPopupOpen] = React.useState(false)
-  const handleSuccessfulPopupOpen = () => {
+  const [outPutMessage , setOutPutMessage] = React.useState("")
+  const handleSuccessfulPopupOpen = (message) => {
+    setOutPutMessage(message)
     setSuccessfulPopupOpen(true)
   }
   const handleSuccessfulPopupClose = () => {
@@ -89,7 +83,7 @@ const CheckingAccount = () => {
         if (response.data.approved){
         console.log("Transfer success!", response.data.message)
         setBalance(response.data.balance)
-        handleSuccessfulPopupOpen()
+        handleSuccessfulPopupOpen(response.data.message)
         handleToAccountChange("")
         handleAmountChange("")
         }
@@ -149,7 +143,7 @@ const CheckingAccount = () => {
     <Stack direction="row" spacing={20}>
       <Stack spacing={0}>
       <CurrentAccountList open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
-      <SuccessfulPopup open ={successfulPopupOpen} onClose={handleSuccessfulPopupClose} text="Transaction Successful!"/>
+      <SuccessfulPopup open ={successfulPopupOpen} onClose={handleSuccessfulPopupClose} value={outPutMessage}/>
       {/* <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/> */}
         <Box textAlign="left" sx={{ padding: "20px 150px" }}>
           {/* Left Side */}
