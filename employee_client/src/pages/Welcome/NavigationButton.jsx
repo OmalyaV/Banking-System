@@ -1,10 +1,11 @@
 import React from "react"
 import { Button, Stack } from "@mui/material"
 
-const NavigationButton = ({ src, title }) => {
+const NavigationButton = ({ src, title, onClick }) => {
   return (
     <Button
       variant="outlined"
+      onClick={onClick}
       style={{
         color: "white",
         height: "300px",

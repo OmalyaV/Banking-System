@@ -1,4 +1,5 @@
 import * as React from "react"
+
 import PropTypes from "prop-types"
 import Dialog from "@mui/material/Dialog"
 import Typography from "@mui/material/Typography"
@@ -9,33 +10,56 @@ import axios from "axios"
 import api from "../apiConfig"
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
+import HideInput from "../components/HideInput"
+import Cookies from "universal-cookie"
 
 export default function LoginPopup(props) {
-  const { user, userType, login, logout } = useContext(AuthContext)
+  const cookies = new Cookies()
+  const navigate = useNavigate()
+  const { user, username, userType, login, logout } = useContext(AuthContext)
   const { onClose, open } = props
-  const [username, setUsername] = React.useState("")
+  const [nic, setNic] = React.useState("")
   const [password, setPassword] = React.useState("")
+  const [accountSelect, setAccountSelect] = React.useState(0)
+  const handleButtonClick = (goToAccount) => {
+    setAccountSelect(goToAccount)
+  }
 
   const handleClose = () => {
     onClose(true)
   }
+  const handleNicChange = (newNic) => {
+    setNic(newNic)
+  }
+  const handlePasswordChange = (newPassword) => {
+    setPassword(newPassword)
+  }
 
   const handleLogin = () => {
-    // Create a data object to send in the POST request
     const data = {
-      NIC: "VXZ4598992",
-      password: "joe@457",
+      NIC: nic,
+      password: password,
     }
 
-    // Make a POST request to your server
     api
-      .post("/user/login", data) // Replace "/api/login" with your actual API endpoint
+      .post("/user/login", data)
       .then((response) => {
-        // Handle the response as needed
-        console.log("Login successful!", response.data)
-        login("user")
-        
-        // You can also close the dialog or perform other actions on success
+        if (response.data.approved) {
+          console.log("Login successful!", response.data)
+          if (response.data.userType === "employee") {
+            login(response.data.user)
+            console.log(response.data.user)
+            const user = response.data.user
+            cookies.set("user", { user }, { path: "/" })
+            navigate("/")
+          }else{
+            console.log("Login unsuccessful! Not an Employee", response.data)
+          }
+        } else {
+          console.log("Login unsuccessful!", response.data)
+        }
+
         onClose(true)
       })
       .catch((error) => {
@@ -79,12 +103,12 @@ export default function LoginPopup(props) {
               }}
               fontFamily={"Inter"}
             >
-              Username :
+              NIC Number:
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
-              <TextInput />
+              <TextInput onValueChange={handleNicChange} />
             </Box>
           </Grid>
           <Grid item xs={6}>
@@ -102,7 +126,8 @@ export default function LoginPopup(props) {
           </Grid>
           <Grid item xs={6}>
             <Box padding={"20px 0px"}>
-              <TextInput />
+              {/* <TextInput onValueChange={handlePasswordChange} isPassword ={true} /> */}
+              <HideInput onValueChange={handlePasswordChange} />
             </Box>
           </Grid>
         </Grid>

@@ -211,16 +211,6 @@ function NavBar() {
 
           {user !== null ? (
             <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
-              {/* <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={login}
-                color="inherit"
-              >
-                <PowerSettingsNewIcon />
-              </IconButton> */}
               <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
                 <Typography></Typography>
                 <IconButton
@@ -234,7 +224,6 @@ function NavBar() {
                   <AccountCircleOutlinedIcon />
                 </IconButton>
               </Box>
-              {/* <Box sx={{ marginRight: "20px" }} /> */}
             </Box>
           ) : (
             <Box sx={{ display: "flex", alignItems: "center" }}>
