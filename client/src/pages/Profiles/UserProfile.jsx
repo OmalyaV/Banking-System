@@ -9,6 +9,8 @@ import Grid from "@mui/material/Grid";
 import{useContext} from "react"
 import { AuthContext } from "../../context/AuthContext";
 import api from "../../apiConfig";
+import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom"
 
 
 const UserProfile = () => {
@@ -24,8 +26,16 @@ const UserProfile = () => {
   const [dateOfBirth, setDateOfBirth ] = React.useState("")
   const [telephone, setTelephone] = React.useState("")
   const [email, setEmail] = React.useState("")
+  const [anchorElProfileMenu, setAnchorElProfileMenu] = React.useState(null)
   
-
+  const navigate = useNavigate()
+  const cookies = new Cookies();
+  const handleLogout = () => {
+    logout()
+    setAnchorElProfileMenu(null)
+    cookies.remove("user", { path: "/" });
+    navigate("/")
+  }
   const handleFullNameChange = (newFullName) => {
     setFullname(newFullName)
   }
@@ -93,7 +103,7 @@ const UserProfile = () => {
           <img src="assets/images/ProfilePicture.png" alt="User Icon" /> 
           </Box>
           <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
-            <YellowButton text="Logout" /> 
+            <YellowButton text="Logout" onClick={handleLogout} /> 
           </Box>
         </Stack>
         <Stack spacing={0} sx={{ justifyContent: "flex-end" }}>
@@ -106,7 +116,7 @@ const UserProfile = () => {
                 mb: 2, // 1 unit is equivalent to 8 pixels, so this creates a 8px margin below the element
               }}
             >
-              My Details
+              My Profile Details
             </Typography>
 
              <Typography
