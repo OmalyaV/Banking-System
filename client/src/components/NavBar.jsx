@@ -66,6 +66,7 @@ function NavBar() {
   }
 
   const handleProfileSettings = (event) => {
+    navigate("/profile")
     setAnchorElProfileMenu(event.currentTarget)
     setOverlayVisible(false)
   }
