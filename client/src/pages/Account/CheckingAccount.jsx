@@ -19,6 +19,8 @@ import YellowButton from "../../components/YellowButton"
 import { AuthContext } from "../../context/AuthContext"
 import AccountListPopup from "../../popups/AccountListPopup"
 import CurrentAccountList from "../../popups/CurrentAccountList"
+import SuccessfulPopup from "../../popups/Successful"
+import TextInput from "../../components/TextInput"
 
 function createData(Date,FromAccount, ToAccount,  Amount ) {
   return {Date,FromAccount, ToAccount,  Amount };
@@ -52,15 +54,29 @@ const GreyBox = styled(Paper)(({ theme }) => ({
 
 const CheckingAccount = () => {
   // const accountType = "Adult"
-//  const {account, setCustomerCurrentAccount} = useContext(CurrentAccountContext)
-   const {account, setCustomerAccount} = useContext(AccountContext)
+ const {account, setCustomerCurrentAccount} = useContext(CurrentAccountContext)
+   //const {account, setCustomerAccount} = useContext(AccountContext)
   const { user, username,userType, login, logout } = useContext(AuthContext)
  
   const [balance , setBalance] = React.useState(0)
   
   const [accountList, setAccountList] = React.useState([])
   const[accountListPopupOpen, setAccountListPopupOpen] = React.useState(false)
-
+  const [toAccount , setToAccount] = React.useState("")
+  const [amount , setAmount] = React.useState("")
+  const [successfulPopupOpen, setSuccessfulPopupOpen] = React.useState(false)
+  const handleSuccessfulPopupOpen = () => {
+    setSuccessfulPopupOpen(true)
+  }
+  const handleSuccessfulPopupClose = () => {
+    setSuccessfulPopupOpen(false)
+  }
+  const handleToAccountChange = (newToAccount) => {
+    setToAccount(newToAccount)
+  }
+  const handleAmountChange = (newAmount) => {
+    setAmount(newAmount)
+  }
   const handleListOpen=()=>{
     setAccountListPopupOpen(true)
     handleAccountList()
@@ -69,6 +85,27 @@ const CheckingAccount = () => {
   const handleListClose =()=>{
     setAccountListPopupOpen(false)
   }
+  const handleTransaction = () => {
+    const data = {
+      sender_account_number: account,
+      receiver_account_number: toAccount,
+      transfer_amount: amount
+    }
+    api
+      .post("/transaction/transaction", data) 
+      .then((response) => {
+        if (response.data.approved){
+        console.log("Transfer success!", response.data.message)
+        setBalance(response.data.balance)
+        handleSuccessfulPopupOpen()
+        handleToAccountChange("")
+        handleAmountChange("")
+        }
+        else{
+          console.log("something went wrong!", response.data) }})
+      .catch((error) => {
+        console.error("account details fetching failed:", error)
+      })}
 
   const handleAccountList=() =>{
     console.log(user)
@@ -98,25 +135,20 @@ const CheckingAccount = () => {
 
   React.useEffect(() => {
     console.log(account)
-
     api
       .post("/account/account_details",{
         account_number: account
       }) 
       .then((response) => {
-       
         if (response.data.approved){
         console.log("Account details fetched!", response.data)
         setBalance(response.data.account.balance)
-        //navigate("/account")
         }
         else{
           console.log("something went wrong!", response.data)
         }
-        //onClose(true)
-      })
+})
       .catch((error) => {
-        // Handle errors
         console.error("account details fetching failed:", error)
       })
     }, [account])
@@ -124,8 +156,9 @@ const CheckingAccount = () => {
   return (
     <Stack direction="row" spacing={20}>
       <Stack spacing={0}>
-      {/* <CurrentAccountList open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/> */}
-      <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
+      <CurrentAccountList open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
+      <SuccessfulPopup open ={successfulPopupOpen} onClose={handleSuccessfulPopupClose} text="Transaction Successful!"/>
+      {/* <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/> */}
         <Box textAlign="left" sx={{ padding: "20px 150px" }}>
           {/* Left Side */}
           <Typography
@@ -189,7 +222,8 @@ const CheckingAccount = () => {
             </Box>
             
           </Stack>
-          <Box padding={{ paddingTop: "20px" }}>
+          
+      <Box padding={{ paddingTop: "20px" }}>
             <Typography
               sx={{
                 color: "white",
@@ -204,6 +238,62 @@ const CheckingAccount = () => {
           </Box>
         </Box>
         <Box sx={{ paddingLeft: "100px" }}>
+          <GreyBox allignment="left" padding="10px 10px 10px 50px">
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <Typography
+                  sx={{
+                    color: "white",
+                    fontSize: 12,
+                    fontWeight: 400,
+                    padding: "0px 0px",
+                  }}
+                  fontFamily={"Inter"}
+                >
+                  To Account:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <TextInput value={toAccount} onValueChange={handleToAccountChange} />
+              </Grid>
+              <Grid item xs={6}>
+                <Typography
+                  sx={{
+                    color: "white",
+                    fontSize: 12,
+                    fontWeight: 400,
+                    padding: "0px 0px",
+                  }}
+                  fontFamily={"Inter"}
+                >
+                  Amount:
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <TextInput value={amount} onValueChange={handleAmountChange}/>
+              </Grid>
+            </Grid>
+            <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
+              <YellowButton text="Proceed" onClick={handleTransaction} />
+            </Box>
+          </GreyBox>
+        </Box>
+          
+          {/* <Box padding={{ paddingTop: "20px" }}>
+            <Typography
+              sx={{
+                color: "white",
+                fontSize: 12,
+                fontWeight: 400,
+                padding: "0px 0px",
+              }}
+              fontFamily={"Inter"}
+            >
+              Transaction
+            </Typography>
+          </Box> */}
+        
+        {/* <Box sx={{ paddingLeft: "100px" }}>
           <Paper
             sx={{
               paddingLeft: "50px",
@@ -270,6 +360,7 @@ const CheckingAccount = () => {
             </Grid>
             <Box sx={{ padding: "10px 0px", borderRadius: "20px" }}>
               <Button
+                onClick={handleTransaction}
                 variant="contained"
                 sx={{
                   fontFamily: "Inter",
@@ -287,8 +378,11 @@ const CheckingAccount = () => {
               </Button>
             </Box>
           </Paper>
-        </Box>
+        </Box> */}
+        
+        
       </Stack>
+      
       <Stack spacing={0}>
         
           <TableContainer component={Paper} sx={{ backgroundColor: 'black', border: '2px solid white', padding: '10px' }}>
