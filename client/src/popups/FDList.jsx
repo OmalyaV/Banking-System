@@ -11,7 +11,7 @@ const FDListPopup
  = (props) => {
 
   
-  const {FDSaveAccount , setFDSaveAccount} = useContext(FDContext)
+  const {FD , saveAccount,amount,plan_id,setCustomerFD} = useContext(FDContext)
   const { onClose, open, list } = props
 
   const handleClose = () => {
@@ -21,9 +21,11 @@ const FDListPopup
     console.log(list)
   }
   const handleButtonClick = (goToFD) => () => {
+
     onClose(true)
     console.log(goToFD)
-    setFDSaveAccount(goToFD.saving_account_number)
+    setCustomerFD(goToFD)
+    console.log(FD)
     //handleAccountDetails(goToAccount) 
   }
   
@@ -88,7 +90,7 @@ const FDListPopup
     
       {list.map((item, index) => (
         
-        <TableRow key={index} onClick={()=>handleButtonClick(item)} style={{ cursor: 'pointer' }}>
+        <TableRow key={index} onClick={()=>handleButtonClick(item)()} style={{ cursor: 'pointer' }}>
           <TableCell>{item.starting_date}</TableCell>
           <TableCell>{item.amount}</TableCell>
           <TableCell>{item.plan_id}</TableCell>
