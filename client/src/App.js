@@ -10,6 +10,7 @@ import AccountContextProvider from "./context/AccountContext"
 import CurrentAccountContextProvider from "./context/CurrentAccountContext"
 import { Navigate } from 'react-router-dom'
 import Cookies from "universal-cookie";
+import Profile from "./pages/Profiles"
 
 function App() {
   const { user,username, userType, login, logout } = React.useContext(AuthContext)
@@ -35,13 +36,14 @@ function App() {
           <AccountContextProvider>
           <CurrentAccountContextProvider>
         <Routes>
-          
         
             <Route path="/account" element={<Account />} />
-
            </Routes>
            </CurrentAccountContextProvider>
           </AccountContextProvider>
+        <Routes>
+        <Route path="/profile" element={<Profile />} />
+        </Routes>
         {/* <Welcome /> */}
         </Router>
     </div>

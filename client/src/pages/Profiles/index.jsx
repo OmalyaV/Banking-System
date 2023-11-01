@@ -15,8 +15,8 @@ const Profile = () => {
   return (
     <div>
     <NavBar/>
-    {/* <UserProfile/> */}
-    <ManagerProfile/>
+    <UserProfile/>
+    {/* <ManagerProfile/> */}
     <Footer/>
     </div>
 
