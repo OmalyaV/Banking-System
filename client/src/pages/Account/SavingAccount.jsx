@@ -12,13 +12,6 @@ import { useContext } from "react"
 import api from "../../apiConfig"
 import { AccountContext } from "../../context/AccountContext"
 import SuccessfulPopup from "../../popups/Successful"
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableComponent from "../../components/Table"
 
 const SavingAccount = () => {
 
@@ -31,18 +24,14 @@ const SavingAccount = () => {
   const [accountType , setAccountType] = React.useState("Your account type")
   const [toAccount , setToAccount] = React.useState("")
   const [amount , setAmount] = React.useState("")
+  const [outPutMessage , setOutPutMessage] = React.useState("")
   const [successfulPopupOpen, setSuccessfulPopupOpen] = React.useState(false)
-  const rows = [
-    createData('wewreee', 159, 6.0, 24),
-    createData('wetyr', 237, 9.0, 37),
-    createData('asdfdh', 262, 16.0, 24),
-    createData('rfgbc', 305, 3.7, 67),
-    createData('drewrtgh', 356, 16.0, 49),
-  ];
+ 
   function createData(Date,FromAccount, ToAccount,  Amount ) {
     return {Date,FromAccount, ToAccount,  Amount };
   }
-  const handleSuccessfulPopupOpen = () => {
+  const handleSuccessfulPopupOpen = (message) => {
+    setOutPutMessage(message)
     setSuccessfulPopupOpen(true)
   }
   const handleSuccessfulPopupClose = () => {
@@ -74,7 +63,8 @@ const SavingAccount = () => {
         if (response.data.approved){
         console.log("Transfer success!", response.data.message)
         setBalance(response.data.balance)
-        handleSuccessfulPopupOpen()
+        
+        handleSuccessfulPopupOpen(response.data.message)
         handleToAccountChange("")
         handleAmountChange("")
         }
@@ -127,7 +117,7 @@ const SavingAccount = () => {
     <Stack direction="row" spacing={20}>
       <Stack spacing={0}>
         <AccountListPopup open ={accountListPopupOpen} onClose={handleListClose} list ={accountList}/>
-        <SuccessfulPopup open ={successfulPopupOpen} onClose={handleSuccessfulPopupClose} text={"Transaction Successful"}/>
+        <SuccessfulPopup open ={successfulPopupOpen} onClose={handleSuccessfulPopupClose} value={outPutMessage}/>
         <Box textAlign="left" sx={{ padding: "20px 150px" }}>
           {/* Left Side */}
           <Typography

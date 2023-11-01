@@ -10,14 +10,11 @@ const add_transaction = async (req, res) => {
     const balance = transaction[1]
       console.log(message, balance)
 
-      if (message == "transaction success") {
-        console.log("Transaction successful")
+      
+        console.log(message)
         return res.send({ approved: true, balance: balance, message: message })
-      }
-      else {
-        console.log("Transaction failed")
-        return res.send({ approved: false })
-      }
+     
+      
       
     } catch (err) {
       console.log(err)

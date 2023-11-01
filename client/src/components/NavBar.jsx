@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom"
 import RegisterPopup from "../popups/Register"
 import Cookies from "universal-cookie";
 
-const pages = ["About Us","Digital Banking", "Promotions", "Contact Us"]
+const pages = ["Digital Banking", "Promotions", "Contact Us"]
 
 function NavBar() {
   const customFontStyle = {
@@ -66,6 +66,7 @@ function NavBar() {
   }
 
   const handleProfileSettings = (event) => {
+    navigate("/profile")
     setAnchorElProfileMenu(event.currentTarget)
     setOverlayVisible(false)
   }

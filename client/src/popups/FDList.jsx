@@ -6,14 +6,20 @@ import { FDContext } from "../context/FDContext";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import ButtonBase from "@mui/material";
 import { useContext } from "react"
+import OnlineLoanRequestPopup from "./OnlineLoanRequest";
 
 const FDListPopup
  = (props) => {
 
-  
-  const {FDSaveAccount , setFDSaveAccount} = useContext(FDContext)
+  const [formOpen, setFormOpen] = React.useState(false)
+  const {FD , saveAccount,amount,plan_id,setCustomerFD} = useContext(FDContext)
   const { onClose, open, list } = props
-
+  const handleFormOpen = () => {
+    setFormOpen(true)
+  }
+  const handleFormClose = () => {
+    setFormOpen(false)
+  }
   const handleClose = () => {
     onClose(true)
   }
@@ -21,9 +27,13 @@ const FDListPopup
     console.log(list)
   }
   const handleButtonClick = (goToFD) => () => {
-    onClose(true)
+
+    //onClose(true)
     console.log(goToFD)
-    setFDSaveAccount(goToFD.saving_account_number)
+    setCustomerFD(goToFD)
+    console.log(FD)
+    handleFormOpen()
+
     //handleAccountDetails(goToAccount) 
   }
   
@@ -88,7 +98,7 @@ const FDListPopup
     
       {list.map((item, index) => (
         
-        <TableRow key={index} onClick={()=>handleButtonClick(item)} style={{ cursor: 'pointer' }}>
+        <TableRow key={index} onClick={()=>handleButtonClick(item)()} style={{ cursor: 'pointer' }}>
           <TableCell>{item.starting_date}</TableCell>
           <TableCell>{item.amount}</TableCell>
           <TableCell>{item.plan_id}</TableCell>
@@ -100,6 +110,7 @@ const FDListPopup
     </TableBody>
   </Table>
 </TableContainer>
+<OnlineLoanRequestPopup open={formOpen} onClose={handleFormClose} />
     </Dialog>
   )
 }

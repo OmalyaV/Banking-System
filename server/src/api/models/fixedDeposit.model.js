@@ -33,11 +33,15 @@ class FixedDeposit {
     }
 
     static async getMaxLoanForFD(FD_id) {
-        const sqlQuery = 'CALL defaultdb.getMaxLoanForFD(?)';
+        let loan_amount  = ''
+        const sqlQuery = 'CALL defaultdb.getMaxLoanForFD(?,@loan_amount)';
         try{
             const [rows] = await db.execute(sqlQuery, [FD_id]);
+            const [[output]] = await db.query('SELECT @loan_amount AS output');
+            
 
-            const loan_amount = rows? rows[0] : null;
+           
+            loan_amount = output.output;
             return loan_amount;
             
             }
