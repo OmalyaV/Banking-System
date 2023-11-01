@@ -9,6 +9,8 @@ import CustomerRoute from "./routes/customer.routes.js"
 import AccountRoute from "./routes/account.routes.js"
 import TransactionRoute from "./routes/transaction.routes.js"
 import FixedDepositRoute from "./routes/fixedDeposit.routes.js"
+import InstallmentRoute from "./routes/installment.routes.js"
+import EmployeeRoute from "./routes/employee.routes.js"
 import LoanRoute from "./routes/loan.routes.js"
 //console.log("hi")
 const app = express()
@@ -35,5 +37,7 @@ app.use("/account", AccountRoute)
 app.use("/transaction", TransactionRoute)
 app.use("/FD",FixedDepositRoute)
 app.use("/loan",LoanRoute)
+app.use("/installment",InstallmentRoute)
+app.use("/employee",EmployeeRoute)
 
 
