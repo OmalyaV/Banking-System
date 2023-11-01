@@ -8,6 +8,7 @@ import AuthContextProvider, { AuthContext } from "./context/AuthContext"
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom"
 import AccountContextProvider from "./context/AccountContext"
 import CurrentAccountContextProvider from "./context/CurrentAccountContext"
+import FDContextProvider from "./context/FDContext"
 import { Navigate } from 'react-router-dom'
 import Cookies from "universal-cookie";
 import Profile from "./pages/Profiles"
@@ -35,10 +36,11 @@ function App() {
         </Routes>
           <AccountContextProvider>
           <CurrentAccountContextProvider>
-        <Routes>
-        
+          <FDContextProvider>
+          <Routes>
             <Route path="/account" element={<Account />} />
            </Routes>
+            </FDContextProvider>
            </CurrentAccountContextProvider>
           </AccountContextProvider>
         <Routes>

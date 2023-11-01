@@ -6,11 +6,17 @@ import { Typography, TextField, InputBase, Grid, Button } from "@mui/material"
 import TextInput from "../../components/TextInput"
 import YellowButton from "../../components/YellowButton"
 import GreyBox from "../../components/GreyBox"
-
+import { styled } from "@mui/material/styles"
+import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../../context/AuthContext"
+import { useContext } from "react"
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 const Loans = () => {
-
+  
   const accountType = "Adult"
-
+  const { user, username,userType, login, logout } = useContext(AuthContext)
   return (
     <Stack direction="row" spacing={20} >
       <Stack spacing={0}>

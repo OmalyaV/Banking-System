@@ -12,6 +12,14 @@ import { useContext } from "react"
 import api from "../../apiConfig"
 import { AccountContext } from "../../context/AccountContext"
 import SuccessfulPopup from "../../popups/Successful"
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableComponent from "../../components/Table"
+
 const SavingAccount = () => {
 
   const {account, setCustomerAccount} = useContext(AccountContext)
@@ -24,6 +32,16 @@ const SavingAccount = () => {
   const [toAccount , setToAccount] = React.useState("")
   const [amount , setAmount] = React.useState("")
   const [successfulPopupOpen, setSuccessfulPopupOpen] = React.useState(false)
+  const rows = [
+    createData('wewreee', 159, 6.0, 24),
+    createData('wetyr', 237, 9.0, 37),
+    createData('asdfdh', 262, 16.0, 24),
+    createData('rfgbc', 305, 3.7, 67),
+    createData('drewrtgh', 356, 16.0, 49),
+  ];
+  function createData(Date,FromAccount, ToAccount,  Amount ) {
+    return {Date,FromAccount, ToAccount,  Amount };
+  }
   const handleSuccessfulPopupOpen = () => {
     setSuccessfulPopupOpen(true)
   }
@@ -248,18 +266,8 @@ const SavingAccount = () => {
         </Box>
       </Stack>
       <Stack spacing={0}>
-        <Typography
-          fontFamily={"Inter"}
-          color={"white"}
-          padding={{ paddingBottom: "20px" }}
-        >
-          Transaction History
-        </Typography>
-        <GreyBox>
-          <Typography fontFamily={"Inter"}>Transfer from Account</Typography>
-          <Typography fontFamily={"Inter"}>Transfer from Account</Typography>
-          <Typography fontFamily={"Inter"}>Transfer from Account</Typography>
-        </GreyBox>
+    {/* <TableComponent/>   
+    <TableComponent/> */}
       </Stack>
     </Stack>
   )
