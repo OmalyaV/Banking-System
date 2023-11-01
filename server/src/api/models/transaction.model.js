@@ -82,7 +82,7 @@ class Trsnsaction {
                 sender_account_number: row.sender_account_number,
                 receiver_account_number: row.receiver_account_number,
                 transfer_amount: row.transfer_amount,
-                transaction_date: row.transaction_date,
+                transaction_date: new Date(row.transaction_date).toLocaleDateString(),
                 transaction_time: row.transaction_time
             })) : null;
             return transaction;

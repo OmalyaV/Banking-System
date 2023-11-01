@@ -7,72 +7,90 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Dialog, Typography } from "@mui/material"
-function createData(From, To, Amount, Date,Time ) {
-  return {From, To, Amount, Date, Time};
-}
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import api from "../apiConfig";
 
-const rows = [
-  createData('wewreee', 159, 6.0, 24, 4.0),
-  createData('wetyr', 237, 9.0, 37, 4.3),
-  createData('asdfdh', 262, 16.0, 24, 6.0),
-  createData('rfgbc', 305, 3.7, 67, 4.3),
-  createData('drewrtgh', 356, 16.0, 49, 3.9),
-];
+
+
+
 
 const TotalTransactionReportPopup = (props) => {
-  const { onClose, open, name } = props
+  const { user, username,userType, login, logout } = useContext(AuthContext)
+  const [branchCode, setBranchCode] = React.useState("")
+  const [list, setList] = React.useState([])
+  const { onClose, open } = props
+
+  React.useEffect(() => {
+    console.log(user)
+    const data = {
+      NIC: user
+    }
+    api
+      .post("/employee/get_employee_branch_code", data)
+      .then((response) => {
+        if (response.data.approved){
+          setBranchCode(response.data.branch_code)
+          handleList()
+          console.log("branch code fetched!")
+        }
+        else{
+          console.log("something went wrong!", response.data) }})
+      .catch((error) => {
+        console.error("Branch code fetching failed:", error)
+      })
+  } , [])
+
+  const handleList = () => {
+    const data = {
+      branch_code: branchCode
+    }
+    api
+      .post("/transaction/branch_transactions", data)
+      .then((response) => {
+        if (response.data.approved){
+          setList(response.data.transaction)
+          console.log("list fetched!")
+        }
+        else{
+          console.log("something went wrong!", response.data) }})
+      .catch((error) => {
+        console.error("list fetching failed:", error)
+      })
+  }
 
   const handleClose = () => {
-    onClose(name)
+    onClose(true)
   }
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <TableContainer component={Paper} sx={{ backgroundColor: 'black', border: '2px solid white' }}>
-      <Box textAlign="left" sx={{ padding: "20px 150px", textAlign: "center" }}>
-          {/* Left Side */}
-          <Typography
-            sx={{
-              color: "#FFCF43",
-              fontSize: 24,
-              fontWeight: 700,
-              padding: "0px 0px",
-            }}
-          >
-            Total Transaction Report
-          </Typography>
-      </Box>
+      <TableContainer component={Paper}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell>From Account</TableCell>
+        <TableCell>To Account</TableCell>
+        <TableCell>transfer amount</TableCell>
+        <TableCell>Transfer Date</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+    
+      {list.map((item, index) => (
+        
+        <TableRow key={index} >
+          <TableCell>{item.sender_account_number}</TableCell>
+          <TableCell>{item.receiver_account_number}</TableCell>
+          <TableCell>{item.transfer_amount}</TableCell>
+          <TableCell>{item.transfer_date}</TableCell>
+        </TableRow>
+        
+      ))}
       
-      <Table sx={{ minWidth: 500 ,color: "#FFCF43", border: '1px solid white'}} >
-        <TableHead>
-          <TableRow>
-            <TableCell sx={{ color: 'white', border: '1px solid white'}}>From </TableCell>
-            <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>To</TableCell>
-            <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>Amount&nbsp;</TableCell>
-            <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>Date&nbsp;</TableCell>
-            <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>Time&nbsp;</TableCell>
-           
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              
-            >
-              <TableCell component="th" scope="row" sx={{ color: 'white', border: '1px solid white' }}>
-                {row.From}
-              </TableCell>
-              <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>{row.To}</TableCell>
-              <TableCell align="right" sx={{ color: 'white', border: '1px solid white' }}>{row.Amount}</TableCell>
-              <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>{row.Date}</TableCell>
-              <TableCell align="right" sx={{ color: 'white' , border: '1px solid white'}}>{row.Time}</TableCell>
-             
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    </TableBody>
+  </Table>
+</TableContainer>
     </Dialog>
   )
 }
