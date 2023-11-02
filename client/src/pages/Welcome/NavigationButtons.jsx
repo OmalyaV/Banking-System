@@ -21,7 +21,7 @@ const NavigationButtons = () => {
 
   return (
     <Stack direction="row" spacing={2} justifyContent="center" paddingTop="20px">
-      <NavigationButton title="Dashboard" src="dashboard" />
+      {/* <NavigationButton title="Dashboard" src="dashboard" /> */}
       <NavigationButton title="Transaction" src="transaction" onClick={() => navigate("/account")}/>
       <button
         onClick={scrollToRates}
