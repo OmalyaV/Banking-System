@@ -17,6 +17,7 @@ const NewsBar = () => {
   }
 
 
+
   return (
     <div
       class="image"

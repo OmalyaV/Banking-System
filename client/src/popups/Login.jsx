@@ -39,23 +39,9 @@ export default function LoginPopup(props) {
   }
 
 
-  // const handleUserLogin = () => {
-  //   cookies.set("authenticated", "true", { path: "/" });
-  //   setUser({ username: "exampleUser" });
-  // };
-
-  // // Example: User Logout (remove authentication cookie)
-  // const handleUserLogout = () => {
-  //   cookies.remove("authenticated", { path: "/" });
-  //   setUser(null);
-  // };
 
   const handleLogin = () => {
-    // Create a data object to send in the POST request
-    // const data = {
-    //   NIC: "VXZ4598992",
-    //   password: "joe@457",
-    // }
+
     const data = {
       NIC: nic,
       password: password,
