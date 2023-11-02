@@ -10,20 +10,24 @@ import axios from "axios"
 import api from "../apiConfig"
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import HideInput from "../components/HideInput"
-import Cookies from "universal-cookie";
-
+import Cookies from "universal-cookie"
+import { Alert } from "@mui/material"
 
 export default function LoginPopup(props) {
-  
-  const cookies = new Cookies();
+  const cookies = new Cookies()
   const navigate = useNavigate()
-  const { user, username,userType, login, logout } = useContext(AuthContext)
+  const { user, username, userType, login, logout } = useContext(AuthContext)
   const { onClose, open } = props
   const [nic, setNic] = React.useState("")
   const [password, setPassword] = React.useState("")
   const [accountSelect, setAccountSelect] = React.useState(0)
+
+  const [showAlert, setShowAlert] = React.useState(false)
+  const [alertTimeout, setAlertTimeout] = React.useState(null)
+  const alertDuration = 5 // Duration in seconds
+
   const handleButtonClick = (goToAccount) => {
     setAccountSelect(goToAccount)
   }
@@ -38,10 +42,7 @@ export default function LoginPopup(props) {
     setPassword(newPassword)
   }
 
-
-
   const handleLogin = () => {
-
     const data = {
       NIC: nic,
       password: password,
@@ -51,20 +52,36 @@ export default function LoginPopup(props) {
       .post("/user/login", data) // Replace "/api/login" with your actual API endpoint
       .then((response) => {
         // Handle the response as needed
-        if (response.data.approved){
-        console.log("Login successful!", response.data)
-        login(response.data.user)
-        console.log(response.data.user)
-        const user = response.data.user
-        cookies.set("user", {user}, { path: "/" });
-        //user(response.data.customer_NIC)
-        navigate("/account")
-        }
-        else{
+        if (response.data.approved) {
+          if (response.data.user.user_type === "customer") {
+            console.log("Login successful!", response.data)
+            login(response.data.user)
+            console.log(response.data.user)
+            const user = response.data.user
+            cookies.set("user", { user }, { path: "/" })
+            onClose(true)
+
+            //user(response.data.customer_NIC)
+            navigate("/account")
+          } else {
+            setShowAlert(true) // Set the state to show the alert
+            setAlertTimeout(
+              setTimeout(() => {
+                setShowAlert(false)
+              }, alertDuration * 1000)
+            )
+            console.log("Login successful!", response.data)
+          }
+        } else {
+          setShowAlert(true) // Set the state to show the alert
+          setAlertTimeout(
+            setTimeout(() => {
+              setShowAlert(false)
+            }, alertDuration * 1000)
+          )
           console.log("Login unsuccessful!", response.data)
         }
         // You can also close the dialog or perform other actions on success
-        onClose(true)
       })
       .catch((error) => {
         // Handle errors
@@ -84,6 +101,9 @@ export default function LoginPopup(props) {
         alignItems={"center"}
         flex={"row"}
       >
+        {showAlert && (
+          <Alert severity="error">Login unsuccessful! Not a User</Alert>
+        )}
         <Typography
           sx={{
             color: "white",
@@ -100,7 +120,6 @@ export default function LoginPopup(props) {
           <Grid item xs={6}>
             <Typography
               sx={{
-                
                 color: "white",
                 fontSize: 18,
                 fontWeight: 400,
@@ -149,7 +168,6 @@ export default function LoginPopup(props) {
           <YellowButton text="Login" onClick={handleLogin} />
         </Box>
       </Box>
-      
     </Dialog>
   )
 }
