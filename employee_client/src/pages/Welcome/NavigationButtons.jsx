@@ -30,15 +30,15 @@ const NavigationButtons = () => {
       {username === "Jhon" && (
         <Stack
           direction="row"
-          spacing={2}
+          spacing={5}
           justifyContent="center"
           paddingTop="20px"
         >
-          <NavigationButton
+          {/* <NavigationButton
             title="Late loan installments"
             src="loans"
             // onClick={() => handleOpenPopup("Late Loan Instalements")}
-          />
+          /> */}
           <NavigationButton
             title="Total Transactions"
             src="plans_and_rates"
