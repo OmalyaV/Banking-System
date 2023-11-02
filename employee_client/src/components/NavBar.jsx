@@ -54,8 +54,8 @@ function NavBar() {
   const {username} = useContext(AuthContext)
 
   useEffect(() => {
-    if (cookies.get("user") !== undefined) {
-      login(cookies.get("user"))
+    if (cookies.get("employee") !== undefined) {
+      login(cookies.get("employee"))
     }
   },[])
 

@@ -34,11 +34,7 @@ const NavigationButtons = () => {
           justifyContent="center"
           paddingTop="20px"
         >
-          {/* <NavigationButton
-            title="Late loan installments"
-            src="loans"
-            // onClick={() => handleOpenPopup("Late Loan Instalements")}
-          /> */}
+
           <NavigationButton
             title="Total Transactions"
             src="plans_and_rates"

@@ -58,7 +58,7 @@ export default function LoginPopup(props) {
             login(response.data.user)
             console.log(response.data.user)
             const user = response.data.user
-            cookies.set("user", { user }, { path: "/" })
+            cookies.set("employee", { user }, { path: "/" })
             onClose(true)
 
             // navigate("/")
