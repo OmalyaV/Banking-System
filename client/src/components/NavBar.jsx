@@ -23,6 +23,8 @@ import { Paper } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import RegisterPopup from "../popups/Register"
 import Cookies from "universal-cookie";
+import { Link } from "react-router-dom"
+
 
 const pages = ["Digital Banking", "Promotions", "Contact Us"]
 
@@ -168,20 +170,25 @@ function NavBar() {
                   <Typography
                     textAlign="center"
                     className="Typography--heading"
-                  >
-                  </Typography>
+                  ></Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <Box>
-            <Typography
-              style={{ ...customFontStyle, fontSize: "20px", fontWeight: 800 }}
-            >
-              <span style={{ color: "white" }}>Nexus</span>
-              <span style={{ color: "#FFCF43" }}> Trust </span>
-              <span style={{ color: "white" }}>Bank</span>
-            </Typography>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Typography
+                style={{
+                  ...customFontStyle,
+                  fontSize: "20px",
+                  fontWeight: 800,
+                }}
+              >
+                <span style={{ color: "white" }}>Nexus</span>
+                <span style={{ color: "#FFCF43" }}> Trust </span>
+                <span style={{ color: "white" }}>Bank</span>
+              </Typography>
+            </Link>
           </Box>
           <Box
             sx={{
@@ -206,7 +213,6 @@ function NavBar() {
               >
                 {page}
               </Button>
-              
             ))}
           </Box>
 
@@ -257,7 +263,6 @@ function NavBar() {
                 Register
               </Button>
             </Box>
-            
           )}
           <LoginPopup open={open} onClose={handleClose} />
           <RegisterPopup open={registerOpen} onClose={registerPopupClose} />
